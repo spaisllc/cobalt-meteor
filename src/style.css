@@ -1,0 +1,8 @@
+@import './styles/variables.css';
+@import './styles/global.css';
+@import './styles/header.css';
+@import './styles/hero.css';
+@import './styles/services.css';
+@import './styles/about.css';
+@import './styles/contact.css';
+@import './styles/chatbot.css';
