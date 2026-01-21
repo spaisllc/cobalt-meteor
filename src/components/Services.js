@@ -8,7 +8,7 @@ export function Services() {
     },
     {
       title: "Data Insights",
-      desc: "Unlock hidden value in public records. Perfect for citizen journalists and researchers analyzing complex datasets.",
+      desc: "Unlock hidden value in public records. Perfect for researchers and professionals analyzing complex datasets.",
       icon: "📊"
     },
     {

@@ -9,7 +9,7 @@ export function Hero() {
           Empowering Your Digital Future
         </h1>
         <p class="hero-subtitle">
-          From cutting-edge citizen journalism tools to <strong>custom AI-powered resume websites</strong>.
+          From intelligent automation to <strong>custom AI-powered resume websites</strong>,
           We build affordable, intelligent solutions for freelancers, small businesses, and you.
         </p>
         <div class="hero-actions">

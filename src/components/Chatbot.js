@@ -107,8 +107,8 @@ function initChatbot() {
     if (lower.includes('service') || lower.includes('do')) {
       return "We specialize in AI automation, data analysis, and custom chatbots. What are you looking to build?";
     }
-    if (lower.includes('citizen') || lower.includes('journal')) {
-      return "We love citizen journalists! We can help you analyze council minutes, extract data, and more.";
+    if (lower.includes('data') || lower.includes('analysis')) {
+      return "We specialize in data analysis and insight extraction. Let's chat about your specific needs!";
     }
     return "That's interesting! Tell me more, or click 'Contact Us' to get in touch with a human expert.";
   }
