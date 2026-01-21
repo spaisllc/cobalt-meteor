@@ -1,10 +1,10 @@
 /* src/components/Header.js */
 export function Header() {
-    return `
+  return `
     <header class="header">
       <div class="container header-content">
         <a href="/" class="logo">
-          Springs <span class="text-gradient">AI</span>
+          Springs <span class="text-gradient">AI Solutions</span>
         </a>
         <nav class="nav">
           <a href="#services" class="nav-link">Services</a>
