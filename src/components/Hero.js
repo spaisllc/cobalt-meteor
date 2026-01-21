@@ -2,6 +2,7 @@
 export function Hero() {
   return `
     <section class="hero">
+      <div class="ribbon-banner">OPENING SOON</div>
       <div class="hero-bg"></div>
       <div class="container hero-content">
         <h1 class="hero-title">

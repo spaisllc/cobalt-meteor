@@ -1,4 +1,24 @@
 /* src/styles/hero.css */
+
+/* Ribbon Banner */
+.ribbon-banner {
+    position: fixed;
+    top: 50px;
+    right: -80px;
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    color: white;
+    padding: 12px 100px;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-align: center;
+    transform: rotate(45deg);
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5);
+    z-index: 9999;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
 .hero {
     position: relative;
     min-height: 100vh;
