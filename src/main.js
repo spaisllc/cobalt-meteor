@@ -8,6 +8,7 @@ import { About } from './components/About.js';
 import { Chatbot } from './components/Chatbot.js';
 import { AnimatedBackground } from './components/AnimatedBackground.js';
 import { initScrollAnimations } from './utils/scrollAnimations.js';
+import { initTerminal } from './components/TerminalInterface.js';
 
 document.querySelector('#app').innerHTML = `
   ${AnimatedBackground()}
@@ -22,5 +23,8 @@ document.querySelector('#app').innerHTML = `
   ${Chatbot()}
 `;
 
-// Initialize scroll animations
-setTimeout(initScrollAnimations, 100);
+// Initialize systems
+setTimeout(() => {
+  initScrollAnimations();
+  initTerminal(); // Boot up Spacee
+}, 100);

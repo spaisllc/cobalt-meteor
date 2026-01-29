@@ -2,6 +2,8 @@
 @import './styles/global.css';
 @import './styles/animated-bg.css';
 @import './styles/scroll-animations.css';
+@import './styles/terminal.css';
+@import './styles/hologram.css';
 @import './styles/header.css';
 @import './styles/hero.css';
 @import './styles/services.css';
