@@ -30,7 +30,7 @@ export function parseCommand(input) {
     if (cmd.includes('about') || cmd.includes('who are you')) {
         return {
             type: 'TEXT_ONLY',
-            response: `I am S.P.A.I.S (it sounds like "Space S"), the digital concierge for Springs AI Solutions. We bridge the gap between human intent and artificial intelligence.`
+            response: `I am S.P.A.I.S, the digital concierge for Springs AI Solutions. We bridge the gap between human intent and artificial intelligence.`
         };
     }
 
