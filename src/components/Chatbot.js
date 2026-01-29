@@ -59,6 +59,16 @@ function initChatbot() {
   trigger.addEventListener('click', toggleChat);
   close.addEventListener('click', toggleChat);
 
+  // Expose global opener
+  window.openChatbot = (msg) => {
+    if (window.classList.contains('hidden')) {
+      toggleChat();
+    }
+    if (msg) {
+      addMessage(msg, 'bot');
+    }
+  };
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const text = input.value.trim();

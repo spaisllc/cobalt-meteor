@@ -13,7 +13,7 @@ import { initTerminal } from './components/TerminalInterface.js';
 document.querySelector('#app').innerHTML = `
   ${AnimatedBackground()}
   ${Header()}
-  <main>
+  <main id="main-content" style="opacity: 0; pointer-events: none; transition: opacity 1.5s ease;">
     ${Hero()}
     ${Services()}
     ${Demo()}

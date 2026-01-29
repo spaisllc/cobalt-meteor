@@ -131,10 +131,25 @@ export async function initTerminal() {
         const term = document.querySelector('.terminal-overlay');
         term.style.transition = 'opacity 0.8s ease';
         term.style.opacity = '0';
+
+        // Reveal Main Site
+        const mainContent = document.getElementById('main-content');
+        if (mainContent) {
+            mainContent.style.opacity = '1';
+            mainContent.style.pointerEvents = 'all';
+        }
+
         setTimeout(() => {
             term.style.display = 'none';
             const section = document.querySelector(selector);
             if (section) section.scrollIntoView({ behavior: 'smooth' });
+
+            // Trigger Chatbot "Morph"
+            const name = getUserName();
+            const msg = `I'm still here if you need anything, ${name}.`;
+            if (window.openChatbot) {
+                setTimeout(() => window.openChatbot(msg), 1000);
+            }
         }, 800);
     };
 }
