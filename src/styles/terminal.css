@@ -98,11 +98,12 @@
     font-size: 3rem;
     font-weight: 800;
     letter-spacing: -2px;
-    background: linear-gradient(135deg, #ffffff 30%, #00f3ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
+    color: #ffffff;
+    text-shadow: none;
+    filter: none;
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    /* Pure white, no glow, max readability */
     /* Adds glow for legibility */
     opacity: 0;
     transition: opacity 1s ease-in-out;
