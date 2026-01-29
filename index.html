@@ -1,13 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>springs-ai-website</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>springs-ai-website</title>
+  <style>
+    /* CRITICAL: Hides site content immediately before external CSS loads */
+    body.terminal-active {
+      overflow: hidden !important;
+    }
+
+    body.terminal-active header,
+    body.terminal-active #main-content,
+    body.terminal-active .chatbot-widget {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+      /* Double insurance */
+    }
+  </style>
+</head>
+
+<body class="terminal-active">
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

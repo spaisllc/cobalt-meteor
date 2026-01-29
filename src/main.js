@@ -13,7 +13,7 @@ import { initTerminal } from './components/TerminalInterface.js';
 document.querySelector('#app').innerHTML = `
   ${AnimatedBackground()}
   ${Header()}
-  <main id="main-content" style="opacity: 0; pointer-events: none; transition: opacity 1.5s ease;">
+  <main id="main-content">
     ${Hero()}
     ${Services()}
     ${Demo()}
@@ -22,6 +22,9 @@ document.querySelector('#app').innerHTML = `
   </main>
   ${Chatbot()}
 `;
+
+// Set initial state (Hidden)
+document.body.classList.add('terminal-active');
 
 // Initialize systems
 setTimeout(() => {

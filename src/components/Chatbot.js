@@ -15,7 +15,7 @@ export function Chatbot() {
           <div class="bot-info">
             <div class="bot-avatar">AI</div>
             <div>
-              <div class="bot-name">Springs Rep</div>
+              <div class="bot-name">S.P.A.I.S</div>
               <div class="bot-status">Online</div>
             </div>
           </div>
@@ -25,7 +25,7 @@ export function Chatbot() {
         <div id="chat-messages" class="chat-messages">
           <div class="message bot">
             <div class="message-content">
-              Hello! I'm the Springs AI Solutions virtual assistant. How can I help you today?
+              Hello! I'm S.P.A.I.S. How can I help you today?
             </div>
           </div>
         </div>

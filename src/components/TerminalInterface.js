@@ -35,7 +35,7 @@ export async function initTerminal() {
 
     // await addLine('SPRINGS AI SOLUTIONS INITIALIZED...'); // Replaced by title reveal
     await new Promise(r => setTimeout(r, 500));
-    await addLine('Hello. My name is Spacee (S.P.A.I.S.), your Springs AI Solutions Concierge.');
+    await addLine('Hello. My name is S.P.A.I.S (it sounds like "Space S"), your Springs AI Solutions Concierge.');
     await new Promise(r => setTimeout(r, 500));
 
     // Check if we already know the user
@@ -133,11 +133,7 @@ export async function initTerminal() {
         term.style.opacity = '0';
 
         // Reveal Main Site
-        const mainContent = document.getElementById('main-content');
-        if (mainContent) {
-            mainContent.style.opacity = '1';
-            mainContent.style.pointerEvents = 'all';
-        }
+        document.body.classList.remove('terminal-active');
 
         setTimeout(() => {
             term.style.display = 'none';

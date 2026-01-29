@@ -5,6 +5,23 @@
 @import './styles/terminal.css';
 @import './styles/hologram.css';
 @import './styles/header.css';
+
+/* Global Terminal State Manager */
+body.terminal-active {
+    overflow: hidden !important;
+    /* Lock scroll */
+}
+
+/* Hide site elements when terminal is active */
+body.terminal-active header,
+body.terminal-active #main-content,
+body.terminal-active .chatbot-widget {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 1.5s ease;
+    /* Smooth fade in when removed */
+}
+
 @import './styles/hero.css';
 @import './styles/services.css';
 @import './styles/demo.css';
