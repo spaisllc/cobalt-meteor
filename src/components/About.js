@@ -4,17 +4,14 @@ export function About() {
     <section id="about" class="about section-padding">
       <div class="container about-container">
         <div class="about-content">
-          <h2 class="section-title">Empowering the <span class="text-gradient">Public</span></h2>
-          <p class="about-text">
-            At Springs AI Solutions, we believe technology should serve the people. 
-            We are dedicated to providing affordable, high-impact AI tools to <strong>citizens</strong>, 
-            <strong>professionals</strong>, and <strong>small businesses</strong>.
-          </p>
-          <p class="about-text">
-            From intelligent workflow automation to custom content generation, 
-            we help you leverage the power of Artificial Intelligence to elevate your work and creativity.
-          </p>
-        </div>
+        <h2>Architecting Your <span class="text-gradient">Digital Future</span></h2>
+        <p>
+          The future belongs to those who adapt. At Springs AI Solutions, we bridge the gap between raw data and actionable intelligence.
+        </p>
+        <p>
+          We don't just build websites; we engineer digital infrastructure. From instant, data-driven resume platforms to bespoke automation agents, we arm professionals and creators with the elite-tier AI tools needed to outplace the competition and work at the speed of thought.
+        </p>
+      </div>
         <div class="about-visual">
           <div class="visual-card">
             <div class="stat-item">

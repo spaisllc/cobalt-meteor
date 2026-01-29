@@ -3,6 +3,7 @@ import { HologramCards } from './HologramCards.js';
 import { typeText } from '../utils/typewriter.js';
 import { parseCommand } from '../utils/commandParser.js';
 import { setUserName, getUserName } from '../utils/terminalState.js';
+import { runBootSequence } from '../utils/bootSequence.js';
 
 export async function initTerminal() {
     const app = document.querySelector('#app');
@@ -29,6 +30,9 @@ export async function initTerminal() {
     };
 
     // 4. Intro Sequence
+    // Run the Evolution Boot Sequence first
+    await runBootSequence(terminalWrapper);
+
     await addLine('SPRINGS AI SOLUTIONS INITIALIZED...');
     await new Promise(r => setTimeout(r, 500));
     await addLine('Hello. My name is Spacee (S.P.A.I.S.), your Springs AI Solutions Concierge.');
