@@ -1,0 +1,163 @@
+/* Pricing Section */
+.pricing {
+    padding: 8rem 0;
+    background: var(--bg-primary);
+}
+
+.pricing-card {
+    max-width: 800px;
+    margin: 4rem auto;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+}
+
+.price-badge {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.1));
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+    border: 1px solid var(--brand-blue);
+}
+
+.price-amount {
+    font-size: 4rem;
+    font-weight: 900;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.price-label {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+}
+
+.pricing-card h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem 0;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 3rem 0;
+}
+
+.pricing-features li {
+    padding: 0.75rem 0;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.pricing-features li:last-child {
+    border-bottom: none;
+}
+
+.order-form {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+}
+
+.order-form h4 {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.simple-order-form input,
+.simple-order-form textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition-fast);
+}
+
+.simple-order-form input:focus,
+.simple-order-form textarea:focus {
+    outline: none;
+    border-color: var(--brand-blue);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.file-upload {
+    margin-bottom: 1rem;
+}
+
+.file-upload label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.payment-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-large {
+    padding: 1.25rem 2rem;
+    font-size: 1.125rem;
+}
+
+.guarantee {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
+}
+
+.faq-quick {
+    max-width: 700px;
+    margin: 4rem auto 0;
+}
+
+.faq-quick h3 {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+}
+
+.faq-item {
+    background: var(--bg-glass);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+}
+
+.faq-item strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .payment-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .price-amount {
+        font-size: 3rem;
+    }
+}

@@ -2,19 +2,34 @@
 export function Services() {
   const services = [
     {
-      title: "AI Personal Sites",
-      desc: "Stand out with a stunning resume website featuring your own personal chatbot to answer recruiter questions 24/7.",
+      title: "Beautiful Resume Display",
+      desc: "Your experience, skills, and achievements presented in a stunning, modern layout that makes recruiters want to keep reading.",
       icon: "✨"
     },
     {
-      title: "Data Insights",
-      desc: "Unlock hidden value in public records. Perfect for researchers and professionals analyzing complex datasets.",
-      icon: "📊"
+      title: "AI ChatBot Assistant",
+      desc: "Answers recruiter questions 24/7 about your experience, skills, career gaps, and availability. Never miss an opportunity.",
+      icon: "🤖"
     },
     {
-      title: "Custom Solutions",
-      desc: "From automating small business workflows to building custom AI agents, we handle the tech so you can focus on growth.",
+      title: "Mobile-Optimized",
+      desc: "Looks perfect on desktop, tablet, and phone. Recruiters can review your site anywhere, anytime.",
+      icon: "📱"
+    },
+    {
+      title: "Custom Domain Ready",
+      desc: "Use your own domain (yourname.com) or we'll host it on a professional subdomain. Your choice.",
+      icon: "🌐"
+    },
+    {
+      title: "Fast Delivery",
+      desc: "Order today, get your site in 48 hours. Upload your resume, pick a theme, and we handle everything else.",
       icon: "⚡"
+    },
+    {
+      title: "Lifetime Hosting",
+      desc: "One-time $299 fee includes hosting forever. No monthly bills, no hidden costs, no surprises.",
+      icon: "💰"
     }
   ];
 
@@ -27,11 +42,11 @@ export function Services() {
   `).join('');
 
   return `
-    <section id="services" class="services section-padding">
+    <section id="features" class="services section-padding">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Our <span class="text-gradient">Services</span></h2>
-          <p class="section-subtitle">Tailored AI solutions for the modern era.</p>
+          <h2 class="section-title">What <span class="text-gradient">You Get</span></h2>
+          <p class="section-subtitle">Everything you need to stand out and get hired</p>
         </div>
         <div class="services-grid">
           ${cardsHtml}

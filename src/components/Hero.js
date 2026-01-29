@@ -6,16 +6,30 @@ export function Hero() {
       <div class="hero-bg"></div>
       <div class="container hero-content">
         <h1 class="hero-title">
-          <span class="text-gradient">Springs AI Solutions</span> <br>
-          Empowering Your Digital Future
+          Land Your Dream Job With An 
+          <span class="text-gradient">AI-Powered Resume Website</span>
         </h1>
         <p class="hero-subtitle">
-          From intelligent automation to <strong>custom AI-powered resume websites</strong>,
-          We build affordable, intelligent solutions for freelancers, small businesses, and you.
+          Stand out from 300+ applicants. Recruiters spend <strong>6 seconds</strong> on your resume—
+          make every second count with an interactive site that answers their questions 24/7.
         </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">48 hours</div>
+            <div class="stat-label">Delivery Time</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">$299</div>
+            <div class="stat-label">One-Time Fee</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">AI-Powered</div>
+            <div class="stat-label">ChatBot Included</div>
+          </div>
+        </div>
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-glow">Get Started</a>
-          <a href="#services" class="btn btn-outline">Explore Services</a>
+          <a href="#demo" class="btn btn-glow">See a Live Example</a>
+          <a href="#order" class="btn btn-outline">Order Yours Now</a>
         </div>
       </div>
     </section>
