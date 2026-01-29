@@ -106,12 +106,28 @@
     /* Pure white, no glow, max readability */
     /* Adds glow for legibility */
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 2s ease-out;
+    /* Fast brightness onset, slow settlement */
     text-align: center;
 }
 
 .boot-title.fade-in-slow {
     opacity: 1;
+    animation: titleMorph 3s ease-out forwards;
+}
+
+@keyframes titleMorph {
+    0% {
+        color: #ffffff;
+        text-shadow: none;
+        filter: none;
+    }
+
+    100% {
+        color: #00f3ff;
+        text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);
+        filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.5));
+    }
 }
 
 /* CRT Scanline Effect */
