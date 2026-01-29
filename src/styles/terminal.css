@@ -85,6 +85,34 @@
     animation: flash 0.2s linear;
 }
 
+/* Boot Title Reveal */
+.boot-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    /* Space for title */
+    width: 100%;
+}
+
+.boot-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #fff 0%, #00f3ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    text-align: center;
+}
+
+.boot-title.fade-in-slow {
+    opacity: 1;
+}
+
 /* CRT Scanline Effect */
 .terminal-overlay::before {
     content: " ";

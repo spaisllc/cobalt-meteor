@@ -33,7 +33,7 @@ export async function initTerminal() {
     // Run the Evolution Boot Sequence first
     await runBootSequence(terminalWrapper);
 
-    await addLine('SPRINGS AI SOLUTIONS INITIALIZED...');
+    // await addLine('SPRINGS AI SOLUTIONS INITIALIZED...'); // Replaced by title reveal
     await new Promise(r => setTimeout(r, 500));
     await addLine('Hello. My name is Spacee (S.P.A.I.S.), your Springs AI Solutions Concierge.');
     await new Promise(r => setTimeout(r, 500));
