@@ -85,7 +85,27 @@
     padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--radius-full);
     font-weight: 600;
-    transition: var(--transition-normal);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .btn-glow {
@@ -95,19 +115,23 @@
 }
 
 .btn-glow:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.3),
+        0 0 60px rgba(59, 130, 246, 0.4);
 }
 
 .btn-outline {
-    border: 1px solid var(--border-subtle);
+    border: 1px solid rgba(96, 165, 250, 0.3);
     color: white;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
 }
 
 .btn-outline:hover {
-    border-color: white;
-    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(96, 165, 250, 0.6);
+    background: rgba(96, 165, 250, 0.1);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
 }
 
 /* Hero Stats */

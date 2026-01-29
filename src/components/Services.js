@@ -42,7 +42,7 @@ export function Services() {
   `).join('');
 
   return `
-    <section id="features" class="services section-padding">
+    <section id="features" class="services section-padding scroll-animate">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">What <span class="text-gradient">You Get</span></h2>

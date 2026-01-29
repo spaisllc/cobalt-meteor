@@ -26,18 +26,39 @@
 }
 
 .service-card {
-    background: var(--bg-glass);
-    border: 1px solid var(--border-subtle);
-    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);
-    transition: var(--transition-normal);
-    backdrop-filter: blur(5px);
+    padding: var(--spacing-xl);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05));
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(188, 19, 254, 0.3);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    transform: translateY(-8px);
+    border-color: rgba(96, 165, 250, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2),
+        0 0 0 1px rgba(96, 165, 250, 0.1);
+}
+
+.service-card:hover::before {
+    opacity: 1;
 }
 
 .service-icon {

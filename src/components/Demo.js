@@ -1,6 +1,6 @@
 export function Demo() {
-    return `
-    <section id="demo" class="demo">
+  return `
+    <section id="demo" class="demo scroll-animate">
       <div class="container">
         <h2 class="section-title">See It In Action</h2>
         <p class="section-subtitle">This is exactly what you'll get—a professional, interactive resume website</p>

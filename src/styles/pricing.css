@@ -7,10 +7,24 @@
 .pricing-card {
     max-width: 800px;
     margin: 4rem auto;
-    background: var(--bg-glass);
-    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(96, 165, 250, 0.2);
     border-radius: var(--radius-lg);
     padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--brand-gradient);
 }
 
 .price-badge {

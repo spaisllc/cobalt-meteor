@@ -1,6 +1,6 @@
 export function Pricing() {
-    return `
-    <section id="order" class="pricing">
+  return `
+    <section id="order" class="pricing scroll-animate">
       <div class="container">
         <h2 class="section-title">Ready to Stand Out?</h2>
         <p class="section-subtitle">Get your AI-powered resume website in 48 hours</p>

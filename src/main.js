@@ -5,10 +5,12 @@ import { Services } from './components/Services.js';
 import { Demo } from './components/Demo.js';
 import { Pricing } from './components/Pricing.js';
 import { About } from './components/About.js';
-import { Contact } from './components/Contact.js';
 import { Chatbot } from './components/Chatbot.js';
+import { AnimatedBackground } from './components/AnimatedBackground.js';
+import { initScrollAnimations } from './utils/scrollAnimations.js';
 
 document.querySelector('#app').innerHTML = `
+  ${AnimatedBackground()}
   ${Header()}
   <main>
     ${Hero()}
@@ -19,3 +21,6 @@ document.querySelector('#app').innerHTML = `
   </main>
   ${Chatbot()}
 `;
+
+// Initialize scroll animations
+setTimeout(initScrollAnimations, 100);

@@ -1,5 +1,7 @@
 @import './styles/variables.css';
 @import './styles/global.css';
+@import './styles/animated-bg.css';
+@import './styles/scroll-animations.css';
 @import './styles/header.css';
 @import './styles/hero.css';
 @import './styles/services.css';
