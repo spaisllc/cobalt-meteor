@@ -7,10 +7,12 @@
   /* Midnight blue */
   --bg-glass: rgba(15, 23, 42, 0.7);
 
-  --text-primary: #f8fafc;
-  /* Bright white */
-  --text-secondary: #cbd5e1;
-  /* Light gray-blue */
+  --text-primary: #ffffff;
+  /* Pure white */
+  --text-secondary: #e2e8f0;
+  /* Very light gray-blue (was #cbd5e1) */
+  --text-dim: #cbd5e1;
+  /* The old secondary, now used for lower priority text */
   --text-accent: #ffd700;
   /* Gold */
 
