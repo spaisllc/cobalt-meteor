@@ -40,7 +40,7 @@ export async function runBootSequence(terminalNode) {
     await add('LOADING IBM SYSTEM/360 KERNEL...', 'amber-text', 100);
     await add('[OK] MAGNETIC CORE MEMORY', 'amber-text', 100);
     await add('[OK] PUNCH CARD I/O', 'amber-text', 300);
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise(r => setTimeout(r, 1500)); // Slowed down from 600ms
     // clear();
 
     // 3. DESKTOP/INTERNET ERA (1990s)
@@ -48,7 +48,7 @@ export async function runBootSequence(terminalNode) {
     await add('C:\\> ESTABLISHING TCP/IP CONNECTION...', 'green-text', 100);
     await add('BW: 56K... CONNECTED.', 'green-text', 100);
     await add('LOADING WORLD_WIDE_WEB.EXE...', 'green-text', 300);
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise(r => setTimeout(r, 1500)); // Slowed down
     // clear();
 
     // 4. COMPUTE ERA (2010s)
@@ -56,7 +56,7 @@ export async function runBootSequence(terminalNode) {
     await add('DETECTING NVIDIA H100 NODES...', 'blue-text', 50);
     await add('ALLOCATING TENSOR CORES [|||||||||||||||||] 100%', 'blue-text', 50);
     await add('PROCESSING BIG DATA STREAMS...', 'blue-text', 300);
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise(r => setTimeout(r, 1500)); // Slowed down
     // clear();
 
     // 5. AI ERA (Today)
@@ -64,7 +64,7 @@ export async function runBootSequence(terminalNode) {
     await add('>> LOADING NEURAL NETWORK MODEL...', 'purple-text', 200);
     await add('SYNAPSES: 1.7 TRILLION', 'purple-text', 100);
     await add('LLM WEIGHTS: LOADED.', 'purple-text', 100);
-    await add('AGENTIC REASONING: ACTIVE.', 'purple-text', 800);
+    await add('AGENTIC REASONING: ACTIVE.', 'purple-text', 1500); // 1.5s pause for drama
 
     // Flash effect before Spacee
     history.classList.add('flash-white');
