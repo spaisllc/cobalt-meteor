@@ -2,8 +2,8 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  // Base URL for GitHub Pages deployment
-  base: '/spais-balls/',
+  // Base URL for Cloudflare Pages deployment
+  base: '/',
   root: '.',
   build: {
     outDir: 'dist',
