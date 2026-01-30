@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
+  // Base URL for GitHub Pages deployment
+  base: '/spais-balls/',
   root: '.',
   build: {
     outDir: 'dist',
