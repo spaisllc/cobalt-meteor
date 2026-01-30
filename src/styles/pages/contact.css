@@ -1,0 +1,183 @@
+/* ========================================
+   CONTACT PAGE STYLES
+   Springs AI Solutions
+   ======================================== */
+
+body[data-page="contact"] {
+    background: var(--color-bg-void);
+}
+
+/* Page Hero (shared) */
+.page-hero {
+    padding: calc(var(--nav-height) + var(--spacing-16)) var(--spacing-6) var(--spacing-16);
+    text-align: center;
+    position: relative;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 800px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
+.page-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    animation: page-appear 0.6s ease-out;
+}
+
+@keyframes page-appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contact Section */
+.contact-section {
+    padding: var(--spacing-16) var(--spacing-6);
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: var(--spacing-6);
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+/* Contact Options */
+.chat-option {
+    text-align: center;
+}
+
+.chat-option .option-header {
+    flex-direction: column;
+    text-align: center;
+}
+
+.chat-option .option-icon {
+    font-size: var(--text-4xl);
+}
+
+/* Form Option */
+.form-option {
+    grid-row: span 2;
+}
+
+/* Direct Contact Option */
+.direct-option {
+    text-align: center;
+}
+
+.direct-option .option-header {
+    flex-direction: column;
+    text-align: center;
+}
+
+.direct-option .option-icon {
+    font-size: var(--text-4xl);
+}
+
+.direct-contacts {
+    margin-bottom: var(--spacing-6);
+}
+
+.direct-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    padding: var(--spacing-3);
+    background: var(--color-bg-deep);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    margin-bottom: var(--spacing-3);
+}
+
+.direct-link:hover {
+    border-color: var(--color-primary-500);
+    color: var(--color-primary-400);
+}
+
+.direct-icon {
+    font-size: var(--text-lg);
+}
+
+.calendar-embed {
+    margin-top: var(--spacing-6);
+}
+
+.calendar-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--spacing-3);
+}
+
+.calendar-btn {
+    width: 100%;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: var(--spacing-20) var(--spacing-6);
+    background: var(--color-bg-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.faq-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+.faq-container .section-title {
+    margin-bottom: var(--spacing-10);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .contact-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-option {
+        grid-column: span 2;
+        grid-row: auto;
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-hero {
+        padding-top: calc(var(--nav-height) + var(--spacing-10));
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .form-option {
+        grid-column: auto;
+        order: 0;
+    }
+
+    .chat-option {
+        order: -1;
+    }
+}

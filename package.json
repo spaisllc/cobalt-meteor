@@ -1,14 +1,18 @@
 {
   "name": "springs-ai-website",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Springs AI Solutions - AI-powered digital employees",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^7.2.4"
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "openai": "^4.0.0"
   }
 }

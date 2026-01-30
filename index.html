@@ -1,31 +1,231 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>springs-ai-website</title>
-  <style>
-    /* CRITICAL: Hides site content immediately before external CSS loads */
-    body.terminal-active {
-      overflow: hidden !important;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Springs AI Solutions - AI-powered digital employees that sell, support, and scale your business 24/7.">
+    <meta property="og:title" content="Springs AI Solutions - We Build Digital Employees">
+    <meta property="og:description" content="AI agents that qualify leads, answer questions 24/7, and close deals while you sleep.">
+    <meta property="og:type" content="website">
+    <title>Springs AI Solutions | AI-Powered Digital Employees</title>
 
-    body.terminal-active header,
-    body.terminal-active #main-content,
-    body.terminal-active .chatbot-widget {
-      opacity: 0 !important;
-      pointer-events: none !important;
-      visibility: hidden !important;
-      /* Double insurance */
-    }
-  </style>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="src/styles/reset.css">
+    <link rel="stylesheet" href="src/styles/variables.css">
+    <link rel="stylesheet" href="src/styles/typography.css">
+    <link rel="stylesheet" href="src/styles/animations.css">
+    <link rel="stylesheet" href="src/styles/components/navigation.css">
+    <link rel="stylesheet" href="src/styles/components/chat-widget.css">
+    <link rel="stylesheet" href="src/styles/components/cards.css">
+    <link rel="stylesheet" href="src/styles/components/buttons.css">
+    <link rel="stylesheet" href="src/styles/components/footer.css">
+    <link rel="stylesheet" href="src/styles/pages/home.css">
+    <link rel="stylesheet" href="src/styles/responsive.css">
 </head>
+<body data-page="home">
+    <!-- Background Canvas -->
+    <canvas id="background-canvas"></canvas>
 
-<body class="terminal-active">
-  <div id="app"></div>
-  <script type="module" src="/src/main.js"></script>
+    <!-- Navigation -->
+    <nav id="main-nav" class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-text">SPRINGS<span class="logo-dot">.</span>AI</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link active">Home</a></li>
+                <li><a href="/about.html" class="nav-link">About</a></li>
+                <li><a href="/services.html" class="nav-link">Services</a></li>
+                <li><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-cta" id="nav-chat-btn">Start Chat</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">We Build</span>
+                    <span class="title-line highlight">Digital Employees</span>
+                </h1>
+                <p class="hero-subtitle">
+                    AI agents that sell, support, and scale your business 24/7
+                </p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" id="hero-chat-btn">
+                        <span class="btn-text">Start a Conversation</span>
+                        <span class="btn-icon">&#8250;</span>
+                    </button>
+                    <a href="/services.html" class="btn btn-secondary">
+                        <span class="btn-text">See How It Works</span>
+                    </a>
+                </div>
+                <p class="hero-hint">
+                    <span class="hint-icon">&#9889;</span>
+                    You're about to talk to one of our AI sales agents
+                </p>
+            </div>
+        </section>
+
+        <!-- Demo Section -->
+        <section class="demo-section" id="demo">
+            <div class="demo-container">
+                <div class="demo-header">
+                    <h2 class="section-title">Experience S.P.A.I.S.</h2>
+                    <p class="section-subtitle">Our AI sales agent is ready to talk</p>
+                </div>
+                <div id="chat-container" class="chat-container">
+                    <!-- Chat widget will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof Section -->
+        <section class="proof-section">
+            <div class="proof-container">
+                <h2 class="proof-title">Trusted by forward-thinking companies</h2>
+                <div class="proof-metrics">
+                    <div class="metric">
+                        <span class="metric-value">50%</span>
+                        <span class="metric-label">Lead Increase</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">24/7</span>
+                        <span class="metric-label">Availability</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">3x</span>
+                        <span class="metric-label">Faster Response</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Preview Section -->
+        <section class="services-preview">
+            <div class="services-container">
+                <h2 class="section-title">What We Build</h2>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <div class="card-icon">&#129302;</div>
+                        <h3 class="card-title">AI Sales Agents</h3>
+                        <p class="card-description">Lead qualification on autopilot. 24/7 prospect engagement with natural conversation flows.</p>
+                        <a href="/services.html#sales-agents" class="card-link">Learn more &#8250;</a>
+                    </article>
+                    <article class="service-card">
+                        <div class="card-icon">&#128172;</div>
+                        <h3 class="card-title">Smart Chatbots</h3>
+                        <p class="card-description">Replace boring forms with conversations. Capture 3x more leads with intelligent branching.</p>
+                        <a href="/services.html#chatbots" class="card-link">Learn more &#8250;</a>
+                    </article>
+                    <article class="service-card">
+                        <div class="card-icon">&#9889;</div>
+                        <h3 class="card-title">Custom Solutions</h3>
+                        <p class="card-description">Bespoke AI employees tailored to your specific workflows and integrated with your tools.</p>
+                        <a href="/services.html#custom" class="card-link">Learn more &#8250;</a>
+                    </article>
+                </div>
+                <div class="services-cta">
+                    <a href="/services.html" class="btn btn-outline">View All Services</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Ready to hire your first AI employee?</h2>
+                <p class="cta-subtitle">Start a conversation and see the difference</p>
+                <button class="btn btn-primary btn-large" id="cta-chat-btn">
+                    <span class="btn-text">Talk to S.P.A.I.S.</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="footer-logo">SPRINGS<span class="logo-dot">.</span>AI</span>
+                <p class="footer-tagline">Building the future of digital employees</p>
+            </div>
+            <nav class="footer-nav">
+                <div class="footer-column">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/services.html">Services</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/services.html#sales-agents">AI Sales Agents</a></li>
+                        <li><a href="/services.html#chatbots">Smart Chatbots</a></li>
+                        <li><a href="/services.html#email">Email Assistants</a></li>
+                        <li><a href="/services.html#custom">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@springsai.com">hello@springsai.com</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Springs AI Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget (Floating) -->
+    <div id="chat-widget" class="chat-widget">
+        <button class="chat-widget-toggle" id="chat-toggle" aria-label="Open chat">
+            <span class="chat-icon">&#128172;</span>
+            <span class="chat-close-icon">&#10005;</span>
+        </button>
+        <div class="chat-widget-panel" id="chat-panel">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <span class="chat-status"></span>
+                    <span class="chat-title">S.P.A.I.S.</span>
+                </div>
+                <button class="chat-fullscreen-btn" id="chat-fullscreen" aria-label="Toggle fullscreen">
+                    &#x26F6;
+                </button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-container">
+                <input
+                    type="text"
+                    id="chat-input"
+                    class="chat-input"
+                    placeholder="Type a message..."
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <button class="chat-send-btn" id="chat-send" aria-label="Send message">
+                    &#10148;
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <script type="module" src="src/main.js"></script>
 </body>
-
 </html>

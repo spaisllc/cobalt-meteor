@@ -1,0 +1,181 @@
+/* ========================================
+   BUTTON COMPONENTS
+   Springs AI Solutions
+   ======================================== */
+
+/* Base Button */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    padding: var(--spacing-3) var(--spacing-6);
+    border-radius: var(--radius-sm);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-icon {
+    font-size: var(--text-lg);
+    transition: transform var(--transition-fast);
+}
+
+/* Primary Button */
+.btn-primary {
+    color: var(--color-bg-deep);
+    background: var(--color-primary-400);
+    border-color: var(--color-primary-400);
+    box-shadow: var(--glow-subtle);
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-300);
+    border-color: var(--color-primary-300);
+    box-shadow: var(--glow-medium);
+    transform: translateY(-2px);
+}
+
+.btn-primary:hover .btn-icon {
+    transform: translateX(4px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    color: var(--color-text-secondary);
+    background: var(--color-bg-surface);
+    border-color: var(--color-border);
+}
+
+.btn-secondary:hover {
+    color: var(--color-primary-400);
+    border-color: var(--color-primary-500);
+    background: var(--color-bg-elevated);
+}
+
+/* Outline Button */
+.btn-outline {
+    color: var(--color-primary-400);
+    background: transparent;
+    border-color: var(--color-primary-500);
+}
+
+.btn-outline:hover {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--color-primary-400);
+    box-shadow: var(--glow-subtle);
+}
+
+/* Ghost Button */
+.btn-ghost {
+    color: var(--color-text-secondary);
+    background: transparent;
+    border-color: transparent;
+    padding: var(--spacing-2) var(--spacing-4);
+}
+
+.btn-ghost:hover {
+    color: var(--color-primary-400);
+    background: rgba(0, 255, 255, 0.05);
+}
+
+/* Large Button */
+.btn-large {
+    font-size: var(--text-base);
+    padding: var(--spacing-4) var(--spacing-8);
+}
+
+/* Small Button */
+.btn-small {
+    font-size: var(--text-xs);
+    padding: var(--spacing-2) var(--spacing-4);
+}
+
+/* Full Width Button */
+.btn-full {
+    width: 100%;
+}
+
+/* Button with Glow Animation */
+.btn-glow {
+    animation: button-glow 2s ease-in-out infinite;
+}
+
+@keyframes button-glow {
+    0%, 100% {
+        box-shadow: var(--glow-subtle);
+    }
+    50% {
+        box-shadow: var(--glow-medium);
+    }
+}
+
+/* Button Loading State */
+.btn-loading {
+    pointer-events: none;
+}
+
+.btn-loading .btn-text {
+    opacity: 0;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Button Group */
+.btn-group {
+    display: flex;
+    gap: var(--spacing-4);
+}
+
+.btn-group-vertical {
+    flex-direction: column;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .btn-large {
+        font-size: var(--text-sm);
+        padding: var(--spacing-3) var(--spacing-6);
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+}

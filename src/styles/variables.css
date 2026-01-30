@@ -1,54 +1,247 @@
-/* src/styles/variables.css */
 :root {
-  /* Star Trek Inspired - Deep Blue Palette */
-  --bg-primary: #020617;
-  /* Deep void/space black */
-  --bg-secondary: #0f172a;
-  /* Midnight blue */
-  --bg-glass: rgba(15, 23, 42, 0.7);
+    /* ========================================
+       PREMIUM MATRIX DESIGN SYSTEM
+       Springs AI Solutions - Refined Hacker Aesthetic
+       ======================================== */
 
-  --text-primary: #ffffff;
-  /* Pure white */
-  --text-secondary: #e2e8f0;
-  /* Very light gray-blue (was #cbd5e1) */
-  --text-dim: #cbd5e1;
-  /* The old secondary, now used for lower priority text */
-  --text-accent: #ffd700;
-  /* Gold */
+    /* Primary Palette (Refined Cyan) */
+    --color-primary-100: #e0ffff;
+    --color-primary-200: #b3ffff;
+    --color-primary-300: #66ffff;
+    --color-primary-400: #00ffff;  /* Bright - use sparingly */
+    --color-primary-500: #00cccc;  /* Default primary */
+    --color-primary-600: #009999;
+    --color-primary-700: #006666;
+    --color-primary-800: #004d4d;
+    --color-primary-900: #003333;
 
-  /* Brand Colors */
-  --brand-blue: #3b82f6;
-  /* Azure blue */
-  --brand-purple: #60a5fa;
-  /* Electric blue */
-  --brand-gold: #60a5fa;
-  /* Using electric blue for consistency */
-  --brand-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    /* Accent Colors */
+    --color-accent-green: #00ff88;
+    --color-accent-purple: #9d00ff;
+    --color-accent-gold: #ffd700;
+    --color-accent-blue: #00aaff;
 
-  /* Status Colors */
-  --success: #00ff94;
-  --error: #ff0055;
+    /* Legacy compatibility */
+    --color-primary: var(--color-primary-500);
+    --color-primary-bright: var(--color-primary-400);
+    --color-primary-glow: rgba(0, 255, 255, 0.4);
+    --color-secondary: var(--color-accent-green);
 
-  /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    /* Background Layers (Depth System) */
+    --color-bg-void: #000000;
+    --color-bg-deep: #050a0a;
+    --color-bg-surface: #0a1414;
+    --color-bg-elevated: #0f1f1f;
+    --color-bg-hover: #142828;
+    --color-bg-terminal: rgba(5, 10, 10, 0.9);
+    --color-bg-glass: rgba(10, 20, 20, 0.7);
+    --color-bg-overlay: rgba(0, 0, 0, 0.8);
 
-  /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 4rem;
-  --spacing-2xl: 8rem;
+    /* Legacy compatibility */
+    --color-bg: var(--color-bg-void);
 
-  /* Borders & Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
+    /* Text Hierarchy */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #b3cccc;
+    --color-text-tertiary: #668888;
+    --color-text-muted: #445555;
+    --color-text-glow: var(--color-primary-400);
 
-  --border-subtle: rgba(255, 255, 255, 0.1);
+    /* Legacy compatibility */
+    --color-text: var(--color-primary-500);
+    --color-text-dim: var(--color-text-tertiary);
 
-  /* Transitions */
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease-in-out;
+    /* Status Colors */
+    --color-success: #00ff88;
+    --color-warning: #ffaa00;
+    --color-error: #ff3366;
+    --color-info: #00aaff;
+
+    /* Border Colors */
+    --color-border: rgba(0, 204, 204, 0.3);
+    --color-border-hover: rgba(0, 255, 255, 0.5);
+    --color-border-focus: var(--color-primary-400);
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+
+    /* Font Families */
+    --font-display: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    --font-body: 'IBM Plex Mono', 'Source Code Pro', 'Courier New', monospace;
+    --font-terminal: 'Courier New', Courier, monospace;
+
+    /* Legacy compatibility */
+    --font-mono: var(--font-terminal);
+
+    /* Type Scale (1.25 ratio) */
+    --text-xs: 0.64rem;     /* 10.24px */
+    --text-sm: 0.8rem;      /* 12.8px */
+    --text-base: 1rem;      /* 16px */
+    --text-lg: 1.25rem;     /* 20px */
+    --text-xl: 1.563rem;    /* 25px */
+    --text-2xl: 1.953rem;   /* 31.25px */
+    --text-3xl: 2.441rem;   /* 39px */
+    --text-4xl: 3.052rem;   /* 48.8px */
+    --text-5xl: 3.815rem;   /* 61px */
+
+    /* Legacy compatibility */
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+    --font-size-lg: 18px;
+    --font-size-xl: 24px;
+
+    /* Font Weights */
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+    /* Line Heights */
+    --leading-tight: 1.25;
+    --leading-normal: 1.6;
+    --leading-relaxed: 1.8;
+
+    /* Legacy compatibility */
+    --line-height: 1.6;
+
+    /* Letter Spacing */
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.05em;
+    --tracking-wider: 0.1em;
+
+    /* ========================================
+       SPACING
+       ======================================== */
+
+    --spacing-0: 0;
+    --spacing-1: 0.25rem;   /* 4px */
+    --spacing-2: 0.5rem;    /* 8px */
+    --spacing-3: 0.75rem;   /* 12px */
+    --spacing-4: 1rem;      /* 16px */
+    --spacing-5: 1.25rem;   /* 20px */
+    --spacing-6: 1.5rem;    /* 24px */
+    --spacing-8: 2rem;      /* 32px */
+    --spacing-10: 2.5rem;   /* 40px */
+    --spacing-12: 3rem;     /* 48px */
+    --spacing-16: 4rem;     /* 64px */
+    --spacing-20: 5rem;     /* 80px */
+    --spacing-24: 6rem;     /* 96px */
+
+    /* Legacy compatibility */
+    --spacing-xs: var(--spacing-2);
+    --spacing-sm: var(--spacing-4);
+    --spacing-md: var(--spacing-6);
+    --spacing-lg: var(--spacing-8);
+    --spacing-xl: var(--spacing-12);
+
+    /* ========================================
+       EFFECTS & SHADOWS
+       ======================================== */
+
+    /* Glow System (3 levels) */
+    --glow-subtle: 0 0 20px rgba(0, 255, 255, 0.1);
+    --glow-medium:
+        0 0 10px rgba(0, 255, 255, 0.2),
+        0 0 20px rgba(0, 255, 255, 0.1),
+        0 0 40px rgba(0, 255, 255, 0.05);
+    --glow-intense:
+        0 0 5px rgba(0, 255, 255, 0.4),
+        0 0 15px rgba(0, 255, 255, 0.3),
+        0 0 30px rgba(0, 255, 255, 0.2),
+        0 0 60px rgba(0, 255, 255, 0.1);
+
+    /* Legacy compatibility */
+    --glow-sm: var(--glow-subtle);
+    --glow-md: var(--glow-medium);
+    --glow-lg: var(--glow-intense);
+    --shadow-terminal: var(--glow-intense);
+
+    /* Text Glow */
+    --text-glow-subtle: 0 0 10px currentColor;
+    --text-glow-medium:
+        0 0 10px currentColor,
+        0 0 20px currentColor;
+    --text-glow-intense:
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 40px currentColor;
+
+    /* Card Shadows */
+    --shadow-card:
+        0 4px 6px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(0, 255, 255, 0.05);
+    --shadow-card-hover:
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 255, 255, 0.1);
+
+    /* Gradients */
+    --gradient-cyber: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-accent-purple) 100%);
+    --gradient-surface: linear-gradient(180deg, var(--color-bg-surface) 0%, var(--color-bg-deep) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+
+    /* ========================================
+       BORDERS & RADIUS
+       ======================================== */
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    --border-width: 1px;
+    --border-width-thick: 2px;
+
+    /* ========================================
+       TRANSITIONS & ANIMATIONS
+       ======================================== */
+
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* ========================================
+       Z-INDEX LAYERS
+       ======================================== */
+
+    --z-background: 0;
+    --z-base: 1;
+    --z-content: 10;
+    --z-nav: 50;
+    --z-dropdown: 60;
+    --z-chat-widget: 80;
+    --z-modal: 90;
+    --z-overlay: 100;
+
+    /* Legacy compatibility */
+    --z-terminal: var(--z-content);
+    --z-hologram: var(--z-dropdown);
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
+
+    --container-max: 1200px;
+    --container-narrow: 800px;
+    --nav-height: 70px;
+    --chat-widget-width: 380px;
+    --chat-widget-height: 500px;
+}
+
+/* Dark mode is default - no changes needed */
+@media (prefers-color-scheme: light) {
+    /* Could add light mode support later if needed */
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --transition-fast: 0s;
+        --transition-normal: 0s;
+        --transition-slow: 0s;
+        --transition-bounce: 0s;
+    }
 }

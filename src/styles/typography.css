@@ -1,0 +1,229 @@
+/* ========================================
+   TYPOGRAPHY SYSTEM
+   Springs AI Solutions
+   ======================================== */
+
+/* Base Typography */
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text-secondary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+h1 {
+    font-size: var(--text-4xl);
+    letter-spacing: var(--tracking-tight);
+}
+
+h2 {
+    font-size: var(--text-3xl);
+    letter-spacing: var(--tracking-tight);
+}
+
+h3 {
+    font-size: var(--text-2xl);
+}
+
+h4 {
+    font-size: var(--text-xl);
+}
+
+h5 {
+    font-size: var(--text-lg);
+}
+
+h6 {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+}
+
+/* Paragraph */
+p {
+    margin: 0 0 var(--spacing-4);
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Links */
+a {
+    color: var(--color-primary-400);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-primary-300);
+    text-shadow: var(--text-glow-subtle);
+}
+
+/* Strong & Emphasis */
+strong, b {
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* Small Text */
+small {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+}
+
+/* Code */
+code {
+    font-family: var(--font-terminal);
+    font-size: 0.9em;
+    padding: var(--spacing-1) var(--spacing-2);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary-400);
+}
+
+pre {
+    font-family: var(--font-terminal);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    padding: var(--spacing-4);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+}
+
+pre code {
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+/* Lists */
+ul, ol {
+    margin: 0 0 var(--spacing-4);
+    padding-left: var(--spacing-6);
+}
+
+li {
+    margin-bottom: var(--spacing-2);
+}
+
+/* Blockquote */
+blockquote {
+    margin: var(--spacing-4) 0;
+    padding: var(--spacing-4) var(--spacing-6);
+    border-left: 3px solid var(--color-primary-500);
+    background: var(--color-bg-surface);
+    font-style: italic;
+}
+
+/* Utility Classes */
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
+
+.font-normal { font-weight: var(--weight-normal); }
+.font-medium { font-weight: var(--weight-medium); }
+.font-semibold { font-weight: var(--weight-semibold); }
+.font-bold { font-weight: var(--weight-bold); }
+
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-tertiary { color: var(--color-text-tertiary); }
+.text-muted { color: var(--color-text-muted); }
+.text-glow { color: var(--color-text-glow); }
+.text-success { color: var(--color-success); }
+.text-error { color: var(--color-error); }
+.text-warning { color: var(--color-warning); }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+.tracking-tight { letter-spacing: var(--tracking-tight); }
+.tracking-normal { letter-spacing: var(--tracking-normal); }
+.tracking-wide { letter-spacing: var(--tracking-wide); }
+.tracking-wider { letter-spacing: var(--tracking-wider); }
+
+/* Highlight Effect */
+.highlight {
+    color: var(--color-primary-400);
+    text-shadow: var(--text-glow-subtle);
+}
+
+/* Section Titles */
+.section-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-4);
+}
+
+.section-title.centered {
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--spacing-8);
+}
+
+.section-subtitle.centered {
+    text-align: center;
+}
+
+/* Page Titles */
+.page-title {
+    font-size: var(--text-5xl);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-6);
+}
+
+.page-subtitle {
+    font-size: var(--text-xl);
+    color: var(--color-text-tertiary);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    h1, .page-title {
+        font-size: var(--text-3xl);
+    }
+
+    h2, .section-title {
+        font-size: var(--text-2xl);
+    }
+
+    h3 {
+        font-size: var(--text-xl);
+    }
+
+    .page-subtitle {
+        font-size: var(--text-lg);
+    }
+}

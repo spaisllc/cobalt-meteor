@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Springs AI Solutions - Learn about our mission to build AI-powered digital employees for modern businesses.">
+    <meta property="og:title" content="About | Springs AI Solutions">
+    <meta property="og:description" content="The future of sales is autonomous. Learn about Springs AI Solutions.">
+    <meta property="og:type" content="website">
+    <title>About | Springs AI Solutions</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="src/styles/reset.css">
+    <link rel="stylesheet" href="src/styles/variables.css">
+    <link rel="stylesheet" href="src/styles/typography.css">
+    <link rel="stylesheet" href="src/styles/animations.css">
+    <link rel="stylesheet" href="src/styles/components/navigation.css">
+    <link rel="stylesheet" href="src/styles/components/chat-widget.css">
+    <link rel="stylesheet" href="src/styles/components/cards.css">
+    <link rel="stylesheet" href="src/styles/components/buttons.css">
+    <link rel="stylesheet" href="src/styles/components/footer.css">
+    <link rel="stylesheet" href="src/styles/pages/about.css">
+    <link rel="stylesheet" href="src/styles/responsive.css">
+</head>
+<body data-page="about">
+    <!-- Background Canvas -->
+    <canvas id="background-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-text">SPRINGS<span class="logo-dot">.</span>AI</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about.html" class="nav-link active">About</a></li>
+                <li><a href="/services.html" class="nav-link">Services</a></li>
+                <li><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-cta" id="nav-chat-btn">Start Chat</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="page-hero-content">
+                <h1 class="page-title">The Future of Sales<br><span class="highlight">Is Autonomous</span></h1>
+                <p class="page-subtitle">We're building AI employees that work as hard as you do</p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="about-section mission-section">
+            <div class="section-container">
+                <div class="section-content">
+                    <h2 class="section-title">Our Mission</h2>
+                    <p class="section-text">
+                        We believe every business deserves enterprise-grade AI. Not as a buzzword or an expensive experiment, but as a practical tool that generates revenue while you sleep.
+                    </p>
+                    <p class="section-text">
+                        Springs AI Solutions exists to bridge the gap between AI's potential and real-world business applications. We build digital employees that qualify leads, answer questions, and close deals - all without human intervention.
+                    </p>
+                </div>
+                <div class="section-visual">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-dot"></span>
+                            <span class="code-dot"></span>
+                            <span class="code-dot"></span>
+                        </div>
+                        <pre class="code-content"><code>// Our philosophy
+const springsAI = {
+  mission: "democratize AI",
+  approach: "conversations > forms",
+  goal: "revenue machines",
+  status: "always online"
+};</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="about-section story-section">
+            <div class="section-container reverse">
+                <div class="section-content">
+                    <h2 class="section-title">Our Story</h2>
+                    <p class="section-text">
+                        Springs AI was born from a simple observation: businesses were spending thousands on websites that asked visitors to fill out forms. Forms that got ignored. Leads that went cold.
+                    </p>
+                    <p class="section-text">
+                        We asked ourselves: what if instead of asking people to fill out a form, we just... talked to them? What if every website visitor was greeted by an intelligent sales agent that could qualify, educate, and convert - 24 hours a day?
+                    </p>
+                    <p class="section-text">
+                        That's what we build now. Not websites. Not chatbots. <strong>Digital employees</strong> that generate revenue.
+                    </p>
+                </div>
+                <div class="section-visual">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-marker"></span>
+                            <div class="timeline-content">
+                                <span class="timeline-date">The Problem</span>
+                                <p>Forms convert at 2-3%. Visitors bounce.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-marker"></span>
+                            <div class="timeline-content">
+                                <span class="timeline-date">The Insight</span>
+                                <p>Conversations convert. Engagement converts.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item active">
+                            <span class="timeline-marker"></span>
+                            <div class="timeline-content">
+                                <span class="timeline-date">The Solution</span>
+                                <p>AI agents that talk, qualify, and convert.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beliefs Section -->
+        <section class="about-section beliefs-section">
+            <div class="section-container">
+                <h2 class="section-title centered">What We Believe</h2>
+                <div class="beliefs-grid">
+                    <article class="belief-card">
+                        <div class="belief-number">01</div>
+                        <h3 class="belief-title">AI Should Augment, Not Replace</h3>
+                        <p class="belief-text">Our AI employees handle the repetitive work so your human team can focus on what matters: building relationships and closing deals.</p>
+                    </article>
+                    <article class="belief-card">
+                        <div class="belief-number">02</div>
+                        <h3 class="belief-title">Conversations Convert Better Than Forms</h3>
+                        <p class="belief-text">A dialogue is worth a thousand form fields. People want to talk, not fill out paperwork. We build for that reality.</p>
+                    </article>
+                    <article class="belief-card">
+                        <div class="belief-number">03</div>
+                        <h3 class="belief-title">Every Business Deserves Enterprise AI</h3>
+                        <p class="belief-text">Fortune 500 AI capabilities shouldn't be reserved for Fortune 500 budgets. We make powerful AI accessible.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section class="about-section tech-section">
+            <div class="section-container">
+                <div class="section-content">
+                    <h2 class="section-title">Our Technology</h2>
+                    <p class="section-text">
+                        We build on the latest advances in large language models and conversational AI. Our agents understand context, remember history, and adapt their approach based on who they're talking to.
+                    </p>
+                    <ul class="tech-list">
+                        <li class="tech-item">
+                            <span class="tech-icon">&#9889;</span>
+                            <span class="tech-text">Powered by GPT-4 and Claude</span>
+                        </li>
+                        <li class="tech-item">
+                            <span class="tech-icon">&#128274;</span>
+                            <span class="tech-text">Privacy-first architecture</span>
+                        </li>
+                        <li class="tech-item">
+                            <span class="tech-icon">&#128200;</span>
+                            <span class="tech-text">Continuous learning & optimization</span>
+                        </li>
+                        <li class="tech-item">
+                            <span class="tech-icon">&#128279;</span>
+                            <span class="tech-text">Seamless CRM integration</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="section-visual">
+                    <div class="tech-visual">
+                        <div class="tech-node central">AI</div>
+                        <div class="tech-node orbit n1">NLP</div>
+                        <div class="tech-node orbit n2">ML</div>
+                        <div class="tech-node orbit n3">API</div>
+                        <div class="tech-node orbit n4">CRM</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Ready to meet your AI employee?</h2>
+                <p class="cta-subtitle">Start a conversation and experience the future</p>
+                <button class="btn btn-primary btn-large" id="cta-chat-btn">
+                    <span class="btn-text">Talk to S.P.A.I.S.</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="footer-logo">SPRINGS<span class="logo-dot">.</span>AI</span>
+                <p class="footer-tagline">Building the future of digital employees</p>
+            </div>
+            <nav class="footer-nav">
+                <div class="footer-column">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/services.html">Services</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/services.html#sales-agents">AI Sales Agents</a></li>
+                        <li><a href="/services.html#chatbots">Smart Chatbots</a></li>
+                        <li><a href="/services.html#email">Email Assistants</a></li>
+                        <li><a href="/services.html#custom">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@springsai.com">hello@springsai.com</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Springs AI Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget (Floating) -->
+    <div id="chat-widget" class="chat-widget">
+        <button class="chat-widget-toggle" id="chat-toggle" aria-label="Open chat">
+            <span class="chat-icon">&#128172;</span>
+            <span class="chat-close-icon">&#10005;</span>
+        </button>
+        <div class="chat-widget-panel" id="chat-panel">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <span class="chat-status"></span>
+                    <span class="chat-title">S.P.A.I.S.</span>
+                </div>
+                <button class="chat-fullscreen-btn" id="chat-fullscreen" aria-label="Toggle fullscreen">
+                    &#x26F6;
+                </button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-container">
+                <input
+                    type="text"
+                    id="chat-input"
+                    class="chat-input"
+                    placeholder="Type a message..."
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <button class="chat-send-btn" id="chat-send" aria-label="Send message">
+                    &#10148;
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
