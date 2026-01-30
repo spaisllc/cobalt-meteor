@@ -92,23 +92,26 @@ export class BootSequence {
         this.overlay = document.createElement('div');
         this.overlay.id = 'boot-overlay';
         this.overlay.className = 'boot-overlay';
+        // Start completely black - header hidden, reveals after code sequence
         this.overlay.innerHTML = `
             <div class="boot-terminal">
-                <div class="boot-header">
+                <div class="boot-header hidden" id="boot-header">
                     <span class="boot-logo">[ S.P.A.I.S. ]</span>
                     <span class="boot-title">SPRINGS AI SOLUTIONS, LLC</span>
                     <span class="boot-subtitle">SYSTEM INITIALIZATION SEQUENCE</span>
                 </div>
                 <div class="boot-content" id="boot-content"></div>
-                <div class="boot-status">
+                <div class="boot-status hidden" id="boot-status">
                     <span class="status-bar"></span>
-                    <span class="status-text">LOADING SYSTEMS<span class="status-dots">...</span></span>
+                    <span class="status-text">SYSTEMS ONLINE<span class="status-dots">...</span></span>
                 </div>
             </div>
             <div class="boot-lines-container" id="boot-lines"></div>
         `;
         document.body.prepend(this.overlay);
         this.contentEl = document.getElementById('boot-content');
+        this.headerEl = document.getElementById('boot-header');
+        this.statusEl = document.getElementById('boot-status');
     }
 
     async start() {
@@ -171,15 +174,31 @@ export class BootSequence {
     }
 
     async typeText(element, text, duration) {
-        const charDelay = Math.min(duration / text.length, 40);
+        const charDelay = Math.min(duration / text.length, 50);
+
+        // Create cursor element for typewriter effect
+        const cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        cursor.textContent = '█';
+        element.appendChild(cursor);
 
         for (const char of text) {
-            element.textContent += char;
+            // Insert character before cursor
+            const charSpan = document.createTextNode(char);
+            element.insertBefore(charSpan, cursor);
             await this.delay(charDelay);
         }
+
+        // Remove cursor after typing completes
+        cursor.remove();
     }
 
     async showLinesTransition() {
+        // Clear the code content before showing lines
+        this.contentEl.classList.add('fade-out');
+        await this.delay(300);
+        this.contentEl.innerHTML = '';
+
         const container = document.getElementById('boot-lines');
         container.classList.add('active');
 
@@ -198,6 +217,16 @@ export class BootSequence {
         // Converge to center
         container.classList.add('converge');
         await this.delay(400);
+
+        // NOW reveal the S.P.A.I.S. header and logo after lines animation
+        this.headerEl.classList.remove('hidden');
+        this.headerEl.classList.add('reveal');
+        await this.delay(300);
+
+        // Show the status bar
+        this.statusEl.classList.remove('hidden');
+        this.statusEl.classList.add('reveal');
+        await this.delay(800);
     }
 
     complete() {

@@ -47,10 +47,47 @@
     z-index: 5;
 }
 
-/* Header */
+/* Header - starts hidden, reveals after code sequence */
 .boot-header {
     text-align: center;
     margin-bottom: var(--spacing-10, 2.5rem);
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.boot-header.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+.boot-header.reveal {
+    animation: headerReveal 0.8s ease-out forwards;
+}
+
+@keyframes headerReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Status - also starts hidden */
+.boot-status.hidden {
+    opacity: 0;
+}
+
+.boot-status.reveal {
+    animation: fadeIn 0.5s ease-out forwards;
 }
 
 .boot-logo {
@@ -117,6 +154,18 @@
     animation: fadeIn 0.2s ease-out forwards;
     white-space: nowrap;
     overflow: hidden;
+}
+
+/* Typing Cursor - visible blinking block cursor */
+.typing-cursor {
+    display: inline-block;
+    animation: cursorBlink 0.7s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 /* Era-Specific Styles */
