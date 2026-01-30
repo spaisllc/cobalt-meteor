@@ -1,35 +1,62 @@
 /**
- * Springs AI Solutions - Main Application
+ * Springs AI Solutions, LLC - Main Application
  * Handles initialization for all pages
  */
 
 import { AnimatedBackground } from './components/AnimatedBackground.js';
 import { Navigation } from './components/Navigation.js';
 import { ChatWidget } from './components/ChatWidget.js';
+import { BootSequence } from './components/BootSequence.js';
 
 class App {
     constructor() {
         this.background = null;
         this.navigation = null;
         this.chatWidget = null;
+        this.bootSequence = null;
         this.currentPage = document.body.dataset.page || 'home';
     }
 
     async init() {
-        // Initialize animated background on all pages
-        this.initBackground();
-
-        // Initialize navigation
+        // Initialize navigation first (visible during boot on non-home pages)
         this.initNavigation();
 
-        // Initialize chat widget
+        // Initialize chat widget (needed before boot completes)
         this.initChatWidget();
+
+        // Run boot sequence on home page only
+        if (this.currentPage === 'home') {
+            await this.runBootSequence();
+        } else {
+            // Other pages: just start background normally
+            this.initBackground();
+        }
 
         // Initialize page-specific features
         this.initPageFeatures();
 
         // Set up global event listeners
         this.setupEventListeners();
+    }
+
+    async runBootSequence() {
+        return new Promise((resolve) => {
+            this.bootSequence = new BootSequence({
+                onComplete: () => {
+                    // Start background animation AFTER boot completes
+                    this.initBackground();
+
+                    // Open chat and start required intro flow
+                    if (this.chatWidget) {
+                        this.chatWidget.openWithIntro();
+                    }
+
+                    resolve();
+                }
+            });
+
+            this.bootSequence.start();
+        });
     }
 
     initBackground() {

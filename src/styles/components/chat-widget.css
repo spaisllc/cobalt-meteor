@@ -357,6 +357,93 @@
     border-radius: 0;
 }
 
+/* ========================================
+   INTRO MODE STYLES
+   Required intro flow after boot sequence
+   ======================================== */
+
+/* Intro Mode - Fullscreen overlay, can't close */
+.chat-widget.intro-mode {
+    inset: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.chat-widget.intro-mode .chat-widget-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    max-width: none;
+    z-index: 9998;
+}
+
+.chat-widget.intro-mode .chat-widget-toggle {
+    display: none;
+}
+
+.chat-widget.intro-mode .chat-fullscreen-btn {
+    display: none;
+}
+
+/* Center the chat content in intro mode */
+.chat-widget.intro-mode .chat-messages {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--spacing-8);
+}
+
+/* Service Option Buttons */
+.service-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4) 0;
+    animation: message-appear 0.3s ease-out;
+}
+
+.service-option-btn {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    padding: var(--spacing-4);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    font-family: var(--font-display);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+}
+
+.service-option-btn:hover {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-primary-500);
+    box-shadow: var(--glow-subtle);
+}
+
+.service-option-btn:hover .option-label {
+    color: var(--color-primary-400);
+}
+
+.service-option-btn .option-label {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    transition: color var(--transition-fast);
+}
+
+.service-option-btn .option-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .chat-widget {
@@ -381,5 +468,17 @@
         left: 0;
         right: 0;
         height: 100vh;
+    }
+
+    .chat-widget.intro-mode .chat-messages {
+        padding: var(--spacing-4);
+    }
+
+    .service-options {
+        padding: var(--spacing-2) 0;
+    }
+
+    .service-option-btn {
+        padding: var(--spacing-3);
     }
 }

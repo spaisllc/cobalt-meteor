@@ -1,3 +1,9 @@
+/**
+ * Animated Background Component
+ * Springs AI Solutions, LLC
+ * Canvas-based particle and grid animation
+ */
+
 export class AnimatedBackground {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
@@ -5,6 +11,10 @@ export class AnimatedBackground {
         this.particles = [];
         this.gridLines = [];
         this.isAnimating = false;
+
+        // Start hidden for boot sequence
+        this.canvas.style.opacity = '0';
+        this.canvas.style.transition = 'opacity 0.8s ease-out';
 
         this.resize();
         window.addEventListener('resize', () => this.resize());
@@ -57,6 +67,8 @@ export class AnimatedBackground {
 
     start() {
         this.isAnimating = true;
+        // Fade in the canvas
+        this.canvas.style.opacity = '1';
         this.animate();
     }
 

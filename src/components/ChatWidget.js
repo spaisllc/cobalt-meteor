@@ -1,6 +1,7 @@
 /**
  * ChatWidget Component
  * AI-powered chat interface using OpenAI API
+ * Springs AI Solutions, LLC
  */
 
 import { OpenAIService } from '../services/openaiService.js';
@@ -23,9 +24,30 @@ export class ChatWidget {
         this.userName = null;
         this.userEmail = null;
 
+        // Intro flow state machine
+        this.introState = 'idle'; // idle | greeting | awaiting_name | awaiting_interest | awaiting_email | complete
+        this.introComplete = this.checkIntroComplete();
+        this.selectedService = null;
+
+        // Service options for intro flow
+        this.serviceOptions = [
+            { key: 'sales', label: 'Automate Sales', description: 'AI-powered lead capture and conversion' },
+            { key: 'support', label: 'Automate Support', description: 'Smart chatbots and customer service' },
+            { key: 'custom', label: 'Custom AI Project', description: 'Bespoke solutions for your business' }
+        ];
+
         this.openaiService = new OpenAIService();
 
         this.init();
+    }
+
+    checkIntroComplete() {
+        return localStorage.getItem('spais_intro_complete') === 'true';
+    }
+
+    saveIntroComplete() {
+        localStorage.setItem('spais_intro_complete', 'true');
+        this.introComplete = true;
     }
 
     init() {
@@ -67,7 +89,175 @@ export class ChatWidget {
         }
     }
 
+    // Open chat with required intro flow (called after boot sequence)
+    async openWithIntro() {
+        // Force open and fullscreen for intro
+        this.isOpen = true;
+        this.isFullscreen = true;
+        this.widget.classList.add('open', 'fullscreen', 'intro-mode');
+
+        this.input.focus();
+
+        // Load any saved user data
+        this.loadHistory();
+
+        if (this.introComplete && this.userName) {
+            // Returning user with completed intro - personalized greeting
+            await this.addBotMessage(
+                `Welcome back, ${this.userName}! I'm S.P.A.I.S., your Springs AI Solutions, LLC Concierge. How can I help you today?`
+            );
+            this.introState = 'complete';
+            this.exitIntroMode();
+        } else if (this.introComplete) {
+            // Completed intro but no name saved
+            await this.addBotMessage(
+                "Welcome back! I'm S.P.A.I.S., your Springs AI Solutions, LLC Concierge. How can I help you today?"
+            );
+            this.introState = 'complete';
+            this.exitIntroMode();
+        } else {
+            // New user - start required intro flow
+            await this.startIntroFlow();
+        }
+    }
+
+    async startIntroFlow() {
+        this.introState = 'greeting';
+        await this.delay(500);
+
+        await this.addBotMessage(
+            "Hello. I am S.P.A.I.S., your Springs AI Solutions, LLC Concierge. What is your name?"
+        );
+
+        this.introState = 'awaiting_name';
+    }
+
+    async handleIntroResponse(text) {
+        switch (this.introState) {
+            case 'awaiting_name':
+                // Capture name
+                this.userName = this.extractName(text);
+                this.saveLead();
+
+                await this.addBotMessage(
+                    `Nice to meet you, ${this.userName}! I'm here to help you explore how Springs AI Solutions, LLC can transform your business. Which of these interests you most?`
+                );
+
+                // Show service option buttons
+                this.showServiceOptions();
+                this.introState = 'awaiting_interest';
+                return true;
+
+            case 'awaiting_interest':
+                // Parse service selection
+                this.selectedService = this.parseServiceSelection(text);
+                const acknowledgment = this.getServiceAcknowledgment(this.selectedService);
+
+                await this.addBotMessage(
+                    `${acknowledgment} To personalize your experience and send you relevant information, what's the best email to reach you?`
+                );
+
+                this.introState = 'awaiting_email';
+                return true;
+
+            case 'awaiting_email':
+                const emailMatch = text.match(/[\w.-]+@[\w.-]+\.\w+/);
+                if (emailMatch) {
+                    this.userEmail = emailMatch[0];
+                    this.saveLead();
+
+                    await this.addBotMessage(
+                        `Perfect, ${this.userName}! I've noted your interest in ${this.getServiceLabel(this.selectedService)}. Feel free to explore our site - I'll be here whenever you have questions. You can scroll down to learn more about Springs AI Solutions, LLC and our services.`
+                    );
+
+                    this.saveIntroComplete();
+                    this.introState = 'complete';
+                    this.exitIntroMode();
+                } else {
+                    await this.addBotMessage(
+                        "I didn't catch a valid email address. Could you please share your email so I can send you personalized information?"
+                    );
+                }
+                return true;
+
+            default:
+                // Normal conversation - let sendMessage handle it
+                return false;
+        }
+    }
+
+    extractName(text) {
+        // Clean up the name - take first 3 words max, capitalize properly
+        const words = text.trim().split(/\s+/).slice(0, 3);
+        return words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+    }
+
+    showServiceOptions() {
+        const optionsEl = document.createElement('div');
+        optionsEl.className = 'service-options';
+
+        this.serviceOptions.forEach(option => {
+            const btn = document.createElement('button');
+            btn.className = 'service-option-btn';
+            btn.innerHTML = `
+                <span class="option-label">${option.label}</span>
+                <span class="option-desc">${option.description}</span>
+            `;
+            btn.dataset.service = option.key;
+            btn.addEventListener('click', () => this.selectService(option.key));
+            optionsEl.appendChild(btn);
+        });
+
+        this.messagesContainer.appendChild(optionsEl);
+        this.scrollToBottom();
+    }
+
+    selectService(key) {
+        // Remove options UI
+        const optionsEl = this.messagesContainer.querySelector('.service-options');
+        if (optionsEl) optionsEl.remove();
+
+        // Add as user message
+        const label = this.serviceOptions.find(o => o.key === key)?.label || key;
+        this.addUserMessage(label);
+
+        // Process the selection
+        this.handleIntroResponse(label);
+    }
+
+    parseServiceSelection(text) {
+        const lower = text.toLowerCase();
+        if (lower.includes('sales') || lower.includes('lead')) return 'sales';
+        if (lower.includes('support') || lower.includes('chatbot') || lower.includes('customer')) return 'support';
+        if (lower.includes('custom') || lower.includes('project') || lower.includes('bespoke')) return 'custom';
+        return 'custom'; // Default
+    }
+
+    getServiceAcknowledgment(service) {
+        const acks = {
+            sales: "Excellent choice! AI-powered sales automation is one of our most impactful solutions - helping businesses capture and convert leads 24/7.",
+            support: "Great! Automated support is a game-changer for customer satisfaction and team efficiency. Our smart chatbots handle the routine so your team can focus on what matters.",
+            custom: "I love it! Custom AI projects are where we really shine - building exactly what your business needs, tailored to your unique workflows."
+        };
+        return acks[service] || acks.custom;
+    }
+
+    getServiceLabel(service) {
+        return this.serviceOptions.find(o => o.key === service)?.label || 'Custom AI Project';
+    }
+
+    exitIntroMode() {
+        // Remove intro-mode class to allow normal interaction
+        this.widget.classList.remove('intro-mode');
+        // Keep fullscreen but allow closing
+    }
+
     toggleChat() {
+        // Don't allow closing during intro flow
+        if (this.introState !== 'idle' && this.introState !== 'complete' && this.isOpen) {
+            return;
+        }
+
         this.isOpen = !this.isOpen;
         this.widget.classList.toggle('open', this.isOpen);
 
@@ -87,7 +277,7 @@ export class ChatWidget {
     }
 
     async startConversation(context = null) {
-        let greeting = "Hello! I'm S.P.A.I.S. - Springs AI Sales. I'm here to help you discover how AI can transform your business. What brings you here today?";
+        let greeting = "Hello! I'm S.P.A.I.S., your Springs AI Solutions, LLC Concierge. I'm here to help you discover how AI can transform your business. What brings you here today?";
 
         if (context) {
             const contextMessages = {
@@ -112,6 +302,15 @@ export class ChatWidget {
 
         // Add user message
         this.addUserMessage(text);
+
+        // Check if in intro flow - handle specially
+        if (this.introState !== 'idle' && this.introState !== 'complete') {
+            const handled = await this.handleIntroResponse(text);
+            if (handled) {
+                this.saveHistory();
+                return;
+            }
+        }
 
         // Check for lead capture
         this.checkForLeadInfo(text);

@@ -1,0 +1,344 @@
+/* ========================================
+   BOOT SEQUENCE COMPONENT
+   Springs AI Solutions, LLC
+   Programming History Boot Animation
+   ======================================== */
+
+/* Full-screen Overlay */
+.boot-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.boot-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* CRT Scanline Effect */
+.boot-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Boot Terminal Container */
+.boot-terminal {
+    width: 90%;
+    max-width: 700px;
+    padding: var(--spacing-8, 2rem);
+    position: relative;
+    z-index: 5;
+}
+
+/* Header */
+.boot-header {
+    text-align: center;
+    margin-bottom: var(--spacing-10, 2.5rem);
+}
+
+.boot-logo {
+    display: block;
+    font-family: var(--font-terminal, 'Courier New', monospace);
+    font-size: var(--text-sm, 0.875rem);
+    color: var(--color-primary-400, #00ffff);
+    letter-spacing: 0.3em;
+    margin-bottom: var(--spacing-2, 0.5rem);
+    opacity: 0.7;
+}
+
+.boot-title {
+    display: block;
+    font-family: var(--font-display, 'JetBrains Mono', monospace);
+    font-size: var(--text-xl, 1.25rem);
+    color: var(--color-primary-400, #00ffff);
+    letter-spacing: 0.15em;
+    text-shadow:
+        0 0 10px rgba(0, 255, 255, 0.5),
+        0 0 20px rgba(0, 255, 255, 0.3),
+        0 0 40px rgba(0, 255, 255, 0.2);
+    margin-bottom: var(--spacing-2, 0.5rem);
+}
+
+.boot-subtitle {
+    display: block;
+    font-family: var(--font-terminal, 'Courier New', monospace);
+    font-size: var(--text-xs, 0.75rem);
+    color: var(--color-text-tertiary, #4a5568);
+    letter-spacing: 0.2em;
+}
+
+/* Boot Content - Code Display */
+.boot-content {
+    min-height: 180px;
+    font-family: var(--font-terminal, 'Courier New', monospace);
+    font-size: var(--text-base, 1rem);
+    line-height: 1.8;
+    transition: opacity 0.2s ease;
+}
+
+.boot-content.fade-out {
+    opacity: 0;
+}
+
+/* Era Header */
+.era-header {
+    color: var(--color-text-muted, #718096);
+    font-size: var(--text-xs, 0.75rem);
+    letter-spacing: 0.15em;
+    margin-bottom: var(--spacing-4, 1rem);
+    padding-bottom: var(--spacing-2, 0.5rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Code Line Base */
+.code-line {
+    margin: var(--spacing-2, 0.5rem) 0;
+    padding-left: var(--spacing-4, 1rem);
+    opacity: 0;
+    animation: fadeIn 0.2s ease-out forwards;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Era-Specific Styles */
+
+/* Punch Card Era - Green Phosphor */
+.era-header.punch-card,
+.code-line.punch-card {
+    color: #00ff00;
+    text-shadow:
+        0 0 5px #00ff00,
+        0 0 10px #00ff00,
+        0 0 15px rgba(0, 255, 0, 0.5);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.15em;
+}
+
+/* COBOL Era - Amber Terminal */
+.era-header.cobol,
+.code-line.cobol {
+    color: #ffaa00;
+    text-shadow:
+        0 0 5px #ffaa00,
+        0 0 10px rgba(255, 170, 0, 0.5);
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+}
+
+/* BASIC Era - White/Gray */
+.era-header.basic,
+.code-line.basic {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    font-family: 'Courier New', monospace;
+}
+
+/* C/C++ Era - Blue */
+.era-header.c-cpp,
+.code-line.c-cpp {
+    color: #00aaff;
+    text-shadow:
+        0 0 5px #00aaff,
+        0 0 10px rgba(0, 170, 255, 0.4);
+    font-family: var(--font-display, 'JetBrains Mono', monospace);
+}
+
+/* Python Era - Green */
+.era-header.python,
+.code-line.python {
+    color: #00ff88;
+    text-shadow:
+        0 0 5px #00ff88,
+        0 0 10px rgba(0, 255, 136, 0.4);
+    font-family: var(--font-display, 'JetBrains Mono', monospace);
+}
+
+/* Modern AI Era - Bright Cyan Glow */
+.era-header.modern,
+.code-line.modern {
+    color: var(--color-primary-400, #00ffff);
+    text-shadow:
+        0 0 5px rgba(0, 255, 255, 0.8),
+        0 0 15px rgba(0, 255, 255, 0.5),
+        0 0 30px rgba(0, 255, 255, 0.3);
+    font-family: var(--font-display, 'JetBrains Mono', monospace);
+    font-weight: 600;
+}
+
+/* Boot Status */
+.boot-status {
+    margin-top: var(--spacing-10, 2.5rem);
+    text-align: center;
+    font-family: var(--font-terminal, 'Courier New', monospace);
+    font-size: var(--text-xs, 0.75rem);
+    color: var(--color-text-muted, #718096);
+    letter-spacing: 0.1em;
+}
+
+.status-bar {
+    display: block;
+    width: 200px;
+    height: 2px;
+    margin: 0 auto var(--spacing-3, 0.75rem);
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.status-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, var(--color-primary-400, #00ffff), transparent);
+    animation: statusSweep 1.5s ease-in-out infinite;
+}
+
+@keyframes statusSweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+}
+
+.status-dots {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* ========================================
+   LINES TRANSITION ANIMATION
+   The "little lines" effect user loves
+   ======================================== */
+
+.boot-lines-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 20;
+}
+
+.boot-lines-container.active {
+    opacity: 1;
+}
+
+.transition-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--color-primary-400, #00ffff) 15%,
+        var(--color-primary-400, #00ffff) 85%,
+        transparent 100%
+    );
+    box-shadow:
+        0 0 10px var(--color-primary-400, #00ffff),
+        0 0 20px rgba(0, 255, 255, 0.5);
+    transform: scaleX(0);
+    animation: lineSweep 0.5s ease-out forwards;
+}
+
+@keyframes lineSweep {
+    0% {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scaleX(1);
+        opacity: 0.4;
+    }
+}
+
+.boot-lines-container.converge .transition-line {
+    animation: lineConverge 0.4s ease-in forwards;
+}
+
+@keyframes lineConverge {
+    to {
+        top: 50% !important;
+        opacity: 0;
+        height: 4px;
+    }
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+    .boot-terminal {
+        padding: var(--spacing-4, 1rem);
+    }
+
+    .boot-title {
+        font-size: var(--text-lg, 1.125rem);
+        letter-spacing: 0.1em;
+    }
+
+    .boot-content {
+        font-size: var(--text-sm, 0.875rem);
+        min-height: 150px;
+    }
+
+    .code-line {
+        padding-left: var(--spacing-2, 0.5rem);
+        font-size: var(--text-sm, 0.875rem);
+    }
+
+    .era-header {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .boot-title {
+        font-size: var(--text-base, 1rem);
+    }
+
+    .boot-content {
+        font-size: var(--text-xs, 0.75rem);
+    }
+
+    .code-line {
+        font-size: var(--text-xs, 0.75rem);
+        letter-spacing: 0;
+    }
+}
