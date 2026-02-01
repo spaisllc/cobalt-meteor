@@ -12,72 +12,76 @@ export class BootSequence {
         this.isReturningVisitor = this.checkReturningVisitor();
         this.duration = this.isReturningVisitor ? 3000 : 10000;
 
+        // Terminal path for the prompt
+        this.terminalPath = 'G:\\home\\SPAIS\\springsaisolutions>';
+
+        // Era-based code lines (4 lines per era)
         this.eras = [
             {
                 name: 'MAINFRAME ERA // 1960s',
-                code: [
-                    '001 010 110 LOAD SPRINGS_AI_SOLUTIONS',
-                    '010 100 001 EXEC INIT_SEQUENCE',
-                    '101 011 010 STORE REG_ALPHA',
-                    '110 001 100 JUMP ADDR_0x7F'
-                ],
-                style: 'punch-card'
+                style: 'punch-card',
+                lines: [
+                    '> LOAD "SPAIS_MAINFRAME"',
+                    '> READ CARD_DECK: SPRINGS.AI',
+                    '> EXEC BOOT_SEQUENCE',
+                    '> INIT SPRINGS_AI_SOLUTIONS'
+                ]
             },
             {
-                name: 'COBOL/FORTRAN ERA // 1970s',
-                code: [
+                name: 'COBOL ERA // 1970s',
+                style: 'cobol',
+                lines: [
                     'IDENTIFICATION DIVISION.',
-                    'PROGRAM-ID. SPRINGS-AI-SOLUTIONS-LLC.',
-                    'PERFORM INITIALIZE-DIGITAL-EMPLOYEE.',
-                    'STOP RUN.'
-                ],
-                style: 'cobol'
+                    'PROGRAM-ID. SPAIS-INIT.',
+                    'PERFORM SPRINGS-AI-STARTUP.',
+                    'DISPLAY "SPRINGS AI SOLUTIONS ONLINE".'
+                ]
             },
             {
                 name: 'BASIC ERA // 1980s',
-                code: [
-                    '10 PRINT "SPRINGS AI SOLUTIONS, LLC"',
-                    '20 PRINT "INITIALIZING SYSTEM..."',
-                    '30 GOSUB 1000: REM LOAD_AI_CORE',
-                    '40 PRINT "READY.": END'
-                ],
-                style: 'basic'
+                style: 'basic',
+                lines: [
+                    '10 PRINT "SPRINGS AI SOLUTIONS"',
+                    '20 LOAD "SPAIS.BAS"',
+                    '30 GOSUB INIT_SYSTEM',
+                    '40 RUN DIGITAL_EMPLOYEE'
+                ]
             },
             {
                 name: 'C/C++ ERA // 1990s',
-                code: [
-                    '#include <springs_ai_solutions.h>',
-                    'int main(void) {',
-                    '    SpringsAI::Solutions::initialize();',
-                    '    return EXIT_SUCCESS; }'
-                ],
-                style: 'c-cpp'
+                style: 'c-cpp',
+                lines: [
+                    '#include <springs_ai.h>',
+                    'SpringsAI* spais = new SpringsAI();',
+                    'spais->initialize("solutions");',
+                    'spais->launchConcierge();'
+                ]
             },
             {
-                name: 'PYTHON/WEB ERA // 2010s',
-                code: [
-                    'from springs_ai_solutions import SPAIS',
-                    'agent = SPAIS.create_digital_employee()',
-                    'await agent.initialize(mode="concierge")',
-                    'print("Springs AI Solutions, LLC: Online")'
-                ],
-                style: 'python'
+                name: 'PYTHON ERA // 2000s',
+                style: 'python',
+                lines: [
+                    'from springs_ai import SPAIS',
+                    'agent = SPAIS.create_employee()',
+                    'agent.configure(mode="concierge")',
+                    'agent.activate()'
+                ]
             },
             {
-                name: 'AI/LLM ERA // 2024+',
-                code: [
-                    'const spais = await SPRINGS_AI_SOLUTIONS.wake();',
-                    'spais.loadModel("concierge-v2.llm");',
-                    'spais.setPersonality("helpful", "professional");',
-                    '// Your AI concierge is ready...'
-                ],
-                style: 'modern'
+                name: 'AI ERA // 2020s',
+                style: 'modern',
+                lines: [
+                    'const spais = await SpringsAI.init();',
+                    'spais.loadModel("concierge-v2");',
+                    'await spais.wake({ mode: "ready" });',
+                    '// S.P.A.I.S. online...'
+                ]
             }
         ];
 
-        this.currentEra = 0;
         this.overlay = null;
         this.contentEl = null;
+        this.promptEl = null;
     }
 
     checkReturningVisitor() {
@@ -92,15 +96,16 @@ export class BootSequence {
         this.overlay = document.createElement('div');
         this.overlay.id = 'boot-overlay';
         this.overlay.className = 'boot-overlay';
-        // Start completely black - header hidden, reveals after code sequence
+        // Start completely black - terminal prompt appears first
         this.overlay.innerHTML = `
             <div class="boot-terminal">
+                <div class="boot-prompt" id="boot-prompt"></div>
+                <div class="boot-content" id="boot-content"></div>
                 <div class="boot-header hidden" id="boot-header">
                     <span class="boot-logo">[ S.P.A.I.S. ]</span>
                     <span class="boot-title">SPRINGS AI SOLUTIONS, LLC</span>
-                    <span class="boot-subtitle">SYSTEM INITIALIZATION SEQUENCE</span>
+                    <span class="boot-subtitle">THE FUTURE IS HERE</span>
                 </div>
-                <div class="boot-content" id="boot-content"></div>
                 <div class="boot-status hidden" id="boot-status">
                     <span class="status-bar"></span>
                     <span class="status-text">SYSTEMS ONLINE<span class="status-dots">...</span></span>
@@ -109,6 +114,7 @@ export class BootSequence {
             <div class="boot-lines-container" id="boot-lines"></div>
         `;
         document.body.prepend(this.overlay);
+        this.promptEl = document.getElementById('boot-prompt');
         this.contentEl = document.getElementById('boot-content');
         this.headerEl = document.getElementById('boot-header');
         this.statusEl = document.getElementById('boot-status');
@@ -116,61 +122,92 @@ export class BootSequence {
 
     async start() {
         this.createOverlay();
-        await this.delay(300);
+        await this.delay(500);
+
+        // Phase 1: Show terminal prompt with path
+        await this.showTerminalPrompt();
+
+        // Phase 2: Show "Launch S.P.A.I.S." command
+        await this.showLaunchCommand();
+
+        // Phase 3: Run era-based code sequence
         await this.runSequence();
+
+        // Phase 4: Line transition effect
         await this.showLinesTransition();
+
         this.complete();
     }
 
-    async runSequence() {
-        let erasToShow;
-        let eraDelay;
-
-        if (this.isReturningVisitor) {
-            // Returning visitor: just show first and last era
-            erasToShow = [this.eras[0], this.eras[this.eras.length - 1]];
-            eraDelay = 1200;
-        } else {
-            // First visit: show all eras
-            erasToShow = this.eras;
-            eraDelay = 1500;
-        }
-
-        for (const era of erasToShow) {
-            await this.displayEra(era, eraDelay);
-        }
+    async showTerminalPrompt() {
+        // Type out the terminal path
+        await this.typeText(this.promptEl, this.terminalPath, 800);
+        await this.delay(300);
     }
 
-    async displayEra(era, duration) {
-        // Clear previous era with fade
-        if (this.contentEl.children.length > 0) {
-            this.contentEl.classList.add('fade-out');
+    async showLaunchCommand() {
+        // Create the launch command element
+        const launchCmd = document.createElement('span');
+        launchCmd.className = 'launch-command';
+        this.promptEl.appendChild(launchCmd);
+
+        // Type out "Launch S.P.A.I.S."
+        await this.typeText(launchCmd, ' Launch S.P.A.I.S.', 600);
+
+        // Let it sit so users can read it
+        await this.delay(1500);
+
+        // Add "executing" feedback
+        const execEl = document.createElement('div');
+        execEl.className = 'exec-feedback';
+        execEl.textContent = 'Executing initialization sequence...';
+        this.promptEl.appendChild(execEl);
+
+        // Another pause to let users read the feedback
+        await this.delay(1200);
+
+        // Fade out the prompt area
+        this.promptEl.classList.add('fade-out');
+        await this.delay(500);
+    }
+
+    async runSequence() {
+        // Balanced timing - not too slow, not too fast
+        const lineDelay = this.isReturningVisitor ? 120 : 180;
+        const eraDelay = this.isReturningVisitor ? 300 : 500;
+
+        // Display era-based code lines
+        for (const era of this.eras) {
+            // Show era header
+            const headerEl = document.createElement('div');
+            headerEl.className = `era-header ${era.style}`;
+            headerEl.textContent = `// ${era.name}`;
+            this.contentEl.appendChild(headerEl);
             await this.delay(200);
-            this.contentEl.innerHTML = '';
-            this.contentEl.classList.remove('fade-out');
+
+            // Show 4 code lines for this era
+            for (const lineText of era.lines) {
+                const lineEl = document.createElement('div');
+                lineEl.className = `code-line ${era.style}`;
+                this.contentEl.appendChild(lineEl);
+
+                await this.typeText(lineEl, lineText, lineDelay * 1.5);
+                await this.delay(lineDelay);
+            }
+
+            await this.delay(eraDelay);
+
+            // Keep only last 6 lines visible to avoid overcrowding
+            while (this.contentEl.children.length > 6) {
+                const firstChild = this.contentEl.firstChild;
+                firstChild.classList.add('fade-up');
+                await this.delay(80);
+                firstChild.remove();
+            }
         }
 
-        // Show era header
-        const header = document.createElement('div');
-        header.className = `era-header ${era.style}`;
-        header.textContent = era.name;
-        this.contentEl.appendChild(header);
-        await this.delay(150);
-
-        // Calculate timing
-        const lineDelay = (duration - 400) / era.code.length;
-
-        // Type each code line
-        for (const line of era.code) {
-            const lineEl = document.createElement('div');
-            lineEl.className = `code-line ${era.style}`;
-            this.contentEl.appendChild(lineEl);
-
-            await this.typeText(lineEl, line, lineDelay * 0.6);
-            await this.delay(lineDelay * 0.4);
-        }
-
-        await this.delay(200);
+        // Let the final code settle and breathe
+        await this.delay(800);
     }
 
     async typeText(element, text, duration) {
@@ -196,47 +233,50 @@ export class BootSequence {
     async showLinesTransition() {
         // Clear the code content before showing lines
         this.contentEl.classList.add('fade-out');
-        await this.delay(300);
+        await this.delay(500);
         this.contentEl.innerHTML = '';
 
         const container = document.getElementById('boot-lines');
         container.classList.add('active');
 
-        // Create horizontal scan lines
+        // Create horizontal scan lines - slower stagger
         const lineCount = 24;
         for (let i = 0; i < lineCount; i++) {
             const line = document.createElement('div');
             line.className = 'transition-line';
             line.style.top = `${(i / lineCount) * 100}%`;
-            line.style.animationDelay = `${i * 25}ms`;
+            line.style.animationDelay = `${i * 40}ms`;  // Slower stagger
             container.appendChild(line);
         }
 
-        await this.delay(700);
+        await this.delay(2000);  // Let lines breathe longer
 
         // Converge to center
         container.classList.add('converge');
-        await this.delay(400);
+        await this.delay(1000);  // Slower convergence
 
-        // NOW reveal the S.P.A.I.S. header and logo after lines animation
+        // Reveal the S.P.A.I.S. header and logo
         this.headerEl.classList.remove('hidden');
         this.headerEl.classList.add('reveal');
-        await this.delay(300);
+        await this.delay(600);
 
         // Show the status bar
         this.statusEl.classList.remove('hidden');
         this.statusEl.classList.add('reveal');
-        await this.delay(800);
+
+        // Long pause - let the visuals hook the user before transitioning
+        await this.delay(2500);
     }
 
     complete() {
         this.markVisited();
         this.overlay.classList.add('fade-out');
 
+        // Match the slower CSS transition (1s) before removing and triggering chatbox
         setTimeout(() => {
             this.overlay.remove();
             this.onComplete();
-        }, 500);
+        }, 1200);
     }
 
     delay(ms) {

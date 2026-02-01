@@ -40,11 +40,11 @@
     /* Legacy compatibility */
     --color-bg: var(--color-bg-void);
 
-    /* Text Hierarchy */
+    /* Text Hierarchy - BRIGHTER for accessibility */
     --color-text-primary: #ffffff;
-    --color-text-secondary: #b3cccc;
-    --color-text-tertiary: #668888;
-    --color-text-muted: #445555;
+    --color-text-secondary: #d0e8e8;  /* Brighter for readability */
+    --color-text-tertiary: #88aaaa;   /* Brighter */
+    --color-text-muted: #669999;      /* Brighter */
     --color-text-glow: var(--color-primary-400);
 
     /* Legacy compatibility */
@@ -227,8 +227,8 @@
     --container-max: 1200px;
     --container-narrow: 800px;
     --nav-height: 70px;
-    --chat-widget-width: 380px;
-    --chat-widget-height: 500px;
+    --chat-widget-width: 280px;
+    --chat-widget-height: 320px;
 }
 
 /* Dark mode is default - no changes needed */

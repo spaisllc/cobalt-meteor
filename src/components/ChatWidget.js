@@ -91,10 +91,10 @@ export class ChatWidget {
 
     // Open chat with required intro flow (called after boot sequence)
     async openWithIntro() {
-        // Force open and fullscreen for intro
+        // Open chat normally (not fullscreen/blocking)
         this.isOpen = true;
-        this.isFullscreen = true;
-        this.widget.classList.add('open', 'fullscreen', 'intro-mode');
+        this.isFullscreen = false;
+        this.widget.classList.add('open');
 
         this.input.focus();
 
@@ -247,19 +247,21 @@ export class ChatWidget {
     }
 
     exitIntroMode() {
-        // Remove intro-mode class to allow normal interaction
-        this.widget.classList.remove('intro-mode');
-        // Keep fullscreen but allow closing
+        // No longer using intro-mode overlay - just mark intro complete
+        this.introState = 'complete';
     }
 
     toggleChat() {
-        // Don't allow closing during intro flow
-        if (this.introState !== 'idle' && this.introState !== 'complete' && this.isOpen) {
-            return;
+        // Allow closing anytime - user can skip intro if they want
+        if (this.isOpen && this.introState !== 'idle' && this.introState !== 'complete') {
+            // User is closing during intro - mark intro as skipped/complete
+            this.saveIntroComplete();
+            this.introState = 'complete';
         }
 
         this.isOpen = !this.isOpen;
         this.widget.classList.toggle('open', this.isOpen);
+        this.widget.classList.remove('fullscreen');
 
         if (this.isOpen) {
             this.input.focus();
@@ -448,9 +450,9 @@ export class ChatWidget {
 
     getFallbackResponse() {
         const fallbacks = [
-            "I appreciate your patience! I'm having a brief connection issue. In the meantime, you can reach us directly at hello@springsai.com or check out our services page.",
-            "Thanks for your message! I'm experiencing a technical hiccup. While I sort this out, feel free to explore our website or drop us a line at hello@springsai.com.",
-            "I want to make sure I give you the best response! Let me reconnect - or you can always reach our team at hello@springsai.com for immediate assistance."
+            "I appreciate your patience! I'm having a brief connection issue. In the meantime, you can reach us directly at SpringsAISolutions@proton.me or check out our services page.",
+            "Thanks for your message! I'm experiencing a technical hiccup. While I sort this out, feel free to explore our website or drop us a line at SpringsAISolutions@proton.me.",
+            "I want to make sure I give you the best response! Let me reconnect - or you can always reach our team at SpringsAISolutions@proton.me for immediate assistance."
         ];
         return fallbacks[Math.floor(Math.random() * fallbacks.length)];
     }

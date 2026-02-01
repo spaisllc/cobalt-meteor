@@ -42,9 +42,12 @@ class App {
     async runBootSequence() {
         return new Promise((resolve) => {
             this.bootSequence = new BootSequence({
-                onComplete: () => {
+                onComplete: async () => {
                     // Start background animation AFTER boot completes
                     this.initBackground();
+
+                    // Wait 1.5 seconds to let "We Build Digital Employees" breathe
+                    await this.delay(1500);
 
                     // Open chat and start required intro flow
                     if (this.chatWidget) {

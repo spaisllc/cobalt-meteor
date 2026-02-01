@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  // Base URL for Cloudflare Pages deployment
+  // Cloudflare Pages serves from root
   base: '/',
   root: '.',
   build: {

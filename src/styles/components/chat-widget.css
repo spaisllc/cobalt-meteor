@@ -362,39 +362,59 @@
    Required intro flow after boot sequence
    ======================================== */
 
-/* Intro Mode - Fullscreen overlay, can't close */
+/* Intro Mode - Centered modal, not fullscreen */
 .chat-widget.intro-mode {
-    inset: 0;
-    bottom: 0;
-    right: 0;
-}
-
-.chat-widget.intro-mode .chat-widget-panel {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100vh;
-    border-radius: 0;
-    max-width: none;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
     z-index: 9998;
 }
 
+.chat-widget.intro-mode .chat-widget-panel {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 90%;
+    max-width: 450px;
+    height: auto;
+    max-height: 70vh;
+    border-radius: var(--radius-lg);
+    z-index: 9999;
+}
+
 .chat-widget.intro-mode .chat-widget-toggle {
+    /* Show as a close button in top-right of modal */
+    display: flex;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    z-index: 10000;
+}
+
+.chat-widget.intro-mode .chat-icon {
     display: none;
+}
+
+.chat-widget.intro-mode .chat-close-icon {
+    opacity: 1;
+    transform: rotate(0);
 }
 
 .chat-widget.intro-mode .chat-fullscreen-btn {
     display: none;
 }
 
-/* Center the chat content in intro mode */
+/* Chat content in intro mode */
 .chat-widget.intro-mode .chat-messages {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: var(--spacing-8);
+    max-height: 50vh;
+    padding: var(--spacing-4);
 }
 
 /* Service Option Buttons */
@@ -447,19 +467,66 @@
 /* Responsive */
 @media (max-width: 768px) {
     .chat-widget {
-        bottom: var(--spacing-4);
-        right: var(--spacing-4);
+        bottom: var(--spacing-3);
+        right: var(--spacing-3);
+    }
+
+    /* Smaller toggle button on mobile */
+    .chat-widget-toggle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .chat-widget-toggle::before {
+        display: none; /* No pulse on mobile - less distraction */
     }
 
     .chat-widget-panel {
         position: fixed;
         top: auto;
-        bottom: 80px;
-        left: var(--spacing-4);
-        right: var(--spacing-4);
-        width: auto;
-        height: 60vh;
-        max-height: 500px;
+        bottom: 60px;
+        left: auto;
+        right: var(--spacing-3);
+        width: 240px;
+        height: 280px;
+        max-height: 45vh;
+    }
+
+    /* Smaller header on mobile */
+    .chat-header {
+        padding: var(--spacing-2) var(--spacing-3);
+    }
+
+    .chat-title {
+        font-size: var(--text-xs);
+    }
+
+    /* Smaller messages area */
+    .chat-messages {
+        padding: var(--spacing-2);
+        gap: var(--spacing-2);
+    }
+
+    .message-content {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--text-xs);
+    }
+
+    /* Smaller input area */
+    .chat-input-container {
+        padding: var(--spacing-2);
+        gap: var(--spacing-2);
+    }
+
+    .chat-input {
+        padding: var(--spacing-2);
+        font-size: var(--text-xs);
+    }
+
+    .chat-send-btn {
+        width: 36px;
+        height: 36px;
+        font-size: var(--text-sm);
     }
 
     .chat-widget.fullscreen .chat-widget-panel {
@@ -467,18 +534,77 @@
         bottom: 0;
         left: 0;
         right: 0;
+        width: 100%;
         height: 100vh;
+        max-height: none;
+    }
+
+    .chat-widget.intro-mode .chat-widget-panel {
+        width: 85%;
+        max-width: 280px;
+        max-height: 45vh;
     }
 
     .chat-widget.intro-mode .chat-messages {
-        padding: var(--spacing-4);
+        padding: var(--spacing-2);
+        max-height: 35vh;
     }
 
     .service-options {
         padding: var(--spacing-2) 0;
+        gap: var(--spacing-2);
     }
 
     .service-option-btn {
-        padding: var(--spacing-3);
+        padding: var(--spacing-2);
+    }
+
+    .service-option-btn .option-label {
+        font-size: var(--text-sm);
+    }
+
+    .service-option-btn .option-desc {
+        font-size: var(--text-xs);
+    }
+}
+
+/* Extra small screens - phones */
+@media (max-width: 480px) {
+    .chat-widget {
+        bottom: var(--spacing-2);
+        right: var(--spacing-2);
+    }
+
+    .chat-widget-toggle {
+        width: 44px;
+        height: 44px;
+    }
+
+    .chat-icon,
+    .chat-close-icon {
+        font-size: var(--text-lg);
+    }
+
+    .chat-widget-panel {
+        right: var(--spacing-2);
+        width: 220px;
+        height: 260px;
+        max-height: 50vh;
+        bottom: 54px;
+    }
+
+    .chat-status {
+        width: 8px;
+        height: 8px;
+    }
+
+    .chat-fullscreen-btn {
+        padding: var(--spacing-1);
+        font-size: var(--text-sm);
+    }
+
+    .typing-indicator span {
+        width: 6px;
+        height: 6px;
     }
 }

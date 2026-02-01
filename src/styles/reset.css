@@ -30,6 +30,24 @@ img, picture, video, canvas, svg {
     max-width: 100%;
 }
 
+/* Background Canvas - positioned behind all content */
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Ensure main content is above canvas */
+main {
+    position: relative;
+    z-index: 10;
+}
+
 input, button, textarea, select {
     font: inherit;
 }

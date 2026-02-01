@@ -1,16 +1,17 @@
 /**
  * Animated Background Component
  * Springs AI Solutions, LLC
- * Canvas-based particle and grid animation
+ * Canvas-based grid and network animation - AI-themed aesthetic
  */
 
 export class AnimatedBackground {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
-        this.particles = [];
-        this.gridLines = [];
+        this.nodes = [];
+        this.gridSpacing = 80;
         this.isAnimating = false;
+        this.time = 0;
 
         // Start hidden for boot sequence
         this.canvas.style.opacity = '0';
@@ -23,44 +24,22 @@ export class AnimatedBackground {
     resize() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-        this.initParticles();
-        this.initGrid();
+        this.initNodes();
     }
 
-    initParticles() {
-        this.particles = [];
-        const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
+    initNodes() {
+        this.nodes = [];
+        // Create nodes that float and connect - like neural network visualization
+        const nodeCount = Math.floor((this.canvas.width * this.canvas.height) / 25000);
 
-        for (let i = 0; i < particleCount; i++) {
-            this.particles.push({
+        for (let i = 0; i < nodeCount; i++) {
+            this.nodes.push({
                 x: Math.random() * this.canvas.width,
                 y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 2 + 1
-            });
-        }
-    }
-
-    initGrid() {
-        this.gridLines = [];
-        const spacing = 50;
-
-        // Vertical lines
-        for (let x = 0; x < this.canvas.width; x += spacing) {
-            this.gridLines.push({
-                type: 'vertical',
-                pos: x,
-                opacity: Math.random() * 0.3 + 0.1
-            });
-        }
-
-        // Horizontal lines
-        for (let y = 0; y < this.canvas.height; y += spacing) {
-            this.gridLines.push({
-                type: 'horizontal',
-                pos: y,
-                opacity: Math.random() * 0.3 + 0.1
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                size: Math.random() * 2 + 2,
+                pulseOffset: Math.random() * Math.PI * 2
             });
         }
     }
@@ -79,65 +58,122 @@ export class AnimatedBackground {
     animate() {
         if (!this.isAnimating) return;
 
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        this.time += 0.01;
+
+        // Clear with solid black for crisp look
+        this.ctx.fillStyle = '#000000';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Draw grid
-        this.ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
-        this.ctx.lineWidth = 1;
+        // Draw grid lines - subtle but visible
+        this.drawGrid();
 
-        this.gridLines.forEach(line => {
-            this.ctx.globalAlpha = line.opacity;
-            this.ctx.beginPath();
+        // Draw network connections first (behind nodes)
+        this.drawConnections();
 
-            if (line.type === 'vertical') {
-                this.ctx.moveTo(line.pos, 0);
-                this.ctx.lineTo(line.pos, this.canvas.height);
-            } else {
-                this.ctx.moveTo(0, line.pos);
-                this.ctx.lineTo(this.canvas.width, line.pos);
-            }
-
-            this.ctx.stroke();
-        });
-
-        this.ctx.globalAlpha = 1;
-
-        // Draw and update particles
-        this.particles.forEach(particle => {
-            // Update position
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-
-            // Wrap around edges
-            if (particle.x < 0) particle.x = this.canvas.width;
-            if (particle.x > this.canvas.width) particle.x = 0;
-            if (particle.y < 0) particle.y = this.canvas.height;
-            if (particle.y > this.canvas.height) particle.y = 0;
-
-            // Draw particle
-            this.ctx.fillStyle = 'rgba(0, 255, 255, 0.6)';
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-            this.ctx.fill();
-
-            // Draw connections to nearby particles
-            this.particles.forEach(otherParticle => {
-                const dx = particle.x - otherParticle.x;
-                const dy = particle.y - otherParticle.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 100) {
-                    this.ctx.strokeStyle = `rgba(0, 255, 255, ${0.2 * (1 - distance / 100)})`;
-                    this.ctx.lineWidth = 0.5;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(particle.x, particle.y);
-                    this.ctx.lineTo(otherParticle.x, otherParticle.y);
-                    this.ctx.stroke();
-                }
-            });
-        });
+        // Draw and update nodes
+        this.drawNodes();
 
         requestAnimationFrame(() => this.animate());
+    }
+
+    drawGrid() {
+        const spacing = this.gridSpacing;
+
+        // Subtle pulsing effect on grid opacity
+        const baseOpacity = 0.08 + Math.sin(this.time * 0.5) * 0.02;
+
+        this.ctx.strokeStyle = `rgba(0, 204, 204, ${baseOpacity})`;
+        this.ctx.lineWidth = 1;
+
+        // Vertical lines
+        for (let x = 0; x <= this.canvas.width; x += spacing) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(x, 0);
+            this.ctx.lineTo(x, this.canvas.height);
+            this.ctx.stroke();
+        }
+
+        // Horizontal lines
+        for (let y = 0; y <= this.canvas.height; y += spacing) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, y);
+            this.ctx.lineTo(this.canvas.width, y);
+            this.ctx.stroke();
+        }
+    }
+
+    drawConnections() {
+        const connectionDistance = 150;
+
+        for (let i = 0; i < this.nodes.length; i++) {
+            const nodeA = this.nodes[i];
+
+            for (let j = i + 1; j < this.nodes.length; j++) {
+                const nodeB = this.nodes[j];
+                const dx = nodeA.x - nodeB.x;
+                const dy = nodeA.y - nodeB.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < connectionDistance) {
+                    const opacity = 0.4 * (1 - distance / connectionDistance);
+
+                    // Draw glowing connection line
+                    this.ctx.strokeStyle = `rgba(0, 204, 204, ${opacity})`;
+                    this.ctx.lineWidth = 1;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(nodeA.x, nodeA.y);
+                    this.ctx.lineTo(nodeB.x, nodeB.y);
+                    this.ctx.stroke();
+
+                    // Add glow effect for closer connections
+                    if (distance < connectionDistance * 0.5) {
+                        this.ctx.strokeStyle = `rgba(0, 255, 255, ${opacity * 0.3})`;
+                        this.ctx.lineWidth = 3;
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(nodeA.x, nodeA.y);
+                        this.ctx.lineTo(nodeB.x, nodeB.y);
+                        this.ctx.stroke();
+                    }
+                }
+            }
+        }
+    }
+
+    drawNodes() {
+        this.nodes.forEach(node => {
+            // Update position
+            node.x += node.vx;
+            node.y += node.vy;
+
+            // Wrap around edges
+            if (node.x < 0) node.x = this.canvas.width;
+            if (node.x > this.canvas.width) node.x = 0;
+            if (node.y < 0) node.y = this.canvas.height;
+            if (node.y > this.canvas.height) node.y = 0;
+
+            // Pulsing size effect
+            const pulse = Math.sin(this.time * 2 + node.pulseOffset) * 0.3 + 1;
+            const currentSize = node.size * pulse;
+
+            // Draw outer glow
+            const gradient = this.ctx.createRadialGradient(
+                node.x, node.y, 0,
+                node.x, node.y, currentSize * 3
+            );
+            gradient.addColorStop(0, 'rgba(0, 255, 255, 0.4)');
+            gradient.addColorStop(0.5, 'rgba(0, 204, 204, 0.1)');
+            gradient.addColorStop(1, 'rgba(0, 204, 204, 0)');
+
+            this.ctx.fillStyle = gradient;
+            this.ctx.beginPath();
+            this.ctx.arc(node.x, node.y, currentSize * 3, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            // Draw solid node center
+            this.ctx.fillStyle = 'rgba(0, 255, 255, 0.9)';
+            this.ctx.beginPath();
+            this.ctx.arc(node.x, node.y, currentSize, 0, Math.PI * 2);
+            this.ctx.fill();
+        });
     }
 }
