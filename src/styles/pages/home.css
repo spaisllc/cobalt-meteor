@@ -162,6 +162,12 @@ body[data-page="home"] {
     margin-bottom: var(--spacing-10);
 }
 
+/* Make service cards visible on homepage (override scroll animation) */
+.services-preview .service-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .services-cta {
     text-align: center;
     margin-top: var(--spacing-10);
