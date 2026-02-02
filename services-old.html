@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Springs AI Solutions, LLC Services - AI Sales Agents, Smart Chatbots, Email Assistants, and Custom AI Solutions for your business.">
+    <meta property="og:title" content="Services | Springs AI Solutions, LLC">
+    <meta property="og:description" content="AI employees that work 24/7. Explore our AI-powered solutions.">
+    <meta property="og:type" content="website">
+    <title>Services | Springs AI Solutions, LLC</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="src/styles/reset.css">
+    <link rel="stylesheet" href="src/styles/variables.css">
+    <link rel="stylesheet" href="src/styles/typography.css">
+    <link rel="stylesheet" href="src/styles/animations.css">
+    <link rel="stylesheet" href="src/styles/components/navigation.css">
+    <link rel="stylesheet" href="src/styles/components/chat-widget.css">
+    <link rel="stylesheet" href="src/styles/components/cards.css">
+    <link rel="stylesheet" href="src/styles/components/buttons.css">
+    <link rel="stylesheet" href="src/styles/components/footer.css">
+    <link rel="stylesheet" href="src/styles/pages/services.css">
+    <link rel="stylesheet" href="src/styles/responsive.css">
+</head>
+<body data-page="services">
+    <!-- Background Canvas -->
+    <canvas id="background-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-text">SPRINGS<span class="logo-dot">.</span>AI<span class="logo-dot">.</span>SOLUTIONS</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about.html" class="nav-link">About</a></li>
+                <li><a href="/services.html" class="nav-link active">Services</a></li>
+                <li><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-cta" id="nav-chat-btn">Start Chat</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="page-hero-content">
+                <h1 class="page-title">AI Employees<br><span class="highlight">That Work 24/7</span></h1>
+                <p class="page-subtitle">Custom-built AI solutions for modern businesses</p>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="services-section">
+            <div class="services-container">
+
+                <!-- Service 1: AI Sales Agents -->
+                <article class="service-block" id="sales-agents">
+                    <div class="service-content">
+                        <div class="service-header">
+                            <span class="service-number">01</span>
+                            <h2 class="service-title">AI Sales Agents</h2>
+                        </div>
+                        <p class="service-description">
+                            Your tireless sales team that never sleeps. Our AI sales agents qualify leads, handle objections, answer questions, and schedule demos - all through natural conversation.
+                        </p>
+                        <ul class="service-features">
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Lead qualification on autopilot</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">24/7 prospect engagement</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">CRM integration (Salesforce, HubSpot)</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Natural conversation flows</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Real-time analytics & insights</span>
+                            </li>
+                        </ul>
+                        <div class="service-usecases">
+                            <span class="usecases-label">Best for:</span>
+                            <span class="usecase-tag">B2B Sales</span>
+                            <span class="usecase-tag">SaaS Onboarding</span>
+                            <span class="usecase-tag">Real Estate</span>
+                        </div>
+                        <button class="btn btn-primary service-cta" data-service="sales">
+                            <span class="btn-text">See a Demo</span>
+                        </button>
+                    </div>
+                    <div class="service-visual">
+                        <div class="terminal-preview">
+                            <div class="terminal-header">
+                                <span class="terminal-dot red"></span>
+                                <span class="terminal-dot yellow"></span>
+                                <span class="terminal-dot green"></span>
+                            </div>
+                            <div class="terminal-content">
+                                <p class="terminal-line"><span class="prompt">SPAIS:</span> Hi! I'm here to help you find the right solution.</p>
+                                <p class="terminal-line"><span class="prompt">VISITOR:</span> I need to automate my sales process</p>
+                                <p class="terminal-line"><span class="prompt">SPAIS:</span> I can help with that. What's your current monthly lead volume?</p>
+                                <p class="terminal-line typing"><span class="prompt">VISITOR:</span> <span class="cursor">|</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Service 2: Smart Chatbots -->
+                <article class="service-block reverse" id="chatbots">
+                    <div class="service-content">
+                        <div class="service-header">
+                            <span class="service-number">02</span>
+                            <h2 class="service-title">Smart Chatbots & Forms</h2>
+                        </div>
+                        <p class="service-description">
+                            Replace boring forms with intelligent conversations. Our smart chatbots capture 3x more leads by turning data collection into engaging dialogue.
+                        </p>
+                        <ul class="service-features">
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Conversational lead capture</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Intelligent branching logic</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Real-time lead scoring</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Multi-language support</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Instant notifications</span>
+                            </li>
+                        </ul>
+                        <div class="service-usecases">
+                            <span class="usecases-label">Best for:</span>
+                            <span class="usecase-tag">Customer Support</span>
+                            <span class="usecase-tag">Onboarding</span>
+                            <span class="usecase-tag">Surveys</span>
+                        </div>
+                        <button class="btn btn-primary service-cta" data-service="chatbots">
+                            <span class="btn-text">Talk to Our Bot</span>
+                        </button>
+                    </div>
+                    <div class="service-visual">
+                        <div class="form-comparison">
+                            <div class="comparison-item old">
+                                <span class="comparison-label">Old Way</span>
+                                <div class="fake-form">
+                                    <div class="fake-input"></div>
+                                    <div class="fake-input"></div>
+                                    <div class="fake-input short"></div>
+                                    <div class="fake-textarea"></div>
+                                    <div class="fake-button">Submit</div>
+                                </div>
+                                <span class="conversion-rate bad">2-3% conversion</span>
+                            </div>
+                            <div class="comparison-arrow">&#8594;</div>
+                            <div class="comparison-item new">
+                                <span class="comparison-label">Springs AI Way</span>
+                                <div class="chat-preview">
+                                    <div class="chat-bubble bot">Hey! What brings you here today?</div>
+                                    <div class="chat-bubble user">Looking for pricing</div>
+                                    <div class="chat-bubble bot">Let me help with that...</div>
+                                </div>
+                                <span class="conversion-rate good">10%+ conversion</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Service 3: Email Assistants -->
+                <article class="service-block" id="email">
+                    <div class="service-content">
+                        <div class="service-header">
+                            <span class="service-number">03</span>
+                            <h2 class="service-title">Intelligent Email Assistants</h2>
+                        </div>
+                        <p class="service-description">
+                            Never miss an inquiry again. Our AI email assistants auto-respond, route, and follow up - matching your brand's tone while handling the volume.
+                        </p>
+                        <ul class="service-features">
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Instant auto-responses</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Intelligent routing to team members</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Tone matching to your brand</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Automated follow-up sequences</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Email analytics dashboard</span>
+                            </li>
+                        </ul>
+                        <div class="service-usecases">
+                            <span class="usecases-label">Best for:</span>
+                            <span class="usecase-tag">Customer Service</span>
+                            <span class="usecase-tag">Sales Support</span>
+                            <span class="usecase-tag">Inquiries</span>
+                        </div>
+                        <button class="btn btn-primary service-cta" data-service="email">
+                            <span class="btn-text">Learn More</span>
+                        </button>
+                    </div>
+                    <div class="service-visual">
+                        <div class="email-flow">
+                            <div class="email-node incoming">
+                                <span class="email-icon">&#9993;</span>
+                                <span class="email-label">Incoming Email</span>
+                            </div>
+                            <div class="flow-arrow">&#8595;</div>
+                            <div class="email-node ai">
+                                <span class="email-icon">&#129302;</span>
+                                <span class="email-label">AI Analysis</span>
+                            </div>
+                            <div class="flow-split">
+                                <div class="split-branch">
+                                    <div class="flow-arrow">&#8600;</div>
+                                    <div class="email-node response">
+                                        <span class="email-icon">&#10148;</span>
+                                        <span class="email-label">Auto-Reply</span>
+                                    </div>
+                                </div>
+                                <div class="split-branch">
+                                    <div class="flow-arrow">&#8601;</div>
+                                    <div class="email-node route">
+                                        <span class="email-icon">&#128101;</span>
+                                        <span class="email-label">Route to Team</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Service 4: Custom Solutions -->
+                <article class="service-block reverse" id="custom">
+                    <div class="service-content">
+                        <div class="service-header">
+                            <span class="service-number">04</span>
+                            <h2 class="service-title">Custom AI Agents</h2>
+                        </div>
+                        <p class="service-description">
+                            Unique workflows need unique solutions. We build bespoke AI employees tailored to your specific business processes and integrated with your existing tools.
+                        </p>
+                        <ul class="service-features">
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Tailored to your specific workflows</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Any integration, any platform</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Ongoing optimization & training</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">Dedicated success manager</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-icon">&#10003;</span>
+                                <span class="feature-text">White-label options available</span>
+                            </li>
+                        </ul>
+                        <div class="service-usecases">
+                            <span class="usecases-label">Best for:</span>
+                            <span class="usecase-tag">Enterprise</span>
+                            <span class="usecase-tag">Industry-Specific</span>
+                            <span class="usecase-tag">Complex Workflows</span>
+                        </div>
+                        <button class="btn btn-primary service-cta" data-service="custom">
+                            <span class="btn-text">Discuss Your Project</span>
+                        </button>
+                    </div>
+                    <div class="service-visual">
+                        <div class="custom-visual">
+                            <div class="puzzle-piece p1">Your<br>Workflow</div>
+                            <div class="puzzle-piece p2">Our<br>AI</div>
+                            <div class="puzzle-piece p3">Your<br>Tools</div>
+                            <div class="puzzle-result">=</div>
+                            <div class="puzzle-piece p4 highlight">Custom<br>Solution</div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section" id="pricing">
+            <div class="pricing-container">
+                <h2 class="section-title centered">Investment Tiers</h2>
+                <p class="section-subtitle centered">All plans include setup, training, and first month optimization</p>
+
+                <div class="pricing-grid">
+                    <!-- Starter -->
+                    <article class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-tier">Starter</h3>
+                            <div class="pricing-price">
+                                <span class="price-amount">$2,500</span>
+                                <span class="price-period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>1 AI agent</li>
+                            <li>Up to 1,000 conversations/month</li>
+                            <li>Basic CRM integration</li>
+                            <li>Email support</li>
+                            <li>Monthly performance reports</li>
+                        </ul>
+                        <button class="btn btn-outline pricing-cta">Get Started</button>
+                    </article>
+
+                    <!-- Growth -->
+                    <article class="pricing-card featured">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3 class="pricing-tier">Growth</h3>
+                            <div class="pricing-price">
+                                <span class="price-amount">$5,000</span>
+                                <span class="price-period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>3 AI agents</li>
+                            <li>Unlimited conversations</li>
+                            <li>Advanced integrations</li>
+                            <li>Priority support</li>
+                            <li>Weekly optimization calls</li>
+                            <li>A/B testing</li>
+                        </ul>
+                        <button class="btn btn-primary pricing-cta">Get Started</button>
+                    </article>
+
+                    <!-- Enterprise -->
+                    <article class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-tier">Enterprise</h3>
+                            <div class="pricing-price">
+                                <span class="price-amount">Custom</span>
+                                <span class="price-period">pricing</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Unlimited agents</li>
+                            <li>White-label options</li>
+                            <li>Dedicated success manager</li>
+                            <li>Custom development</li>
+                            <li>SLA guarantees</li>
+                            <li>Strategic consulting</li>
+                        </ul>
+                        <button class="btn btn-outline pricing-cta">Contact Sales</button>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integrations Section -->
+        <section class="integrations-section">
+            <div class="integrations-container">
+                <h2 class="section-title centered">Integrations</h2>
+                <p class="section-subtitle centered">Works with the tools you already use</p>
+                <div class="integrations-grid">
+                    <div class="integration-item">Salesforce</div>
+                    <div class="integration-item">HubSpot</div>
+                    <div class="integration-item">Slack</div>
+                    <div class="integration-item">Zapier</div>
+                    <div class="integration-item">Gmail</div>
+                    <div class="integration-item">Outlook</div>
+                    <div class="integration-item">Notion</div>
+                    <div class="integration-item">+ More</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Ready to see it in action?</h2>
+                <p class="cta-subtitle">Talk to our AI agent and experience the future</p>
+                <button class="btn btn-primary btn-large" id="cta-chat-btn">
+                    <span class="btn-text">Start a Conversation</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="footer-logo">SPRINGS<span class="logo-dot">.</span>AI<span class="logo-dot">.</span>SOLUTIONS</span>
+                <p class="footer-tagline">Building the future of digital employees</p>
+            </div>
+            <nav class="footer-nav">
+                <div class="footer-column">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/services.html">Services</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/services.html#sales-agents">AI Sales Agents</a></li>
+                        <li><a href="/services.html#chatbots">Smart Chatbots</a></li>
+                        <li><a href="/services.html#email">Email Assistants</a></li>
+                        <li><a href="/services.html#custom">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:SpringsAISolutions@proton.me">SpringsAISolutions@proton.me</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Springs AI Solutions, LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget (Floating) -->
+    <div id="chat-widget" class="chat-widget">
+        <button class="chat-widget-toggle" id="chat-toggle" aria-label="Open chat">
+            <span class="chat-icon">&#128172;</span>
+            <span class="chat-close-icon">&#10005;</span>
+        </button>
+        <div class="chat-widget-panel" id="chat-panel">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <span class="chat-status"></span>
+                    <span class="chat-title">S.P.A.I.S.</span>
+                </div>
+                <button class="chat-fullscreen-btn" id="chat-fullscreen" aria-label="Toggle fullscreen">
+                    &#x26F6;
+                </button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-container">
+                <input
+                    type="text"
+                    id="chat-input"
+                    class="chat-input"
+                    placeholder="Type a message..."
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <button class="chat-send-btn" id="chat-send" aria-label="Send message">
+                    &#10148;
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
