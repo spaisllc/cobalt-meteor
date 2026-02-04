@@ -296,20 +296,5 @@ class ChatbotWidget {
     }
 }
 
-// Initialize executive chatbot
-let chatbot;
-document.addEventListener('DOMContentLoaded', () => {
-    chatbot = new ChatbotWidget({
-        executiveName: 'Michael Chen',
-        botName: "Michael's Executive Assistant",
-        botAvatar: 'EA',
-        welcomeMessage: "👋 Hi! I'm Michael's AI assistant. I know his career inside and out—from tech transformations to M&A deals. What would you like to know?",
-        personality: 'professional-warm',
-        suggestedQuestions: [
-            "What's his experience with acquisitions?",
-            "Tell me about his cloud transformation work",
-            "How large were the teams he's led?",
-            "What's his leadership philosophy?"
-        ]
-    });
-});
+// Chatbot class ready for manual initialization
+// Each portfolio page will create its own chatbot instance with custom config
