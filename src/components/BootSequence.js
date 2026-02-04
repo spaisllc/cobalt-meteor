@@ -22,9 +22,9 @@ export class BootSequence {
                 style: 'punch-card',
                 lines: [
                     '> LOAD "SPAIS_MAINFRAME"',
-                    '> READ CARD_DECK: SPRINGS.AI',
+                    '> READ CARD_DECK: SPRINGS.AI.SOLUTIONS',
                     '> EXEC BOOT_SEQUENCE',
-                    '> INIT SPRINGS_AI_SOLUTIONS'
+                    '> INIT SPRINGS.AI.SOLUTIONS'
                 ]
             },
             {
@@ -51,7 +51,7 @@ export class BootSequence {
                 name: 'C/C++ ERA // 1990s',
                 style: 'c-cpp',
                 lines: [
-                    '#include <springs_ai.h>',
+                    '#include <springs_ai_solutions.h>',
                     'SpringsAI* spais = new SpringsAI();',
                     'spais->initialize("solutions");',
                     'spais->launchConcierge();'
@@ -61,7 +61,7 @@ export class BootSequence {
                 name: 'PYTHON ERA // 2000s',
                 style: 'python',
                 lines: [
-                    'from springs_ai import SPAIS',
+                    'from springs_ai_solutions import SPAIS',
                     'agent = SPAIS.create_employee()',
                     'agent.configure(mode="concierge")',
                     'agent.activate()'
