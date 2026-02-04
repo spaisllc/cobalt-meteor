@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="chatbot.css">
-    <script src="executive-chatbot.js" defer></script>
+    <script src="executive-chatbot.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -80,8 +80,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(180deg); }
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.1) rotate(180deg);
+            }
         }
 
         .timeline-dot {
@@ -129,10 +136,25 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-1000px) translateX(100px); opacity: 0; }
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-1000px) translateX(100px);
+                opacity: 0;
+            }
         }
 
         .glow {
@@ -178,7 +200,8 @@
         <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
             <div class="mb-8">
                 <img src="https://ui-avatars.com/api/?name=Sarah+Martinez&size=120&background=06b6d4&color=0a0a0a&bold=true&format=svg"
-                    alt="Dr. Sarah Martinez" class="w-32 h-32 rounded-full mx-auto border-4 border-cyan-500 shadow-2xl glow">
+                    alt="Dr. Sarah Martinez"
+                    class="w-32 h-32 rounded-full mx-auto border-4 border-cyan-500 shadow-2xl glow">
             </div>
 
             <h1 class="text-6xl md:text-7xl font-bold mb-4 tracking-tight">
@@ -284,27 +307,37 @@
                                 <div class="w-3 h-3 rounded-full bg-cyan-500 timeline-dot"></div>
                                 <span class="text-sm text-gray-500">2019 - Present</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">Chief Medical Officer</h3>
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">Chief Medical
+                                Officer</h3>
                             <p class="text-xl text-cyan-500 font-semibold">Mass General Brigham</p>
                         </div>
 
                         <div class="md:w-2/3">
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Oversee medical operations for 2M+ patients across 15 hospitals
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Led AI-driven care coordination reducing hospital readmissions by 34%
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Launched telehealth program serving 500K+ virtual visits annually
                                 </li>
@@ -321,27 +354,37 @@
                                 <div class="w-3 h-3 rounded-full bg-cyan-500 timeline-dot"></div>
                                 <span class="text-sm text-gray-500">2014 - 2019</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">VP of Medical Affairs</h3>
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">VP of Medical
+                                Affairs</h3>
                             <p class="text-xl text-cyan-500 font-semibold">Kaiser Permanente</p>
                         </div>
 
                         <div class="md:w-2/3">
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Implemented EHR optimization improving physician efficiency by 40%
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Led quality improvement initiatives achieving 95th percentile CMS scores
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Published 15 papers on value-based care models in NEJM and JAMA
                                 </li>
@@ -358,27 +401,37 @@
                                 <div class="w-3 h-3 rounded-full bg-cyan-500 timeline-dot"></div>
                                 <span class="text-sm text-gray-500">2008 - 2014</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">Medical Director</h3>
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">Medical Director
+                            </h3>
                             <p class="text-xl text-cyan-500 font-semibold">Johns Hopkins Medicine</p>
                         </div>
 
                         <div class="md:w-2/3">
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Directed cardiology department with 80+ physicians and 200+ staff
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Pioneered remote cardiac monitoring program, now industry standard
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     Mentored 25 physicians through fellowship programs
                                 </li>
@@ -406,7 +459,8 @@
     <section id="contact" class="py-24 bg-black">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-5xl font-bold mb-4 fade-in">Let's Connect</h2>
-            <p class="text-xl text-gray-400 mb-12 fade-in">Open to healthcare board positions and strategic advisory roles</p>
+            <p class="text-xl text-gray-400 mb-12 fade-in">Open to healthcare board positions and strategic advisory
+                roles</p>
 
             <div class="grid md:grid-cols-3 gap-6 mb-12">
                 <a href="mailto:dr.martinez@healthleader.com"
@@ -467,8 +521,8 @@
             <p class="text-gray-500 text-sm mb-2">© 2026 Dr. Sarah Martinez. All rights reserved.</p>
             <p class="text-gray-600 text-xs">
                 Executive portfolio powered by
-                <a href="https://springsaisolutions.com"
-                    class="text-cyan-500 hover:text-cyan-400 transition">Springs AI Solutions</a>
+                <a href="https://springsaisolutions.com" class="text-cyan-500 hover:text-cyan-400 transition">Springs AI
+                    Solutions</a>
             </p>
         </div>
     </footer>
