@@ -9,6 +9,8 @@ class ChatbotWidget {
             botAvatar: config.botAvatar || 'EA',
             welcomeMessage: config.welcomeMessage || "👋 Hi! I'm Michael's AI assistant. I know his career inside and out—from tech transformations to M&A deals. What would you like to know?",
             personality: config.personality || 'professional-warm',
+            buttonColor: config.buttonColor || '#fbbf24',
+            accentColor: config.accentColor || '#f59e0b',
             suggestedQuestions: config.suggestedQuestions || [
                 "What's his experience with acquisitions?",
                 "Tell me about his cloud transformation work",
@@ -29,6 +31,13 @@ class ChatbotWidget {
         this.addMessage('ai', this.config.welcomeMessage, true);
     }
 
+    hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
     injectStyles() {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -37,40 +46,41 @@ class ChatbotWidget {
     }
 
     createWidget() {
+        const { buttonColor, accentColor, botAvatar, botName, executiveName } = this.config;
         const widgetHTML = `
             <div class="chatbot-widget">
                 <!-- Floating Button -->
-                <button class="chatbot-button pulse" id="chatbot-toggle" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);">
+                <button class="chatbot-button pulse" id="chatbot-toggle" style="background: linear-gradient(135deg, ${buttonColor} 0%, ${accentColor} 100%);">
                     <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                     </svg>
                 </button>
-                
+
                 <!-- Chat Window -->
-                <div class="chatbot-window" id="chatbot-window" style="background: #1a1a1a; border: 1px solid rgba(251, 191, 36, 0.2);">
-                    <div class="chatbot-header" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);">
+                <div class="chatbot-window" id="chatbot-window" style="background: #1a1a1a; border: 1px solid ${this.hexToRgba(accentColor, 0.2)};">
+                    <div class="chatbot-header" style="background: linear-gradient(135deg, ${buttonColor} 0%, ${accentColor} 100%);">
                         <div class="chatbot-header-info">
-                            <div class="chatbot-header-avatar" style="background: #0a0a0a; color: #f59e0b;">${this.config.botAvatar}</div>
+                            <div class="chatbot-header-avatar" style="background: #0a0a0a; color: ${accentColor};">${botAvatar}</div>
                             <div class="chatbot-header-text">
-                                <h3 style="color: #0a0a0a;">${this.config.botName}</h3>
+                                <h3 style="color: #0a0a0a;">${botName}</h3>
                                 <p style="color: rgba(10, 10, 10, 0.8);">Available 24/7 • Instant responses</p>
                             </div>
                         </div>
                         <button class="chatbot-close" id="chatbot-close" style="color: #0a0a0a;">×</button>
                     </div>
-                    
+
                     <div class="chatbot-messages" id="chatbot-messages" style="background: #0a0a0a;"></div>
-                    
-                    <div class="chatbot-input-area" style="background: #1a1a1a; border-top: 1px solid rgba(251, 191, 36, 0.2);">
+
+                    <div class="chatbot-input-area" style="background: #1a1a1a; border-top: 1px solid ${this.hexToRgba(accentColor, 0.2)};">
                         <div class="chatbot-input-wrapper">
-                            <textarea 
-                                class="chatbot-input" 
-                                id="chatbot-input" 
-                                placeholder="Ask me anything about ${this.config.executiveName}..."
+                            <textarea
+                                class="chatbot-input"
+                                id="chatbot-input"
+                                placeholder="Ask me anything about ${executiveName}..."
                                 rows="1"
-                                style="background: #0a0a0a; color: #e5e5e5; border-color: rgba(251, 191, 36, 0.2);"
+                                style="background: #0a0a0a; color: #e5e5e5; border-color: ${this.hexToRgba(accentColor, 0.2)};"
                             ></textarea>
-                            <button class="chatbot-send-button" id="chatbot-send" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);">
+                            <button class="chatbot-send-button" id="chatbot-send" style="background: linear-gradient(135deg, ${buttonColor} 0%, ${accentColor} 100%);">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                                 </svg>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Executive AI Portfolio examples - Premium digital presence for C-suite executives and senior leaders.">
+    <meta property="og:title" content="Executive Portfolio Examples | Springs AI Solutions">
+    <meta property="og:description"
+        content="See how executives are using AI-powered portfolios to showcase their careers 24/7.">
+    <meta property="og:type" content="website">
+    <title>Executive Portfolio Examples | Springs AI Solutions, LLC</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="src/styles/reset.css">
+    <link rel="stylesheet" href="src/styles/variables.css">
+    <link rel="stylesheet" href="src/styles/typography.css">
+    <link rel="stylesheet" href="src/styles/animations.css">
+    <link rel="stylesheet" href="src/styles/components/navigation.css">
+    <link rel="stylesheet" href="src/styles/components/chat-widget.css">
+    <link rel="stylesheet" href="src/styles/components/cards.css">
+    <link rel="stylesheet" href="src/styles/components/buttons.css">
+    <link rel="stylesheet" href="src/styles/components/footer.css">
+    <link rel="stylesheet" href="src/styles/pages/services.css">
+    <link rel="stylesheet" href="src/styles/responsive.css">
+
+    <style>
+        .portfolios-hero {
+            padding: 120px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 255, 157, 0.03) 0%, transparent 100%);
+        }
+
+        .portfolios-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .portfolios-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .portfolios-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+        }
+
+        .portfolio-card {
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 255, 157, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 255, 157, 0.1);
+        }
+
+        .portfolio-header {
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.1) 0%, rgba(0, 200, 120, 0.05) 100%);
+            padding: 40px 30px;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+        }
+
+        .portfolio-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .portfolio-role {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: rgba(0, 255, 157, 0.05);
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent-primary);
+        }
+
+        .portfolio-body {
+            padding: 30px;
+        }
+
+        .portfolio-highlights {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .portfolio-highlights li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .portfolio-highlights li:last-child {
+            border-bottom: none;
+        }
+
+        .portfolio-highlights li::before {
+            content: "▹ ";
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .portfolio-ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.1) 0%, rgba(0, 200, 120, 0.05) 100%);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+        }
+
+        .portfolio-cta {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .demo-badge {
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            color: #ffc800;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 10px;
+        }
+
+        .pricing-section {
+            max-width: 1200px;
+            margin: 60px auto 80px;
+            padding: 60px 20px;
+            text-align: center;
+            background: rgba(0, 255, 157, 0.02);
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            border-radius: 12px;
+        }
+
+        .pricing-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pricing-tier {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .tier-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .tier-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .tier-features li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .tier-features li::before {
+            content: "✓ ";
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .portfolios-title {
+                font-size: 2rem;
+            }
+
+            .portfolios-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .pricing-tiers {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body data-page="portfolios">
+    <!-- Background Canvas -->
+    <canvas id="background-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-text">SPRINGS<span class="logo-dot">.</span>AI<span
+                        class="logo-dot">.</span>SOLUTIONS</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about.html" class="nav-link">About</a></li>
+                <li><a href="/services.html" class="nav-link">Services</a></li>
+                <li><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-cta" id="nav-chat-btn">Start Chat</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="portfolios-hero">
+            <h1 class="portfolios-title">Executive AI Portfolio <span class="highlight">Examples</span></h1>
+            <p class="portfolios-subtitle">
+                See how top executives use AI-powered portfolios to showcase their careers, engage recruiters, and open doors—24 hours a day, 7 days a week.
+            </p>
+        </section>
+
+        <!-- Portfolios Grid -->
+        <section class="portfolios-grid">
+
+            <!-- Portfolio 1: Michael Chen - Tech Executive -->
+            <article class="portfolio-card">
+                <div class="portfolio-header">
+                    <div class="portfolio-name">Michael Chen <span class="demo-badge">Demo</span></div>
+                    <div class="portfolio-role">Chief Technology Officer</div>
+                    <div class="portfolio-stats">
+                        <span class="stat-badge">$500M+ Created</span>
+                        <span class="stat-badge">12 Acquisitions</span>
+                        <span class="stat-badge">20+ Years</span>
+                    </div>
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-ai-badge">
+                        💻 AI Chatbot: "The Techie" - Precise, technical, talks code & stacks
+                    </div>
+                    <ul class="portfolio-highlights">
+                        <li>Led digital transformation at Fortune 500 tech company</li>
+                        <li>Built and scaled engineering teams from 50 to 500+</li>
+                        <li>Managed $200M+ technology budgets</li>
+                        <li>Expert in AI/ML, Cloud Infrastructure, DevOps</li>
+                        <li>Board advisor for 3 SaaS startups</li>
+                    </ul>
+                    <a href="portfolio-template/executive-portfolio.html" class="btn btn-primary portfolio-cta" target="_blank">
+                        <span class="btn-text">View Live Portfolio →</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Portfolio 2: Sarah Martinez - Healthcare Executive -->
+            <article class="portfolio-card">
+                <div class="portfolio-header">
+                    <div class="portfolio-name">Dr. Sarah Martinez <span class="demo-badge">Demo</span></div>
+                    <div class="portfolio-role">Chief Medical Officer</div>
+                    <div class="portfolio-stats">
+                        <span class="stat-badge">2M+ Patients</span>
+                        <span class="stat-badge">15 Hospitals</span>
+                        <span class="stat-badge">25+ Years</span>
+                    </div>
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-ai-badge">
+                        💼 AI Chatbot: "The Executive" - Formal, strategic, ROI & leadership focused
+                    </div>
+                    <ul class="portfolio-highlights">
+                        <li>CMO of regional healthcare system serving 2M+ patients</li>
+                        <li>Reduced hospital readmissions by 34% through AI-driven care</li>
+                        <li>Published 40+ peer-reviewed papers on healthcare innovation</li>
+                        <li>Keynote speaker at major medical conferences</li>
+                        <li>Leading telemedicine transformation initiatives</li>
+                    </ul>
+                    <a href="portfolio-template/sarah-martinez.html" class="btn btn-primary portfolio-cta" target="_blank">
+                        <span class="btn-text">View Live Portfolio →</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Portfolio 3: James Morrison - Financial Services -->
+            <article class="portfolio-card">
+                <div class="portfolio-header">
+                    <div class="portfolio-name">James Morrison <span class="demo-badge">Demo</span></div>
+                    <div class="portfolio-role">Chief Financial Officer</div>
+                    <div class="portfolio-stats">
+                        <span class="stat-badge">$2B+ Managed</span>
+                        <span class="stat-badge">8 IPOs</span>
+                        <span class="stat-badge">18+ Years</span>
+                    </div>
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-ai-badge">
+                        📊 AI Chatbot: "The Executive" - Strategic finance, M&A & capital allocation
+                    </div>
+                    <ul class="portfolio-highlights">
+                        <li>CFO for three successful tech IPOs ($200M+ each)</li>
+                        <li>Managed $2B+ in corporate finance operations</li>
+                        <li>Expert in M&A, capital raising, financial strategy</li>
+                        <li>Former Big 4 audit partner with 500+ client portfolio</li>
+                        <li>CPA, MBA from Wharton School of Business</li>
+                    </ul>
+                    <a href="portfolio-template/james-morrison.html" class="btn btn-primary portfolio-cta" target="_blank">
+                        <span class="btn-text">View Live Portfolio →</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Portfolio 4: Angela Thompson - Marketing Executive -->
+            <article class="portfolio-card">
+                <div class="portfolio-header">
+                    <div class="portfolio-name">Angela Thompson <span class="demo-badge">Demo</span></div>
+                    <div class="portfolio-role">Chief Marketing Officer</div>
+                    <div class="portfolio-stats">
+                        <span class="stat-badge">300% ROI Growth</span>
+                        <span class="stat-badge">$100M+ Budgets</span>
+                        <span class="stat-badge">15+ Years</span>
+                    </div>
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-ai-badge">
+                        💬 AI Assistant: Active
+                    </div>
+                    <ul class="portfolio-highlights">
+                        <li>CMO driving 300% revenue growth through digital transformation</li>
+                        <li>Built category-defining brands in consumer tech</li>
+                        <li>Managed $100M+ marketing budgets across 15+ markets</li>
+                        <li>Led rebranding initiatives for 3 Fortune 1000 companies</li>
+                        <li>Featured in Forbes, AdWeek, Marketing Week</li>
+                    </ul>
+                    <button class="btn btn-outline portfolio-cta" disabled>
+                        <span class="btn-text">Coming Soon</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Portfolio 5: David Park - Operations Executive -->
+            <article class="portfolio-card">
+                <div class="portfolio-header">
+                    <div class="portfolio-name">David Park <span class="demo-badge">Demo</span></div>
+                    <div class="portfolio-role">Chief Operating Officer</div>
+                    <div class="portfolio-stats">
+                        <span class="stat-badge">$50M+ Savings</span>
+                        <span class="stat-badge">5000+ Team</span>
+                        <span class="stat-badge">22+ Years</span>
+                    </div>
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-ai-badge">
+                        💬 AI Assistant: Active
+                    </div>
+                    <ul class="portfolio-highlights">
+                        <li>COO overseeing 5000+ employees across global operations</li>
+                        <li>Delivered $50M+ in operational cost savings through automation</li>
+                        <li>Led supply chain optimization for Fortune 500 manufacturer</li>
+                        <li>Six Sigma Black Belt with 100+ process improvements</li>
+                        <li>Expertise in lean operations, logistics, and scaling</li>
+                    </ul>
+                    <button class="btn btn-outline portfolio-cta" disabled>
+                        <span class="btn-text">Coming Soon</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Portfolio 6: Elizabeth Carter - Board Member -->
+            <article class="portfolio-card">
+                <div class="portfolio-header">
+                    <div class="portfolio-name">Elizabeth Carter <span class="demo-badge">Demo</span></div>
+                    <div class="portfolio-role">Corporate Board Director</div>
+                    <div class="portfolio-stats">
+                        <span class="stat-badge">7 Boards</span>
+                        <span class="stat-badge">$10B+ Value</span>
+                        <span class="stat-badge">30+ Years</span>
+                    </div>
+                </div>
+                <div class="portfolio-body">
+                    <div class="portfolio-ai-badge">
+                        💬 AI Assistant: Active
+                    </div>
+                    <ul class="portfolio-highlights">
+                        <li>Serves on 7 public company boards ($10B+ combined value)</li>
+                        <li>Former CEO of $2B enterprise software company</li>
+                        <li>Audit committee chair for 3 Fortune 500 companies</li>
+                        <li>Expert in corporate governance, risk management, strategy</li>
+                        <li>Recognized in NACD Directorship 100</li>
+                    </ul>
+                    <button class="btn btn-outline portfolio-cta" disabled>
+                        <span class="btn-text">Coming Soon</span>
+                    </button>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section">
+            <h2 class="pricing-title">Ready for Your Own AI Portfolio?</h2>
+            <p class="pricing-description">
+                Choose the package that fits your career stage and goals
+            </p>
+
+            <div class="pricing-tiers">
+                <div class="pricing-tier">
+                    <div class="tier-name">Executive</div>
+                    <div class="tier-price">$1,500<span>/month</span></div>
+                    <ul class="tier-features">
+                        <li>Premium portfolio website</li>
+                        <li>AI career assistant (GPT-4)</li>
+                        <li>Custom domain & hosting</li>
+                        <li>Professional design & branding</li>
+                        <li>Monthly updates & maintenance</li>
+                        <li>Analytics dashboard</li>
+                    </ul>
+                    <button class="btn btn-primary" id="executive-tier-btn">
+                        <span class="btn-text">Get Started</span>
+                    </button>
+                </div>
+
+                <div class="pricing-tier">
+                    <div class="tier-name">Enterprise</div>
+                    <div class="tier-price">$2,500<span>/month</span></div>
+                    <ul class="tier-features">
+                        <li>Everything in Executive, plus:</li>
+                        <li>Advanced AI with custom training</li>
+                        <li>Interactive charts & visualizations</li>
+                        <li>Lead capture & CRM integration</li>
+                        <li>Priority support & revisions</li>
+                        <li>Board presentation materials</li>
+                    </ul>
+                    <button class="btn btn-primary" id="enterprise-tier-btn">
+                        <span class="btn-text">Get Started</span>
+                    </button>
+                </div>
+
+                <div class="pricing-tier">
+                    <div class="tier-name">Custom</div>
+                    <div class="tier-price">Contact<span> for pricing</span></div>
+                    <ul class="tier-features">
+                        <li>White-glove service</li>
+                        <li>Multi-page portfolio sites</li>
+                        <li>Video integration</li>
+                        <li>Advanced AI capabilities</li>
+                        <li>API integrations</li>
+                        <li>Dedicated account manager</li>
+                    </ul>
+                    <a href="/contact.html" class="btn btn-outline">
+                        <span class="btn-text">Contact Sales</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Questions? Talk to S.P.A.I.S.</h2>
+                <p class="cta-subtitle">Our AI agent can answer questions about portfolios, pricing, and getting started</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large" id="cta-chat-btn">
+                        <span class="btn-text">Start Chat</span>
+                    </button>
+                    <a href="/services.html" class="btn btn-outline btn-large">
+                        <span class="btn-text">View All Services</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="footer-logo">SPRINGS<span class="logo-dot">.</span>AI<span
+                        class="logo-dot">.</span>SOLUTIONS</span>
+                <p class="footer-tagline">Building the future of AI assistants</p>
+            </div>
+            <nav class="footer-nav">
+                <div class="footer-column">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/services.html">Services</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/services.html#executive-portfolios">Executive AI Portfolios</a></li>
+                        <li><a href="/services.html#custom-ai">Custom AI Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:SpringsAISolutions@proton.me">SpringsAISolutions@proton.me</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Springs AI Solutions, LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget (Floating) -->
+    <div id="chat-widget" class="chat-widget">
+        <button class="chat-widget-toggle" id="chat-toggle" aria-label="Open chat">
+            <span class="chat-icon">&#128172;</span>
+            <span class="chat-close-icon">&#10005;</span>
+        </button>
+        <div class="chat-widget-panel" id="chat-panel">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <span class="chat-status"></span>
+                    <span class="chat-title">S.P.A.I.S.</span>
+                </div>
+                <button class="chat-fullscreen-btn" id="chat-fullscreen" aria-label="Toggle fullscreen">
+                    &#x26F6;
+                </button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." autocomplete="off"
+                    spellcheck="false">
+                <button class="chat-send-btn" id="chat-send" aria-label="Send message">
+                    &#10148;
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <script type="module" src="src/main.js"></script>
+</body>
+
+</html>

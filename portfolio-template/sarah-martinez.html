@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Chen | Chief Technology Officer</title>
+    <title>Dr. Sarah Martinez | Chief Medical Officer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="chatbot.css">
@@ -19,7 +19,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -29,21 +29,21 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
         }
 
-        .gold-gradient {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        .cyan-gradient {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
         }
 
         .card-premium {
             background: rgba(26, 26, 26, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card-premium:hover {
-            border-color: rgba(251, 191, 36, 0.3);
+            border-color: rgba(6, 182, 212, 0.3);
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.1);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1);
         }
 
         .stat-number {
@@ -52,7 +52,6 @@
             line-height: 1;
         }
 
-        /* Scroll animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -64,7 +63,6 @@
             transform: translateY(0);
         }
 
-        /* Animated background */
         .animated-bg {
             position: relative;
             overflow: hidden;
@@ -77,23 +75,15 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.03) 0%, transparent 70%);
             animation: pulse 8s ease-in-out infinite;
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1) rotate(0deg);
-            }
-
-            50% {
-                transform: scale(1.1) rotate(180deg);
-            }
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
         }
 
-        /* Interactive timeline */
         .timeline-dot {
             position: relative;
             transition: all 0.3s ease;
@@ -111,7 +101,7 @@
             transform: translate(-50%, -50%);
             width: 0;
             height: 0;
-            background: rgba(251, 191, 36, 0.3);
+            background: rgba(6, 182, 212, 0.3);
             border-radius: 50%;
             transition: all 0.3s ease;
         }
@@ -121,7 +111,6 @@
             height: 200%;
         }
 
-        /* Particle effect */
         .particles {
             position: absolute;
             width: 100%;
@@ -134,40 +123,24 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            background: rgba(251, 191, 36, 0.4);
+            background: rgba(6, 182, 212, 0.4);
             border-radius: 50%;
             animation: float 15s infinite;
         }
 
         @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-1000px) translateX(100px);
-                opacity: 0;
-            }
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-1000px) translateX(100px); opacity: 0; }
         }
 
-        /* Glowing effect */
         .glow {
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
         }
 
         .glow:hover {
-            box-shadow: 0 0 40px rgba(251, 191, 36, 0.5);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
         }
     </style>
 </head>
@@ -177,12 +150,12 @@
     <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-lg border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <div class="text-xl font-bold gradient-text">Michael Chen</div>
+                <div class="text-xl font-bold gradient-text">Dr. Sarah Martinez</div>
                 <div class="hidden md:flex gap-8 text-sm">
-                    <a href="#about" class="hover:text-amber-500 transition">About</a>
-                    <a href="#achievements" class="hover:text-amber-500 transition">Impact</a>
-                    <a href="#experience" class="hover:text-amber-500 transition">Experience</a>
-                    <a href="#contact" class="hover:text-amber-500 transition">Contact</a>
+                    <a href="#about" class="hover:text-cyan-500 transition">About</a>
+                    <a href="#achievements" class="hover:text-cyan-500 transition">Impact</a>
+                    <a href="#experience" class="hover:text-cyan-500 transition">Experience</a>
+                    <a href="#contact" class="hover:text-cyan-500 transition">Contact</a>
                 </div>
             </div>
         </div>
@@ -190,7 +163,6 @@
 
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center relative animated-bg pt-20">
-        <!-- Particles -->
         <div class="particles">
             <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
             <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
@@ -205,42 +177,42 @@
 
         <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
             <div class="mb-8">
-                <img src="https://ui-avatars.com/api/?name=Michael+Chen&size=120&background=f59e0b&color=0a0a0a&bold=true&format=svg"
-                    alt="Michael Chen" class="w-32 h-32 rounded-full mx-auto border-4 border-amber-500 shadow-2xl glow">
+                <img src="https://ui-avatars.com/api/?name=Sarah+Martinez&size=120&background=06b6d4&color=0a0a0a&bold=true&format=svg"
+                    alt="Dr. Sarah Martinez" class="w-32 h-32 rounded-full mx-auto border-4 border-cyan-500 shadow-2xl glow">
             </div>
 
             <h1 class="text-6xl md:text-7xl font-bold mb-4 tracking-tight">
-                Michael Chen
+                Dr. Sarah Martinez
             </h1>
 
             <p class="text-3xl md:text-4xl mb-6 gradient-text font-semibold">
-                Chief Technology Officer
+                Chief Medical Officer
             </p>
 
             <p class="text-xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-                15+ years transforming enterprises through technology • $500M+ in value created •
-                Led teams of 200+ across 3 continents • 12 successful acquisitions
+                25+ years transforming healthcare delivery • 2M+ patients served •
+                Led digital health initiatives across 15 hospitals • 40+ peer-reviewed publications
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                 <button onclick="chatbot.toggleChat()"
-                    class="gold-gradient px-8 py-4 rounded-lg font-semibold text-black text-lg hover:shadow-2xl transition-all duration-300 glow">
+                    class="cyan-gradient px-8 py-4 rounded-lg font-semibold text-black text-lg hover:shadow-2xl transition-all duration-300 glow">
                     💬 Ask My AI Assistant
                 </button>
                 <a href="#achievements"
-                    class="px-8 py-4 border-2 border-amber-500 rounded-lg font-semibold text-lg hover:bg-amber-500 hover:text-black transition-all duration-300">
+                    class="px-8 py-4 border-2 border-cyan-500 rounded-lg font-semibold text-lg hover:bg-cyan-500 hover:text-black transition-all duration-300">
                     View Impact
                 </a>
             </div>
 
             <div class="flex justify-center gap-6 text-sm text-gray-500">
                 <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-5 h-5 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
                             d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                             clip-rule="evenodd"></path>
                     </svg>
-                    San Francisco Bay Area
+                    Boston, Massachusetts
                 </div>
                 <div class="flex items-center gap-2">
                     <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -248,13 +220,13 @@
                             d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                             clip-rule="evenodd"></path>
                     </svg>
-                    Available for Board & Advisory Roles
+                    Available for Healthcare Board Roles
                 </div>
             </div>
         </div>
 
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
                 </path>
             </svg>
@@ -264,35 +236,35 @@
     <!-- Impact Metrics -->
     <section id="achievements" class="py-24 premium-gradient">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-5xl font-bold text-center mb-4 fade-in">Executive Impact</h2>
-            <p class="text-center text-gray-400 mb-16 fade-in">Quantifiable results that drive shareholder value</p>
+            <h2 class="text-5xl font-bold text-center mb-4 fade-in">Healthcare Impact</h2>
+            <p class="text-center text-gray-400 mb-16 fade-in">Transforming patient outcomes through innovation</p>
 
             <div class="grid md:grid-cols-4 gap-8 mb-16">
                 <div class="card-premium p-8 rounded-2xl text-center fade-in">
-                    <div class="stat-number gradient-text mb-2" data-count="500">0</div>
-                    <div class="text-sm text-gray-400 uppercase tracking-wider">Million in Value Created</div>
+                    <div class="stat-number gradient-text mb-2" data-count="2">0</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Million Patients Served</div>
                 </div>
 
                 <div class="card-premium p-8 rounded-2xl text-center fade-in" style="transition-delay: 0.1s;">
-                    <div class="stat-number gradient-text mb-2" data-count="12">0</div>
-                    <div class="text-sm text-gray-400 uppercase tracking-wider">Successful Acquisitions</div>
+                    <div class="stat-number gradient-text mb-2" data-count="34">0</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">% Reduction in Readmissions</div>
                 </div>
 
                 <div class="card-premium p-8 rounded-2xl text-center fade-in" style="transition-delay: 0.2s;">
-                    <div class="stat-number gradient-text mb-2" data-count="200">0</div>
-                    <div class="text-sm text-gray-400 uppercase tracking-wider">Team Members Led</div>
+                    <div class="stat-number gradient-text mb-2" data-count="15">0</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Hospital Systems Led</div>
                 </div>
 
                 <div class="card-premium p-8 rounded-2xl text-center fade-in" style="transition-delay: 0.3s;">
-                    <div class="stat-number gradient-text mb-2" data-count="15">0</div>
-                    <div class="text-sm text-gray-400 uppercase tracking-wider">Years Leadership</div>
+                    <div class="stat-number gradient-text mb-2" data-count="40">0</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Published Research Papers</div>
                 </div>
             </div>
 
             <!-- Interactive Chart -->
             <div class="card-premium p-8 rounded-2xl fade-in">
-                <h3 class="text-2xl font-bold mb-6">Revenue Growth Impact</h3>
-                <canvas id="revenueChart" height="80"></canvas>
+                <h3 class="text-2xl font-bold mb-6">Patient Satisfaction Growth</h3>
+                <canvas id="satisfactionChart" height="80"></canvas>
             </div>
         </div>
     </section>
@@ -300,8 +272,8 @@
     <!-- Experience Timeline -->
     <section id="experience" class="py-24 bg-black">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-5xl font-bold text-center mb-4 fade-in">Executive Journey</h2>
-            <p class="text-center text-gray-400 mb-16 fade-in">C-Suite leadership across Fortune 500 companies</p>
+            <h2 class="text-5xl font-bold text-center mb-4 fade-in">Medical Leadership Journey</h2>
+            <p class="text-center text-gray-400 mb-16 fade-in">Pioneering digital health transformation</p>
 
             <div class="space-y-12">
                 <!-- Position 1 -->
@@ -309,43 +281,32 @@
                     <div class="flex flex-col md:flex-row gap-6">
                         <div class="md:w-1/3">
                             <div class="flex items-center gap-3 mb-2">
-                                <div class="w-3 h-3 rounded-full bg-amber-500 timeline-dot"></div>
-                                <span class="text-sm text-gray-500">2020 - Present</span>
+                                <div class="w-3 h-3 rounded-full bg-cyan-500 timeline-dot"></div>
+                                <span class="text-sm text-gray-500">2019 - Present</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 group-hover:text-amber-500 transition">Chief Technology
-                                Officer</h3>
-                            <p class="text-xl text-amber-500 font-semibold">Salesforce</p>
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">Chief Medical Officer</h3>
+                            <p class="text-xl text-cyan-500 font-semibold">Mass General Brigham</p>
                         </div>
 
                         <div class="md:w-2/3">
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Led platform transformation to cloud-native architecture, reducing costs by $120M
-                                    annually
+                                    Oversee medical operations for 2M+ patients across 15 hospitals
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Scaled engineering org from 120 to 350+ across US, EMEA, and APAC
+                                    Led AI-driven care coordination reducing hospital readmissions by 34%
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Drove 5 strategic acquisitions ($2.1B total) with successful tech integrations
+                                    Launched telehealth program serving 500K+ virtual visits annually
                                 </li>
                             </ul>
                         </div>
@@ -357,42 +318,32 @@
                     <div class="flex flex-col md:flex-row gap-6">
                         <div class="md:w-1/3">
                             <div class="flex items-center gap-3 mb-2">
-                                <div class="w-3 h-3 rounded-full bg-amber-500 timeline-dot"></div>
-                                <span class="text-sm text-gray-500">2016 - 2020</span>
+                                <div class="w-3 h-3 rounded-full bg-cyan-500 timeline-dot"></div>
+                                <span class="text-sm text-gray-500">2014 - 2019</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 group-hover:text-amber-500 transition">VP of Engineering
-                            </h3>
-                            <p class="text-xl text-amber-500 font-semibold">Amazon Web Services</p>
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">VP of Medical Affairs</h3>
+                            <p class="text-xl text-cyan-500 font-semibold">Kaiser Permanente</p>
                         </div>
 
                         <div class="md:w-2/3">
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Launched 12 new AWS services generating $800M+ ARR
+                                    Implemented EHR optimization improving physician efficiency by 40%
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Built serverless team from 0 to 80 engineers in 18 months
+                                    Led quality improvement initiatives achieving 95th percentile CMS scores
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Reduced infrastructure costs 40% through architectural optimization
+                                    Published 15 papers on value-based care models in NEJM and JAMA
                                 </li>
                             </ul>
                         </div>
@@ -404,42 +355,32 @@
                     <div class="flex flex-col md:flex-row gap-6">
                         <div class="md:w-1/3">
                             <div class="flex items-center gap-3 mb-2">
-                                <div class="w-3 h-3 rounded-full bg-amber-500 timeline-dot"></div>
-                                <span class="text-sm text-gray-500">2011 - 2016</span>
+                                <div class="w-3 h-3 rounded-full bg-cyan-500 timeline-dot"></div>
+                                <span class="text-sm text-gray-500">2008 - 2014</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 group-hover:text-amber-500 transition">Director of
-                                Engineering</h3>
-                            <p class="text-xl text-amber-500 font-semibold">Google Cloud</p>
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition">Medical Director</h3>
+                            <p class="text-xl text-cyan-500 font-semibold">Johns Hopkins Medicine</p>
                         </div>
 
                         <div class="md:w-2/3">
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Led Kubernetes open-source project to 40k+ stars, adopted by Fortune 500s
+                                    Directed cardiology department with 80+ physicians and 200+ staff
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Managed distributed teams across 5 global offices
+                                    Pioneered remote cardiac monitoring program, now industry standard
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd"></path>
+                                    <svg class="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Mentored 15 engineers to senior leadership roles
+                                    Mentored 25 physicians through fellowship programs
                                 </li>
                             </ul>
                         </div>
@@ -452,12 +393,12 @@
     <!-- Leadership Philosophy -->
     <section class="py-24 premium-gradient">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6 fade-in">Leadership Philosophy</h2>
+            <h2 class="text-4xl font-bold mb-6 fade-in">Medical Leadership Philosophy</h2>
             <blockquote class="text-2xl text-gray-300 italic leading-relaxed fade-in">
-                "Technology is not about code—it's about empowering people to solve meaningful problems.
-                The best leaders build systems that outlast their tenure."
+                "Healthcare innovation isn't about replacing human connection—it's about enhancing it.
+                Technology should free physicians to focus on what matters most: caring for patients."
             </blockquote>
-            <p class="mt-8 text-amber-500 font-semibold fade-in">— Michael Chen</p>
+            <p class="mt-8 text-cyan-500 font-semibold fade-in">— Dr. Sarah Martinez</p>
         </div>
     </section>
 
@@ -465,39 +406,38 @@
     <section id="contact" class="py-24 bg-black">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-5xl font-bold mb-4 fade-in">Let's Connect</h2>
-            <p class="text-xl text-gray-400 mb-12 fade-in">Open to board positions, advisory roles, and strategic
-                conversations</p>
+            <p class="text-xl text-gray-400 mb-12 fade-in">Open to healthcare board positions and strategic advisory roles</p>
 
             <div class="grid md:grid-cols-3 gap-6 mb-12">
-                <a href="mailto:michael.chen@executive.com"
-                    class="card-premium p-6 rounded-xl hover:border-amber-500 transition group">
-                    <svg class="w-8 h-8 text-amber-500 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
+                <a href="mailto:dr.martinez@healthleader.com"
+                    class="card-premium p-6 rounded-xl hover:border-cyan-500 transition group">
+                    <svg class="w-8 h-8 text-cyan-500 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                     </svg>
-                    <div class="font-semibold group-hover:text-amber-500 transition">Email</div>
-                    <div class="text-sm text-gray-500">michael.chen@executive.com</div>
+                    <div class="font-semibold group-hover:text-cyan-500 transition">Email</div>
+                    <div class="text-sm text-gray-500">dr.martinez@healthleader.com</div>
                 </a>
 
-                <a href="https://linkedin.com/in/michaelchen" target="_blank"
-                    class="card-premium p-6 rounded-xl hover:border-amber-500 transition group">
-                    <svg class="w-8 h-8 text-amber-500 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
+                <a href="https://linkedin.com/in/drsarahmartinez" target="_blank"
+                    class="card-premium p-6 rounded-xl hover:border-cyan-500 transition group">
+                    <svg class="w-8 h-8 text-cyan-500 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
                             d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"
                             clip-rule="evenodd"></path>
                     </svg>
-                    <div class="font-semibold group-hover:text-amber-500 transition">LinkedIn</div>
+                    <div class="font-semibold group-hover:text-cyan-500 transition">LinkedIn</div>
                     <div class="text-sm text-gray-500">Connect on LinkedIn</div>
                 </a>
 
                 <button onclick="chatbot.toggleChat()"
-                    class="card-premium p-6 rounded-xl hover:border-amber-500 transition group">
-                    <svg class="w-8 h-8 text-amber-500 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
+                    class="card-premium p-6 rounded-xl hover:border-cyan-500 transition group">
+                    <svg class="w-8 h-8 text-cyan-500 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
                             d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
                             clip-rule="evenodd"></path>
                     </svg>
-                    <div class="font-semibold group-hover:text-amber-500 transition">AI Assistant</div>
+                    <div class="font-semibold group-hover:text-cyan-500 transition">AI Assistant</div>
                     <div class="text-sm text-gray-500">Ask me anything</div>
                 </button>
             </div>
@@ -506,15 +446,15 @@
                 <div class="grid md:grid-cols-3 gap-6 text-left">
                     <div>
                         <div class="text-sm text-gray-500 mb-1">Current Role</div>
-                        <div class="font-semibold">CTO, Salesforce</div>
+                        <div class="font-semibold">CMO, Mass General Brigham</div>
                     </div>
                     <div>
                         <div class="text-sm text-gray-500 mb-1">Location</div>
-                        <div class="font-semibold">SF Bay Area</div>
+                        <div class="font-semibold">Boston, MA</div>
                     </div>
                     <div>
                         <div class="text-sm text-gray-500 mb-1">Seeking</div>
-                        <div class="font-semibold text-amber-500">Board & Advisory</div>
+                        <div class="font-semibold text-cyan-500">Healthcare Boards</div>
                     </div>
                 </div>
             </div>
@@ -524,11 +464,11 @@
     <!-- Footer -->
     <footer class="py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-gray-500 text-sm mb-2">© 2026 Michael Chen. All rights reserved.</p>
+            <p class="text-gray-500 text-sm mb-2">© 2026 Dr. Sarah Martinez. All rights reserved.</p>
             <p class="text-gray-600 text-xs">
                 Executive portfolio powered by
                 <a href="https://springsaisolutions.com"
-                    class="text-amber-500 hover:text-amber-400 transition">SpringSAI Solutions</a>
+                    class="text-cyan-500 hover:text-cyan-400 transition">Springs AI Solutions</a>
             </p>
         </div>
     </footer>
@@ -536,15 +476,11 @@
     <script>
         // Scroll animations
         const fadeElements = document.querySelectorAll('.fade-in');
-
         const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
-
         fadeElements.forEach(el => fadeObserver.observe(el));
 
         // Animated counters
@@ -553,11 +489,10 @@
             const duration = 2000;
             const step = target / (duration / 16);
             let current = 0;
-
             const counter = setInterval(() => {
                 current += step;
                 if (current >= target) {
-                    element.textContent = target + (target >= 100 ? '+' : '');
+                    element.textContent = target + (target >= 10 ? '+' : '');
                     clearInterval(counter);
                 } else {
                     element.textContent = Math.floor(current);
@@ -573,26 +508,25 @@
                 }
             });
         }, { threshold: 0.5 });
-
         document.querySelectorAll('[data-count]').forEach(el => statObserver.observe(el));
 
-        // Revenue chart
-        const ctx = document.getElementById('revenueChart').getContext('2d');
+        // Patient Satisfaction Chart
+        const ctx = document.getElementById('satisfactionChart').getContext('2d');
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                labels: ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
                 datasets: [{
-                    label: 'Revenue Impact ($M)',
-                    data: [50, 85, 120, 180, 250, 320, 410, 480, 550],
-                    borderColor: '#f59e0b',
-                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    label: 'Patient Satisfaction Score',
+                    data: [72, 75, 78, 82, 85, 88, 91, 93, 94, 95, 96],
+                    borderColor: '#06b6d4',
+                    backgroundColor: 'rgba(6, 182, 212, 0.1)',
                     borderWidth: 3,
                     tension: 0.4,
                     fill: true,
                     pointRadius: 6,
                     pointHoverRadius: 8,
-                    pointBackgroundColor: '#f59e0b',
+                    pointBackgroundColor: '#06b6d4',
                     pointBorderColor: '#0a0a0a',
                     pointBorderWidth: 2
                 }]
@@ -601,14 +535,12 @@
                 responsive: true,
                 maintainAspectRatio: true,
                 plugins: {
-                    legend: {
-                        display: false
-                    },
+                    legend: { display: false },
                     tooltip: {
                         backgroundColor: '#1a1a1a',
-                        titleColor: '#f59e0b',
+                        titleColor: '#06b6d4',
                         bodyColor: '#e5e5e5',
-                        borderColor: '#f59e0b',
+                        borderColor: '#06b6d4',
                         borderWidth: 1,
                         padding: 12,
                         displayColors: false
@@ -616,44 +548,38 @@
                 },
                 scales: {
                     y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(251, 191, 36, 0.1)'
-                        },
+                        beginAtZero: false,
+                        min: 60,
+                        max: 100,
+                        grid: { color: 'rgba(6, 182, 212, 0.1)' },
                         ticks: {
                             color: '#9ca3af',
-                            callback: function (value) {
-                                return '$' + value + 'M';
-                            }
+                            callback: function (value) { return value + '%'; }
                         }
                     },
                     x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: '#9ca3af'
-                        }
+                        grid: { display: false },
+                        ticks: { color: '#9ca3af' }
                     }
                 }
             }
         });
 
-        // Initialize Michael Chen's Techie Chatbot
+        // Initialize Dr. Martinez's Executive Chatbot
         const chatbot = new ChatbotWidget({
-            executiveName: 'Michael Chen',
-            botName: "Chen's Tech AI",
-            botAvatar: 'MC',
-            welcomeMessage: "Hey there. I'm Michael's AI. I can dive into his technical architecture decisions, stack choices, cloud-native migrations, and engineering leadership. What technical area interests you?",
-            personality: 'techie-precise',
+            executiveName: 'Dr. Sarah Martinez',
+            botName: "Dr. Martinez's AI Assistant",
+            botAvatar: 'SM',
+            welcomeMessage: "Good day. I'm Dr. Martinez's executive AI assistant. I can discuss her healthcare leadership experience, digital transformation initiatives, and strategic vision for patient care. How may I assist you?",
+            personality: 'executive-formal',
             suggestedQuestions: [
-                "What cloud architecture did he implement?",
-                "Tell me about his tech stack preferences",
-                "How did he scale the engineering org?",
-                "What's his approach to DevOps and CI/CD?"
+                "What's her experience reducing hospital readmissions?",
+                "Tell me about her telemedicine transformation work",
+                "How has she improved patient satisfaction scores?",
+                "What's her approach to healthcare innovation?"
             ],
-            buttonColor: '#fbbf24',
-            accentColor: '#f59e0b'
+            buttonColor: '#06b6d4',
+            accentColor: '#0891b2'
         });
     </script>
 </body>

@@ -33,7 +33,7 @@ export class BootSequence {
                 lines: [
                     'IDENTIFICATION DIVISION.',
                     'PROGRAM-ID. SPAIS-INIT.',
-                    'PERFORM SPRINGS-AI-STARTUP.',
+                    'PERFORM SPRINGS-AI-SOLUTIONS-STARTUP.',
                     'DISPLAY "SPRINGS AI SOLUTIONS ONLINE".'
                 ]
             },
