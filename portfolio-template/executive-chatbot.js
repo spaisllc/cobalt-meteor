@@ -12,10 +12,10 @@ class ChatbotWidget {
             buttonColor: config.buttonColor || '#fbbf24',
             accentColor: config.accentColor || '#f59e0b',
             suggestedQuestions: config.suggestedQuestions || [
-                "What's his experience with acquisitions?",
-                "Tell me about his cloud transformation work",
-                "How large were the teams he's led?",
-                "What's his leadership philosophy?"
+                "Tell me about this executive's experience",
+                "What are their key achievements?",
+                "What's their leadership approach?",
+                "How can I connect with them?"
             ]
         };
 
@@ -135,10 +135,11 @@ class ChatbotWidget {
 
     showSuggestedQuestions() {
         const messagesDiv = document.getElementById('chatbot-messages');
+        const { accentColor, buttonColor } = this.config;
         const suggestionsHTML = `
             <div class="suggested-questions">
                 ${this.config.suggestedQuestions.map(q =>
-            `<button class="suggested-question" onclick="chatbot.askQuestion(\`${q}\`)" style="color: #f59e0b; border-color: rgba(251, 191, 36, 0.2); background: #1a1a1a;">${q}</button>`
+            `<button class="suggested-question" onclick="chatbot.askQuestion(\`${q}\`)" style="color: ${accentColor}; border-color: ${this.hexToRgba(accentColor, 0.2)}; background: #1a1a1a;">${q}</button>`
         ).join('')}
             </div>
         `;
