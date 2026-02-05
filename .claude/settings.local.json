@@ -4,7 +4,16 @@
       "Bash(npm run build:*)",
       "Bash(echo:*)",
       "Bash(node node_modules/vite/bin/vite.js:*)",
-      "Bash(node ./node_modules/vite/bin/vite.js build:*)"
+      "Bash(node ./node_modules/vite/bin/vite.js build:*)",
+      "Bash(find:*)",
+      "Bash(git push)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(git commit:*)",
+      "Bash(git rm:*)",
+      "Bash(claude doctor:*)",
+      "Bash(git ls-tree:*)"
     ]
   }
 }
