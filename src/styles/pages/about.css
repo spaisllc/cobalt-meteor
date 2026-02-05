@@ -58,6 +58,9 @@ body[data-page="about"] {
     align-items: center;
     max-width: var(--container-max);
     margin: 0 auto;
+    /* Override scroll animation - make content always visible */
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 .section-container.reverse {
