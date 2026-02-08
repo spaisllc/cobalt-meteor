@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e6c44a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8960c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#131b2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="64" fill="url(#bgGrad)"/>
+  <!-- Subtle border -->
+  <rect x="8" y="8" width="496" height="496" rx="56" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.25"/>
+  <!-- Inner border -->
+  <rect x="20" y="20" width="472" height="472" rx="44" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.12"/>
+  <!-- S letterform — elegant serif style -->
+  <text x="256" y="370" 
+        font-family="Georgia, 'Times New Roman', serif" 
+        font-size="340" 
+        font-weight="700"
+        font-style="italic"
+        fill="url(#goldGrad)" 
+        text-anchor="middle"
+        letter-spacing="-10">S</text>
+  <!-- Small decorative line under S -->
+  <line x1="180" y1="410" x2="332" y2="410" stroke="url(#goldGrad)" stroke-width="2.5" opacity="0.5"/>
+</svg>
