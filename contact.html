@@ -1,280 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact Springs AI Solutions, LLC - Book a strategy call or send us a message about your AI needs.">
-    <meta property="og:title" content="Contact | Springs AI Solutions, LLC">
-    <meta property="og:description" content="Let's build your AI employee. Get in touch with Springs AI Solutions, LLC.">
-    <meta property="og:type" content="website">
-    <title>Contact | Springs AI Solutions, LLC</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="src/styles/reset.css">
-    <link rel="stylesheet" href="src/styles/variables.css">
-    <link rel="stylesheet" href="src/styles/typography.css">
-    <link rel="stylesheet" href="src/styles/animations.css">
-    <link rel="stylesheet" href="src/styles/components/navigation.css">
-    <link rel="stylesheet" href="src/styles/components/chat-widget.css">
-    <link rel="stylesheet" href="src/styles/components/cards.css">
-    <link rel="stylesheet" href="src/styles/components/buttons.css">
-    <link rel="stylesheet" href="src/styles/components/forms.css">
-    <link rel="stylesheet" href="src/styles/components/footer.css">
-    <link rel="stylesheet" href="src/styles/pages/contact.css">
-    <link rel="stylesheet" href="src/styles/responsive.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Springs AI Solutions</title>
+  <meta name="description" content="Book a consultation with Springs AI Solutions. Let's discuss how institutional AI can work for you.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-page="contact">
-    <!-- Background Canvas -->
-    <canvas id="background-canvas"></canvas>
+<body>
 
-    <!-- Navigation -->
-    <nav id="main-nav" class="nav">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <span class="logo-text">SPRINGS<span class="logo-dot">.</span>AI<span class="logo-dot">.</span>SOLUTIONS</span>
-            </a>
-            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger"></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About</a></li>
-                <li><a href="/services.html" class="nav-link">Services</a></li>
-                <li><a href="/contact.html" class="nav-link active">Contact</a></li>
-            </ul>
-            <button class="nav-cta" id="nav-chat-btn">Start Chat</button>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Page Hero -->
-        <section class="page-hero">
-            <div class="page-hero-content">
-                <h1 class="page-title">Let's Build Your<br><span class="highlight">AI Employee</span></h1>
-                <p class="page-subtitle">Book a strategy call or send us a message</p>
-            </div>
-        </section>
-
-        <!-- Contact Options Section -->
-        <section class="contact-section">
-            <div class="contact-container">
-
-                <!-- Option 1: Chat -->
-                <article class="contact-option chat-option">
-                    <div class="option-header">
-                        <span class="option-icon">&#128172;</span>
-                        <h2 class="option-title">Chat with S.P.A.I.S.</h2>
-                    </div>
-                    <p class="option-description">
-                        Get instant answers and schedule a call through our AI sales agent. Experience firsthand what we can build for you.
-                    </p>
-                    <button class="btn btn-primary option-cta" id="contact-chat-btn">
-                        <span class="btn-text">Start Chatting</span>
-                    </button>
-                    <span class="option-hint">Fastest way to get answers</span>
-                </article>
-
-                <!-- Option 2: Form -->
-                <article class="contact-option form-option">
-                    <div class="option-header">
-                        <span class="option-icon">&#9993;</span>
-                        <h2 class="option-title">Send a Message</h2>
-                    </div>
-                    <form class="contact-form" id="contact-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" id="name" name="name" class="form-input" required placeholder="Your name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" name="email" class="form-input" required placeholder="your@email.com">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="company" class="form-label">Company</label>
-                                <input type="text" id="company" name="company" class="form-input" placeholder="Your company">
-                            </div>
-                            <div class="form-group">
-                                <label for="size" class="form-label">Company Size</label>
-                                <select id="size" name="size" class="form-select">
-                                    <option value="">Select size</option>
-                                    <option value="1-10">1-10 employees</option>
-                                    <option value="11-50">11-50 employees</option>
-                                    <option value="51-200">51-200 employees</option>
-                                    <option value="201-1000">201-1000 employees</option>
-                                    <option value="1000+">1000+ employees</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Tell us about your needs..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary form-submit">
-                            <span class="btn-text">Send Message</span>
-                        </button>
-                    </form>
-                    <div class="form-success" id="form-success" style="display: none;">
-                        <span class="success-icon">&#10003;</span>
-                        <p class="success-message">Message sent! We'll be in touch within 24 hours.</p>
-                    </div>
-                </article>
-
-                <!-- Option 3: Direct Contact -->
-                <article class="contact-option direct-option">
-                    <div class="option-header">
-                        <span class="option-icon">&#128222;</span>
-                        <h2 class="option-title">Direct Contact</h2>
-                    </div>
-                    <div class="direct-contacts">
-                        <a href="mailto:SpringsAISolutions@proton.me" class="direct-link">
-                            <span class="direct-icon">&#9993;</span>
-                            <span class="direct-text">SpringsAISolutions@proton.me</span>
-                        </a>
-                    </div>
-                    <div class="calendar-embed">
-                        <p class="calendar-label">Schedule a call:</p>
-                        <a href="#" class="btn btn-outline calendar-btn">
-                            <span class="btn-text">Book on Calendly</span>
-                        </a>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <div class="faq-container">
-                <h2 class="section-title centered">Frequently Asked Questions</h2>
-
-                <div class="faq-grid">
-                    <article class="faq-item">
-                        <h3 class="faq-question">How long does implementation take?</h3>
-                        <p class="faq-answer">Most AI agents are live within 2-4 weeks. Complex custom solutions may take longer depending on integrations and training requirements.</p>
-                    </article>
-
-                    <article class="faq-item">
-                        <h3 class="faq-question">What's the minimum commitment?</h3>
-                        <p class="faq-answer">We offer month-to-month contracts after an initial 3-month period. This gives us time to optimize your agent for best results.</p>
-                    </article>
-
-                    <article class="faq-item">
-                        <h3 class="faq-question">Do you offer a trial?</h3>
-                        <p class="faq-answer">We offer a pilot program where we build a limited version of your agent so you can test performance before committing to a full deployment.</p>
-                    </article>
-
-                    <article class="faq-item">
-                        <h3 class="faq-question">What AI models do you use?</h3>
-                        <p class="faq-answer">We use the latest models from OpenAI (GPT-4) and Anthropic (Claude) depending on your use case. We can also work with other providers if required.</p>
-                    </article>
-
-                    <article class="faq-item">
-                        <h3 class="faq-question">How do you handle data privacy?</h3>
-                        <p class="faq-answer">Data privacy is paramount. We're SOC 2 compliant and can sign BAAs. Your customer data is never used to train models without explicit consent.</p>
-                    </article>
-
-                    <article class="faq-item">
-                        <h3 class="faq-question">Can the AI integrate with my CRM?</h3>
-                        <p class="faq-answer">Yes! We integrate with Salesforce, HubSpot, Pipedrive, and most major CRMs. We can also build custom integrations via API or Zapier.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-container">
-                <h2 class="cta-title">Still have questions?</h2>
-                <p class="cta-subtitle">Our AI is available 24/7 to help</p>
-                <button class="btn btn-primary btn-large" id="cta-chat-btn">
-                    <span class="btn-text">Ask S.P.A.I.S.</span>
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <span class="footer-logo">SPRINGS<span class="logo-dot">.</span>AI<span class="logo-dot">.</span>SOLUTIONS</span>
-                <p class="footer-tagline">Building the future of digital employees</p>
-            </div>
-            <nav class="footer-nav">
-                <div class="footer-column">
-                    <h4 class="footer-heading">Navigation</h4>
-                    <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="/services.html">Services</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="footer-heading">Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="/services.html#sales-agents">AI Sales Agents</a></li>
-                        <li><a href="/services.html#chatbots">Smart Chatbots</a></li>
-                        <li><a href="/services.html#email">Email Assistants</a></li>
-                        <li><a href="/services.html#custom">Custom Solutions</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="footer-heading">Connect</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:SpringsAISolutions@proton.me">SpringsAISolutions@proton.me</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="footer-bottom">
-                <p class="footer-copyright">&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Chat Widget (Floating) -->
-    <div id="chat-widget" class="chat-widget">
-        <button class="chat-widget-toggle" id="chat-toggle" aria-label="Open chat">
-            <span class="chat-icon">&#128172;</span>
-            <span class="chat-close-icon">&#10005;</span>
-        </button>
-        <div class="chat-widget-panel" id="chat-panel">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <span class="chat-status"></span>
-                    <span class="chat-title">S.P.A.I.S.</span>
-                </div>
-                <button class="chat-fullscreen-btn" id="chat-fullscreen" aria-label="Toggle fullscreen">
-                    &#x26F6;
-                </button>
-            </div>
-            <div class="chat-messages" id="chat-messages"></div>
-            <div class="chat-input-container">
-                <input
-                    type="text"
-                    id="chat-input"
-                    class="chat-input"
-                    placeholder="Type a message..."
-                    autocomplete="off"
-                    spellcheck="false"
-                >
-                <button class="chat-send-btn" id="chat-send" aria-label="Send message">
-                    &#10148;
-                </button>
-            </div>
-        </div>
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Springs <span>AI</span> Solutions</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <!-- Main Application -->
-    <script type="module" src="src/main.js"></script>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h4>Let's Connect</h4>
+      <h1>Start the Conversation.</h1>
+      <p>Every engagement begins with understanding. Book a time that works for you.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT CONTENT -->
+  <section>
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: Info -->
+        <div class="contact-info reveal">
+          <h2>How We Work</h2>
+          <p>We start every relationship with a discovery call — no sales pitch, no pressure. Just a focused conversation about your goals, your current operations, and where AI can create the most leverage.</p>
+          
+          <div class="contact-detail">
+            <h4>Location</h4>
+            <p>Colorado Springs, CO</p>
+          </div>
+
+          <div class="contact-detail">
+            <h4>Response Time</h4>
+            <p>Within 24 hours</p>
+          </div>
+
+          <div class="contact-detail">
+            <h4>Prefer to Talk Now?</h4>
+            <p>Use the AI voice agent on our <a href="index.html#demo">homepage</a> to get instant answers about our services.</p>
+          </div>
+        </div>
+
+        <!-- Right: Calendly Embed -->
+        <div class="calendly-wrapper reveal">
+          <div class="calendly-inline-widget" 
+               data-url="https://calendly.com/springsaisolutions" 
+               style="min-width:320px;height:630px;">
+          </div>
+          <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo">Springs <span>AI</span> Solutions</div>
+          <p>Institutional-grade AI for executive leadership and enterprise operations.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#legacy">Executive AI Twin</a></li>
+            <li><a href="services.html#scale">Voice AI</a></li>
+            <li><a href="services.html#consulting">AI Consulting</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
+        <p>Colorado Springs, CO</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

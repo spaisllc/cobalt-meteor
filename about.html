@@ -1,299 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About Springs AI Solutions, LLC - Learn about our mission to build AI-powered AI assistants for modern businesses.">
-    <meta property="og:title" content="About | Springs AI Solutions, LLC">
-    <meta property="og:description" content="The future of sales is autonomous. Learn about Springs AI Solutions, LLC.">
-    <meta property="og:type" content="website">
-    <title>About | Springs AI Solutions, LLC</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="src/styles/reset.css">
-    <link rel="stylesheet" href="src/styles/variables.css">
-    <link rel="stylesheet" href="src/styles/typography.css">
-    <link rel="stylesheet" href="src/styles/animations.css">
-    <link rel="stylesheet" href="src/styles/components/navigation.css">
-    <link rel="stylesheet" href="src/styles/components/chat-widget.css">
-    <link rel="stylesheet" href="src/styles/components/cards.css">
-    <link rel="stylesheet" href="src/styles/components/buttons.css">
-    <link rel="stylesheet" href="src/styles/components/footer.css">
-    <link rel="stylesheet" href="src/styles/pages/about.css">
-    <link rel="stylesheet" href="src/styles/responsive.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Springs AI Solutions</title>
+  <meta name="description" content="Meet Paotie Dawson, founder of Springs AI Solutions. From government transparency to institutional AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-page="about">
-    <!-- Background Canvas -->
-    <canvas id="background-canvas"></canvas>
+<body>
 
-    <!-- Navigation -->
-    <nav id="main-nav" class="nav">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <span class="logo-text">SPRINGS<span class="logo-dot">.</span>AI<span class="logo-dot">.</span>SOLUTIONS</span>
-            </a>
-            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger"></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link active">About</a></li>
-                <li><a href="/services.html" class="nav-link">Services</a></li>
-                <li><a href="/contact.html" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="nav-cta" id="nav-chat-btn">Start Chat</button>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Page Hero -->
-        <section class="page-hero">
-            <div class="page-hero-content">
-                <h1 class="page-title">About<br><span class="highlight">Springs AI Solutions, LLC</span></h1>
-                <p class="page-subtitle">Colorado Springs-based innovator building custom AI assistants</p>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="about-section mission-section">
-            <div class="section-container">
-                <div class="section-content">
-                    <h2 class="section-title">Who We Are</h2>
-                    <p class="section-text">
-                        Springs AI Solutions, LLC is a Colorado Springs-based innovator building custom AI assistants that work 24/7 to help businesses grow smarter and faster. We create intelligent tools—from premium AI-powered executive portfolios to automated chatbots and workflow solutions—that handle sales, support, and operations with precision and reliability.
-                    </p>
-                </div>
-                <div class="section-visual">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-dot"></span>
-                            <span class="code-dot"></span>
-                            <span class="code-dot"></span>
-                        </div>
-                        <pre class="code-content"><code>// Springs AI Solutions
-const springsAI = {
-  location: "Colorado Springs",
-  mission: "AI that works 24/7",
-  focus: "grow smarter & faster",
-  status: "always online"
-};</code></pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Story Section -->
-        <section class="about-section story-section">
-            <div class="section-container reverse">
-                <div class="section-content">
-                    <h2 class="section-title">Our Journey</h2>
-                    <p class="section-text">
-                        Our journey started with genuine curiosity about AI's potential to solve everyday challenges. What began as hands-on experimentation and problem-solving quickly grew into a focused mission: turning technical exploration into practical, always-on AI that delivers real results.
-                    </p>
-                    <p class="section-text">
-                        Through persistence, iteration, and close collaboration, we've developed solutions that integrate seamlessly, save time, and unlock new opportunities.
-                    </p>
-                </div>
-                <div class="section-visual">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <span class="timeline-marker"></span>
-                            <div class="timeline-content">
-                                <span class="timeline-date">Curiosity</span>
-                                <p>Hands-on experimentation with AI potential</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="timeline-marker"></span>
-                            <div class="timeline-content">
-                                <span class="timeline-date">Mission</span>
-                                <p>Turning exploration into practical solutions</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item active">
-                            <span class="timeline-marker"></span>
-                            <div class="timeline-content">
-                                <span class="timeline-date">Today</span>
-                                <p>Always-on AI that delivers real results</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Impact Section -->
-        <section class="about-section impact-section">
-            <div class="section-container">
-                <div class="section-content">
-                    <h2 class="section-title">What We Do</h2>
-                    <p class="section-text">
-                        Today, we partner with forward-thinking leaders and companies to harness AI for measurable impact—whether boosting leads, accelerating responses, or streamlining processes.
-                    </p>
-                    <p class="section-text">
-                        At Springs AI Solutions, we don't just build tools; we build the future of how businesses work.
-                    </p>
-                    <p class="section-text highlight-text">
-                        <strong>Ready to see what AI can do for you? Let's talk.</strong>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Beliefs Section -->
-        <section class="about-section beliefs-section">
-            <div class="section-container">
-                <h2 class="section-title centered">What We Believe</h2>
-                <div class="beliefs-grid">
-                    <article class="belief-card">
-                        <div class="belief-number">01</div>
-                        <h3 class="belief-title">AI Should Augment, Not Replace</h3>
-                        <p class="belief-text">Our AI employees handle the repetitive work so your human team can focus on what matters: building relationships and closing deals.</p>
-                    </article>
-                    <article class="belief-card">
-                        <div class="belief-number">02</div>
-                        <h3 class="belief-title">Conversations Convert Better Than Forms</h3>
-                        <p class="belief-text">A dialogue is worth a thousand form fields. People want to talk, not fill out paperwork. We build for that reality.</p>
-                    </article>
-                    <article class="belief-card">
-                        <div class="belief-number">03</div>
-                        <h3 class="belief-title">Every Business Deserves Enterprise AI</h3>
-                        <p class="belief-text">Fortune 500 AI capabilities shouldn't be reserved for Fortune 500 budgets. We make powerful AI accessible.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Technology Section -->
-        <section class="about-section tech-section">
-            <div class="section-container">
-                <div class="section-content">
-                    <h2 class="section-title">Our Technology</h2>
-                    <p class="section-text">
-                        We build on the latest advances in large language models and conversational AI. Our agents understand context, remember history, and adapt their approach based on who they're talking to.
-                    </p>
-                    <ul class="tech-list">
-                        <li class="tech-item">
-                            <span class="tech-icon">&#9889;</span>
-                            <span class="tech-text">Powered by GPT-4 and Claude</span>
-                        </li>
-                        <li class="tech-item">
-                            <span class="tech-icon">&#128274;</span>
-                            <span class="tech-text">Privacy-first architecture</span>
-                        </li>
-                        <li class="tech-item">
-                            <span class="tech-icon">&#128200;</span>
-                            <span class="tech-text">Continuous learning & optimization</span>
-                        </li>
-                        <li class="tech-item">
-                            <span class="tech-icon">&#128279;</span>
-                            <span class="tech-text">Seamless CRM integration</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="section-visual">
-                    <div class="tech-visual">
-                        <div class="tech-node central">AI</div>
-                        <div class="tech-node orbit n1">NLP</div>
-                        <div class="tech-node orbit n2">ML</div>
-                        <div class="tech-node orbit n3">API</div>
-                        <div class="tech-node orbit n4">CRM</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-container">
-                <h2 class="cta-title">Ready to meet your AI employee?</h2>
-                <p class="cta-subtitle">Start a conversation and experience the future</p>
-                <button class="btn btn-primary btn-large" id="cta-chat-btn">
-                    <span class="btn-text">Talk to S.P.A.I.S.</span>
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <span class="footer-logo">SPRINGS<span class="logo-dot">.</span>AI<span class="logo-dot">.</span>SOLUTIONS</span>
-                <p class="footer-tagline">Building the future of AI assistants</p>
-            </div>
-            <nav class="footer-nav">
-                <div class="footer-column">
-                    <h4 class="footer-heading">Navigation</h4>
-                    <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="/services.html">Services</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="footer-heading">Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="/services.html#sales-agents">AI Sales Agents</a></li>
-                        <li><a href="/services.html#chatbots">Smart Chatbots</a></li>
-                        <li><a href="/services.html#email">Email Assistants</a></li>
-                        <li><a href="/services.html#custom">Custom Solutions</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="footer-heading">Connect</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:SpringsAISolutions@proton.me">SpringsAISolutions@proton.me</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="footer-bottom">
-                <p class="footer-copyright">&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Chat Widget (Floating) -->
-    <div id="chat-widget" class="chat-widget">
-        <button class="chat-widget-toggle" id="chat-toggle" aria-label="Open chat">
-            <span class="chat-icon">&#128172;</span>
-            <span class="chat-close-icon">&#10005;</span>
-        </button>
-        <div class="chat-widget-panel" id="chat-panel">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <span class="chat-status"></span>
-                    <span class="chat-title">S.P.A.I.S.</span>
-                </div>
-                <button class="chat-fullscreen-btn" id="chat-fullscreen" aria-label="Toggle fullscreen">
-                    &#x26F6;
-                </button>
-            </div>
-            <div class="chat-messages" id="chat-messages"></div>
-            <div class="chat-input-container">
-                <input
-                    type="text"
-                    id="chat-input"
-                    class="chat-input"
-                    placeholder="Type a message..."
-                    autocomplete="off"
-                    spellcheck="false"
-                >
-                <button class="chat-send-btn" id="chat-send" aria-label="Send message">
-                    &#10148;
-                </button>
-            </div>
-        </div>
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Springs <span>AI</span> Solutions</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <!-- Main Application -->
-    <script type="module" src="src/main.js"></script>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h4>The Principal</h4>
+      <h1>Powered by Paotie.</h1>
+      <p>The person behind the platform — and why this work matters.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT MAIN -->
+  <section>
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrapper reveal">
+          <img src="images/paotie-headshot.jpg" alt="Paotie Dawson — Founder, Springs AI Solutions" class="about-image">
+        </div>
+        <div class="about-content reveal">
+          <h4>Origin</h4>
+          <h2>From Watchdog to Architect.</h2>
+          <p>Springs AI Solutions was founded by Paotie Dawson to solve a problem that most people don't realize they have: critical information is locked behind systems that were never designed to be understood.</p>
+          <p>What started as a government transparency initiative — making city and municipal records accessible through AI — revealed a much larger opportunity. If AI could make public data accessible to citizens, it could make private expertise accessible to organizations.</p>
+          <p>That insight became the foundation of everything we build: AI systems that institutionalize human intelligence, making it searchable, conversational, and available around the clock.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="proof-section">
+    <div class="container">
+      <div class="reveal">
+        <h4>Philosophy</h4>
+        <h2>We don't replace leaders.<br>We <em>compound</em> them.</h2>
+        <p>Every executive has decades of pattern recognition, institutional knowledge, and hard-won judgment. That expertise shouldn't retire when they do. We build systems that preserve it, scale it, and put it to work — so the next generation of leadership starts from a higher floor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section>
+    <div class="container">
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <span class="service-icon">🔒</span>
+          <h3>Discretion First</h3>
+          <p>Executive information requires executive-level security. Every system we build is private by default, encrypted in transit and at rest, and accessible only to those you authorize.</p>
+        </div>
+        <div class="service-card reveal">
+          <span class="service-icon">🎯</span>
+          <h3>Outcome-Driven</h3>
+          <p>We don't sell technology for technology's sake. Every engagement starts with a business outcome — revenue protected, time recovered, knowledge preserved — and works backward from there.</p>
+        </div>
+        <div class="service-card reveal">
+          <span class="service-icon">🤝</span>
+          <h3>Long-Term Alignment</h3>
+          <p>We build relationships, not projects. Our retainer model means we're invested in your success over years, not weeks. When your needs evolve, your AI evolves with you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="container" style="text-align: center;">
+      <div class="reveal">
+        <h2>Ready to talk?</h2>
+        <p style="margin: 0 auto var(--space-md);">No pitch decks. No pressure. Just a conversation about what's possible.</p>
+        <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo">Springs <span>AI</span> Solutions</div>
+          <p>Institutional-grade AI for executive leadership and enterprise operations.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#legacy">Executive AI Twin</a></li>
+            <li><a href="services.html#scale">Voice AI</a></li>
+            <li><a href="services.html#consulting">AI Consulting</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
+        <p>Colorado Springs, CO</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

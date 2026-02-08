@@ -1,346 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Springs AI Solutions - Executive AI Portfolios and Custom AI Solutions for modern businesses.">
-    <meta property="og:title" content="Services | Springs AI Solutions, LLC">
-    <meta property="og:description"
-        content="Premium AI portfolios for executives and custom AI solutions for businesses.">
-    <meta property="og:type" content="website">
-    <title>Services | Springs AI Solutions, LLC</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-        rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="src/styles/reset.css">
-    <link rel="stylesheet" href="src/styles/variables.css">
-    <link rel="stylesheet" href="src/styles/typography.css">
-    <link rel="stylesheet" href="src/styles/animations.css">
-    <link rel="stylesheet" href="src/styles/components/navigation.css">
-    <link rel="stylesheet" href="src/styles/components/chat-widget.css">
-    <link rel="stylesheet" href="src/styles/components/cards.css">
-    <link rel="stylesheet" href="src/styles/components/buttons.css">
-    <link rel="stylesheet" href="src/styles/components/footer.css">
-    <link rel="stylesheet" href="src/styles/pages/services.css">
-    <link rel="stylesheet" href="src/styles/responsive.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Springs AI Solutions</title>
+  <meta name="description" content="Executive AI Twins, Enterprise Voice AI, and strategic AI consulting from Springs AI Solutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body>
 
-<body data-page="services">
-    <!-- Background Canvas -->
-    <canvas id="background-canvas"></canvas>
-
-    <!-- Navigation -->
-    <nav id="main-nav" class="nav">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <span class="logo-text">SPRINGS<span class="logo-dot">.</span>AI<span
-                        class="logo-dot">.</span>SOLUTIONS</span>
-            </a>
-            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger"></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About</a></li>
-                <li><a href="/services.html" class="nav-link active">Services</a></li>
-                <li><a href="/contact.html" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="nav-cta" id="nav-chat-btn">Start Chat</button>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Page Hero -->
-        <section class="page-hero">
-            <div class="page-hero-content">
-                <h1 class="page-title">Two Core Services<br><span class="highlight">Built for Results</span></h1>
-                <p class="page-subtitle">Premium portfolios for executives. Custom AI for businesses.</p>
-            </div>
-        </section>
-
-        <!-- Services Grid -->
-        <section class="services-section">
-            <div class="services-container">
-
-                <!-- Service 1: Executive AI Portfolios -->
-                <article class="service-block" id="executive-portfolios">
-                    <div class="service-content">
-                        <div class="service-header">
-                            <span class="service-number">01</span>
-                            <h2 class="service-title">The Resume That Interviews <em>For</em> You</h2>
-                        </div>
-                        <p class="service-description">
-                            Your digital executive presence, powered by AI. Not just a website—your 24/7 virtual
-                            business card that works when you don't.
-                        </p>
-                        <ul class="service-features">
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">Premium portfolio website (yourname.com)</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">24/7 AI career assistant</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">Interactive impact charts & metrics</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">Professional branding & design</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">Board presentation materials</span>
-                            </li>
-                        </ul>
-                        <div class="service-usecases">
-                            <span class="usecases-label">Perfect for:</span>
-                            <span class="usecase-tag">C-Suite Executives</span>
-                            <span class="usecase-tag">VPs & Directors</span>
-                            <span class="usecase-tag">Board Members</span>
-                        </div>
-                        <div class="service-pricing">
-                            <span class="pricing-label">Starting at</span>
-                            <span class="pricing-amount">$1,500/month</span>
-                        </div>
-                        <a href="/portfolios.html" class="btn btn-primary service-cta" style="font-size: 1.1rem; padding: 18px 32px; margin-top: 10px;">
-                            <span class="btn-text">👉 See It In Action</span>
-                        </a>
-                    </div>
-                    <div class="service-visual">
-                        <div class="portfolio-preview">
-                            <div class="browser-mockup">
-                                <div class="browser-header">
-                                    <span class="browser-dot red"></span>
-                                    <span class="browser-dot yellow"></span>
-                                    <span class="browser-dot green"></span>
-                                    <span class="browser-url">your-executive-portfolio.com</span>
-                                </div>
-                                <div class="browser-content">
-                                    <div class="portfolio-hero">
-                                        <div class="portfolio-name" style="font-size: 2rem; margin-bottom: 1rem;">YOUR NAME HERE</div>
-                                        <div class="portfolio-title" style="font-size: 1.3rem; margin-bottom: 1.5rem;">Your Executive Title</div>
-                                        <div class="portfolio-metrics">
-                                            <div class="metric-item">Your Impact Metrics</div>
-                                            <div class="metric-item">Your Achievements</div>
-                                        </div>
-                                        <div class="portfolio-ai-button" style="margin-top: 1.5rem;">💬 AI Assistant Ready</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Service 2: Custom AI Solutions -->
-                <article class="service-block reverse" id="custom-ai">
-                    <div class="service-content">
-                        <div class="service-header">
-                            <span class="service-number">02</span>
-                            <h2 class="service-title">Custom AI Solutions</h2>
-                        </div>
-                        <p class="service-description">
-                            AI tools tailored to your business. From chatbots to automation, we build AI employees that
-                            integrate seamlessly with your existing workflows.
-                        </p>
-                        <ul class="service-features">
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">Custom AI chatbots for your website</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">Lead qualification & sales automation</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">Customer support assistants</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">CRM & tool integrations</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">&#10003;</span>
-                                <span class="feature-text">Custom workflows & automation</span>
-                            </li>
-                        </ul>
-                        <div class="service-usecases">
-                            <span class="usecases-label">Perfect for:</span>
-                            <span class="usecase-tag">SaaS Companies</span>
-                            <span class="usecase-tag">E-commerce</span>
-                            <span class="usecase-tag">Professional Services</span>
-                        </div>
-                        <div class="service-pricing">
-                            <span class="pricing-label">Starting at</span>
-                            <span class="pricing-amount">$2,500/month</span>
-                        </div>
-                        <button class="btn btn-primary service-cta" data-service="custom">
-                            <span class="btn-text">Schedule Consultation</span>
-                        </button>
-                    </div>
-                    <div class="service-visual">
-                        <div class="chatbot-preview">
-                            <div class="chat-mockup">
-                                <div class="chat-mockup-header">
-                                    <span class="chat-status-dot"></span>
-                                    <span class="chat-mockup-title">Your AI Assistant</span>
-                                </div>
-                                <div class="chat-mockup-content">
-                                    <div class="chat-message ai">
-                                        <div class="message-bubble">Hi! I'm here to help. What can I do for you?</div>
-                                    </div>
-                                    <div class="chat-message user">
-                                        <div class="message-bubble">I need pricing information</div>
-                                    </div>
-                                    <div class="chat-message ai">
-                                        <div class="message-bubble">I can help with that! Let me get you the details...
-                                        </div>
-                                    </div>
-                                    <div class="chat-typing">
-                                        <span class="typing-dot"></span>
-                                        <span class="typing-dot"></span>
-                                        <span class="typing-dot"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- Comparison Section -->
-        <section class="comparison-section">
-            <div class="comparison-container">
-                <h2 class="section-title centered">Which Service Is Right For You?</h2>
-                <div class="comparison-grid">
-                    <div class="comparison-card">
-                        <h3 class="comparison-title">The Resume That Interviews <em>For</em> You</h3>
-                        <div class="comparison-ideal">Ideal for:</div>
-                        <ul class="comparison-list">
-                            <li>C-suite executives in transition</li>
-                            <li>Board member candidates</li>
-                            <li>Executives building thought leadership</li>
-                            <li>Senior leaders seeking advisory roles</li>
-                        </ul>
-                        <div class="comparison-outcome">
-                            <strong>Outcome:</strong> Professional digital presence that opens doors 24/7
-                        </div>
-                    </div>
-                    <div class="comparison-card">
-                        <h3 class="comparison-title">Custom AI Solutions</h3>
-                        <div class="comparison-ideal">Ideal for:</div>
-                        <ul class="comparison-list">
-                            <li>Businesses wanting to automate support</li>
-                            <li>Companies with high lead volume</li>
-                            <li>Organizations needing custom AI tools</li>
-                            <li>Teams wanting to scale without headcount</li>
-                        </ul>
-                        <div class="comparison-outcome">
-                            <strong>Outcome:</strong> AI employees that work 24/7, no PTO required
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-container">
-                <h2 class="cta-title">Ready to get started?</h2>
-                <p class="cta-subtitle">Talk to our AI agent or schedule a consultation</p>
-                <div class="cta-buttons">
-                    <button class="btn btn-primary btn-large" id="cta-chat-btn">
-                        <span class="btn-text">Talk to S.P.A.I.S.</span>
-                    </button>
-                    <a href="/contact.html" class="btn btn-outline btn-large">
-                        <span class="btn-text">Schedule Call</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <span class="footer-logo">SPRINGS<span class="logo-dot">.</span>AI<span
-                        class="logo-dot">.</span>SOLUTIONS</span>
-                <p class="footer-tagline">Building the future of AI assistants</p>
-            </div>
-            <nav class="footer-nav">
-                <div class="footer-column">
-                    <h4 class="footer-heading">Navigation</h4>
-                    <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="/services.html">Services</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="footer-heading">Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="/services.html#executive-portfolios">Executive AI Portfolios</a></li>
-                        <li><a href="/services.html#custom-ai">Custom AI Solutions</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="footer-heading">Connect</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:SpringsAISolutions@proton.me">SpringsAISolutions@proton.me</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="footer-bottom">
-                <p class="footer-copyright">&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Chat Widget (Floating) -->
-    <div id="chat-widget" class="chat-widget">
-        <button class="chat-widget-toggle" id="chat-toggle" aria-label="Open chat">
-            <span class="chat-icon">&#128172;</span>
-            <span class="chat-close-icon">&#10005;</span>
-        </button>
-        <div class="chat-widget-panel" id="chat-panel">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <span class="chat-status"></span>
-                    <span class="chat-title">S.P.A.I.S.</span>
-                </div>
-                <button class="chat-fullscreen-btn" id="chat-fullscreen" aria-label="Toggle fullscreen">
-                    &#x26F6;
-                </button>
-            </div>
-            <div class="chat-messages" id="chat-messages"></div>
-            <div class="chat-input-container">
-                <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." autocomplete="off"
-                    spellcheck="false">
-                <button class="chat-send-btn" id="chat-send" aria-label="Send message">
-                    &#10148;
-                </button>
-            </div>
-        </div>
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Springs <span>AI</span> Solutions</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <!-- Main Application -->
-    <script type="module" src="src/main.js"></script>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h4>What We Build</h4>
+      <h1>Services</h1>
+      <p>Three pillars of institutional AI — each designed to compound your competitive advantage.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section id="legacy">
+    <div class="container">
+      <div class="services-grid">
+
+        <!-- Executive AI Twin -->
+        <div class="service-card reveal">
+          <span class="service-icon">🧠</span>
+          <h3>Executive AI Twin</h3>
+          <p>Your expertise, distilled into an AI that thinks like you, speaks like you, and works while you don't.</p>
+          <ul>
+            <li>Full knowledge base ingestion (career, decisions, frameworks)</li>
+            <li>Conversational AI trained on your voice and reasoning</li>
+            <li>24/7 availability for board prep, investor Q&A, team training</li>
+            <li>Continuous learning from new inputs</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline">Build My Legacy</a>
+        </div>
+
+        <!-- Voice AI -->
+        <div class="service-card reveal" id="scale">
+          <span class="service-icon">📞</span>
+          <h3>Enterprise Voice AI</h3>
+          <p>A voice agent that handles your front desk, qualifies leads, and books revenue — around the clock.</p>
+          <ul>
+            <li>Human-level phone conversations</li>
+            <li>Appointment scheduling and CRM integration</li>
+            <li>Lead qualification and routing</li>
+            <li>Custom voice personality and scripts</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline">Scale My Operations</a>
+        </div>
+
+        <!-- AI Consulting -->
+        <div class="service-card reveal" id="consulting">
+          <span class="service-icon">⚙️</span>
+          <h3>AI Strategy Consulting</h3>
+          <p>Not sure where AI fits? We audit your operations, identify high-leverage automation points, and build the roadmap.</p>
+          <ul>
+            <li>Operations audit and AI readiness assessment</li>
+            <li>Custom implementation roadmap</li>
+            <li>Vendor selection and integration guidance</li>
+            <li>Ongoing advisory retainer</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline">Start the Conversation</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="proof-section">
+    <div class="container reveal">
+      <h4>Ready?</h4>
+      <h2>Let's build something <em>institutional.</em></h2>
+      <p>Every engagement starts with a conversation. No pitch decks. No pressure. Just clarity.</p>
+      <div style="margin-top: 2rem;">
+        <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo">Springs <span>AI</span> Solutions</div>
+          <p>Institutional-grade AI for executive leadership and enterprise operations.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#legacy">Executive AI Twin</a></li>
+            <li><a href="services.html#scale">Voice AI</a></li>
+            <li><a href="services.html#consulting">AI Consulting</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
+        <p>Colorado Springs, CO</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
-
 </html>

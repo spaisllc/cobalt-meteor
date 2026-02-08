@@ -1,218 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Springs AI Solutions, LLC - AI-powered digital employees that sell, support, and scale your business 24/7.">
-    <meta property="og:title" content="Springs AI Solutions, LLC - We Build AI Assistants">
-    <meta property="og:description"
-        content="AI agents that qualify leads, answer questions 24/7, and close deals while you sleep.">
-    <meta property="og:type" content="website">
-    <title>Springs AI Solutions, LLC | AI-Powered AI Assistants</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-        rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="src/styles/reset.css">
-    <link rel="stylesheet" href="src/styles/variables.css">
-    <link rel="stylesheet" href="src/styles/typography.css">
-    <link rel="stylesheet" href="src/styles/animations.css">
-    <link rel="stylesheet" href="src/styles/components/navigation.css">
-    <link rel="stylesheet" href="src/styles/components/chat-widget.css">
-    <link rel="stylesheet" href="src/styles/components/cards.css">
-    <link rel="stylesheet" href="src/styles/components/buttons.css">
-    <link rel="stylesheet" href="src/styles/components/footer.css">
-    <link rel="stylesheet" href="src/styles/pages/home.css">
-    <link rel="stylesheet" href="src/styles/components/boot-sequence.css">
-    <link rel="stylesheet" href="src/styles/responsive.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Springs AI Solutions — Intelligence, Institutionalized.</title>
+  <meta name="description" content="Springs AI Solutions digitizes executive decision-making for the next generation of leadership. AI Twins, Voice AI, and enterprise automation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body>
 
-<body data-page="home">
-    <!-- Background Canvas -->
-    <canvas id="background-canvas"></canvas>
-
-    <!-- Navigation -->
-    <nav id="main-nav" class="nav">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <span class="logo-text">SPRINGS<span class="logo-dot">.</span>AI<span
-                        class="logo-dot">.</span>SOLUTIONS</span>
-            </a>
-            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger"></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="/" class="nav-link active">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About</a></li>
-                <li><a href="/services.html" class="nav-link">Services</a></li>
-                <li><a href="/contact.html" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="nav-cta" id="nav-chat-btn">Start Chat</button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="title-line">We Build</span>
-                    <span class="title-line highlight">AI Assistants</span>
-                </h1>
-                <p class="hero-subtitle">
-                    AI agents that sell, support, and scale your business 24/7
-                </p>
-                <div class="hero-cta">
-                    <button class="btn btn-primary" id="hero-chat-btn">
-                        <span class="btn-text">Start a Conversation</span>
-                        <span class="btn-icon">&#8250;</span>
-                    </button>
-                    <a href="/services.html" class="btn btn-secondary">
-                        <span class="btn-text">See How It Works</span>
-                    </a>
-                </div>
-                <p class="hero-hint" style="font-size: 1.1rem; font-weight: 600; color: var(--accent-primary);">
-                    <span class="hint-icon">&#128172;</span>
-                    💬 Chat widget ready below - Click to start!
-                </p>
-            </div>
-        </section>
-
-        <!-- Social Proof Section -->
-        <section class="proof-section">
-            <div class="proof-container">
-                <h2 class="proof-title">Why Forward-Thinking Leaders Choose Springs AI Solutions</h2>
-                <div class="proof-metrics">
-                    <div class="metric">
-                        <span class="metric-value">50%</span>
-                        <span class="metric-label">Lead Increase</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-value">24/7</span>
-                        <span class="metric-label">Availability</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-value">3x</span>
-                        <span class="metric-label">Faster Response</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Preview Section -->
-        <section class="services-preview">
-            <div class="services-container">
-                <h2 class="section-title">Our Services</h2>
-                <div class="services-grid">
-                    <article class="service-card">
-                        <div class="card-icon">&#128188;</div>
-                        <h3 class="card-title">The Resume That Interviews <em>For</em> You</h3>
-                        <p class="card-description">Premium AI-powered portfolios for C-suite executives. Your digital
-                            presence that works 24/7 to open doors.</p>
-                        <a href="/services.html#executive-portfolios" class="card-link">Learn more &#8250;</a>
-                    </article>
-                    <article class="service-card">
-                        <div class="card-icon">&#129302;</div>
-                        <h3 class="card-title">Custom AI Solutions</h3>
-                        <p class="card-description">AI chatbots, automation, and custom tools built for your business
-                            workflows. Integrates with your existing systems.</p>
-                        <a href="/services.html#custom-ai" class="card-link">Learn more &#8250;</a>
-                    </article>
-                </div>
-                <div class="services-cta">
-                    <a href="/services.html" class="btn btn-outline">View All Services</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-container">
-                <h2 class="cta-title">Ready to hire your first AI employee?</h2>
-                <p class="cta-subtitle">Start a conversation and see the difference</p>
-                <button class="btn btn-primary btn-large" id="cta-chat-btn">
-                    <span class="btn-text">Talk to S.P.A.I.S.</span>
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <span class="footer-logo">SPRINGS<span class="logo-dot">.</span>AI<span
-                        class="logo-dot">.</span>SOLUTIONS</span>
-                <p class="footer-tagline">Building the future of AI assistants</p>
-            </div>
-            <nav class="footer-nav">
-                <div class="footer-column">
-                    <h4 class="footer-heading">Navigation</h4>
-                    <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="/services.html">Services</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="footer-heading">Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="/services.html#sales-agents">AI Sales Agents</a></li>
-                        <li><a href="/services.html#chatbots">Smart Chatbots</a></li>
-                        <li><a href="/services.html#email">Email Assistants</a></li>
-                        <li><a href="/services.html#custom">Custom Solutions</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4 class="footer-heading">Connect</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:SpringsAISolutions@proton.me">SpringsAISolutions@proton.me</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="footer-bottom">
-                <p class="footer-copyright">&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Chat Widget (Floating) -->
-    <div id="chat-widget" class="chat-widget">
-        <button class="chat-widget-toggle" id="chat-toggle" aria-label="Open chat">
-            <span class="chat-icon">&#128172;</span>
-            <span class="chat-close-icon">&#10005;</span>
-        </button>
-        <div class="chat-widget-panel" id="chat-panel">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <span class="chat-status"></span>
-                    <span class="chat-title">S.P.A.I.S.</span>
-                </div>
-                <button class="chat-fullscreen-btn" id="chat-fullscreen" aria-label="Toggle fullscreen">
-                    &#x26F6;
-                </button>
-            </div>
-            <div class="chat-messages" id="chat-messages"></div>
-            <div class="chat-input-container">
-                <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." autocomplete="off"
-                    spellcheck="false">
-                <button class="chat-send-btn" id="chat-send" aria-label="Send message">
-                    &#10148;
-                </button>
-            </div>
-        </div>
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Springs <span>AI</span> Solutions</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <!-- Main Application -->
-    <script type="module" src="src/main.js"></script>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">The Digital Family Office</span>
+      <h1>Intelligence,<br><em>Institutionalized.</em></h1>
+      <p>Springs AI Solutions digitizes executive decision-making for the next generation of leadership.</p>
+      <div class="hero-ctas">
+        <a href="#demo" class="btn btn-primary">Audition Your AI</a>
+        <a href="services.html" class="btn btn-outline">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE SPLIT -->
+  <section>
+    <div class="split-grid">
+      <div class="split-card reveal">
+        <h4>The Legacy</h4>
+        <h3>For the Executive.</h3>
+        <p>Your career, searchable. Your wisdom, cloned. An AI Twin that answers board questions while you sleep.</p>
+        <a href="services.html#legacy" class="btn btn-outline">Build My Legacy</a>
+      </div>
+      <div class="split-card reveal">
+        <h4>The Scale</h4>
+        <h3>For the Enterprise.</h3>
+        <p>Never miss a lead. Automate your front desk with human-level voice AI that books revenue 24/7.</p>
+        <a href="services.html#scale" class="btn btn-outline">Scale My Operations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF / DEMO -->
+  <section class="proof-section" id="demo">
+    <div class="container">
+      <div class="reveal">
+        <h4>Experience</h4>
+        <h2>Don't Read. <em>Listen.</em></h2>
+        <p>Talk directly to our AI. Ask anything — about our services, our process, or what we can build for you.</p>
+      </div>
+      <div class="vapi-button-wrapper reveal">
+        <button class="vapi-btn" id="vapi-talk-btn" onclick="startVapiCall()">
+          <span class="pulse-dot"></span>
+          Talk to Springs AI Solutions
+        </button>
+        <span class="vapi-hint">Live voice conversation · Powered by AI</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT TEASER -->
+  <section>
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrapper reveal">
+          <img src="images/paotie-headshot.jpg" alt="Paotie Dawson — Founder, Springs AI Solutions" class="about-image">
+        </div>
+        <div class="about-content reveal">
+          <h4>The Principal</h4>
+          <h2>Powered by Paotie.</h2>
+          <p>Founded by Paotie Dawson to solve complex data accessibility challenges. Now scaling that expertise to amplify executive leadership and enterprise operations.</p>
+          <p>From government transparency advocate to architect of institutional AI — the mission has always been the same: make critical information accessible to the people who need it.</p>
+          <a href="about.html" class="btn btn-ghost">Read the full story <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo">Springs <span>AI</span> Solutions</div>
+          <p>Institutional-grade AI for executive leadership and enterprise operations.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#legacy">Executive AI Twin</a></li>
+            <li><a href="services.html#scale">Voice AI</a></li>
+            <li><a href="services.html#consulting">AI Consulting</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
+        <p>Colorado Springs, CO</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag/dist/assets/index.js"></script>
+  <script>
+    var vapiInstance = window.vapiSDK.run({
+      apiKey: "b8ecbe63-284a-4c3b-9779-cbbd55602e2a",
+      assistant: "ce3d0466-1272-4cd8-ae99-d997b5fb90ee"
+    });
+
+    function startVapiCall() {
+      vapiInstance.start();
+    }
+  </script>
+  <script src="js/main.js"></script>
 </body>
-
 </html>
