@@ -902,3 +902,168 @@ body>* {
     grid-template-columns: 1fr;
   }
 }
+/* --- Visual Voice Overlay --- */
+#visual-voice-overlay {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 350px;
+  max-width: 90vw;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 0;
+  z-index: 2000;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: opacity 0.3s, transform 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+#visual-voice-overlay.visual-voice-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.voice-status-bar {
+  background: rgba(212, 175, 55, 0.1);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+#visual-voice-overlay[data-state='active'] .status-dot { background: var(--gold); box-shadow: 0 0 5px var(--gold); }
+#visual-voice-overlay[data-state='listening'] .status-dot { background: #10b981; animation: pulse 1s infinite; }
+#visual-voice-overlay[data-state='thinking'] .status-dot { background: #3b82f6; animation: pulse 0.5s infinite; }
+#visual-voice-overlay[data-state='speaking'] .status-dot { background: var(--gold); animation: pulse 0.2s infinite; }
+
+#voice-text-output {
+  padding: 1rem;
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.voice-controls {
+  padding: 0.5rem;
+  text-align: right;
+}
+
+.voice-controls button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.voice-controls button:hover {
+  color: var(--text-primary);
+}
+
+
+/* --- Welcome Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--gold);
+  padding: var(--space-lg);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  margin-bottom: var(--space-md);
+}
+
+.mode-selection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+}
+
+.mode-selection button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-align: left;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.btn-icon {
+  font-size: 1.5rem;
+}
+
+.btn-sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.8;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.modal-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: var(--space-md);
+}
+

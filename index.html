@@ -93,7 +93,7 @@
         <p>Talk directly to our AI. Ask anything — about our services, our process, or what we can build for you.</p>
       </div>
       <div class="vapi-button-wrapper reveal">
-        <button class="vapi-btn" id="vapi-talk-btn" onclick="startVapiCall()">
+        <button class="vapi-btn" id="vapi-talk-btn">
           <span class="pulse-dot"></span>
           Talk to Springs AI Solutions
         </button>
@@ -155,19 +155,48 @@
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
-  <script src="https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag/dist/assets/index.js"></script>
-  <script>
-    var vapiInstance = window.vapiSDK.run({
-      apiKey: "b8ecbe63-284a-4c3b-9779-cbbd55602e2a",
-      assistant: "ce3d0466-1272-4cd8-ae99-d997b5fb90ee"
-    });
+  <!-- WELCOME MODAL -->
+  <div id="welcome-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="nav-logo">Springs <span>AI</span> Solutions</div>
+      </div>
+      <h2>Select Interface Mode</h2>
+      <p>This website is equipped with an active AI Digital Employee.</p>
 
-    function startVapiCall() {
-      vapiInstance.start();
-    }
+      <div class="mode-selection">
+        <button id="mode-voice" class="btn btn-primary">
+          <span class="btn-icon">🎙️</span>
+          <div>
+            <strong>Voice Mode</strong>
+            <span class="btn-sub">Interactive Audio & Visual Captions</span>
+          </div>
+        </button>
+
+        <button id="mode-read" class="btn btn-outline">
+          <span class="btn-icon">👁️</span>
+          <div>
+            <strong>Read Mode</strong>
+            <span class="btn-sub">Standard Text Browsing</span>
+          </div>
+        </button>
+      </div>
+
+      <p class="modal-note"><em>Note: Voice Mode requires microphone access. All audio is captioned for
+          accessibility.</em></p>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Vapi Configuration
+    window.vapiConfig = {
+      publicKey: "e69d2468-67f6-4f38-ae1f-c0b43d436cd6",
+      assistantId: "ce3d0466-1272-4cd8-ae99-d997b5fb90ee"
+    };
   </script>
   <script src="js/main.js"></script>
+  <script type="module" src="js/visualVoice.js"></script>
 </body>
 
 </html>
