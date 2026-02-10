@@ -65,8 +65,8 @@ export class MockOpenAIService {
     constructor() {
         this.responses = {
             greeting: [
-                "Hello! I'm S.P.A.I.S. - Springs AI Sales. What brings you here today?",
-                "Hi there! I'm the AI sales agent for Springs AI. How can I help you explore our solutions?",
+                "Hello! I'm S.P.A.I.S. - Springs AI Solutions Sales. What brings you here today?",
+                "Hi there! I'm the AI sales agent for Springs AI Solutions. How can I help you explore our solutions?",
             ],
             services: [
                 "We offer four main solutions: AI Sales Agents (like me!), Smart Chatbots, Email Assistants, and Custom AI Solutions. Which interests you most?",
