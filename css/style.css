@@ -1326,3 +1326,52 @@ body>* {
   }
 }
 
+/* --- Homepage Price Tags --- */
+.price-tag {
+  display: block;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: var(--space-sm) 0;
+}
+
+/* --- Features Grid (Why Us) --- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: var(--space-lg);
+  text-align: center;
+  transition: all var(--transition);
+}
+
+.feature-item:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.feature-item h4 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.feature-item p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
