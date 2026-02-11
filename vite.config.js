@@ -13,10 +13,7 @@ export default defineConfig({
                 main: resolve(__dirname, 'index.html'),
                 about: resolve(__dirname, 'about.html'),
                 services: resolve(__dirname, 'services.html'),
-                contact: resolve(__dirname, 'contact.html'),
-                portfolio: resolve(__dirname, 'portfolio.html'),
-                // Client sites
-                'clients/paotie-dawson/index': resolve(__dirname, 'clients/paotie-dawson/index.html')
+                contact: resolve(__dirname, 'contact.html')
             }
         }
     },
