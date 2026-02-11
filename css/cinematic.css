@@ -1,0 +1,636 @@
+/* ============================================
+   CINEMATIC THEME - Paotie's Digital Estate
+   "The Writer. The Engineer. The Rogue."
+   ============================================ */
+
+/* --- Variables --- */
+:root {
+  --cinema-bg: #0a0a0c;
+  --cinema-surface: #111114;
+  --cinema-border: #1a1a1f;
+  --cinema-text: #e8e6e3;
+  --cinema-muted: #8a8880;
+  --cinema-accent: #c9a227;
+  --cinema-accent-dim: #8a7019;
+  --cinema-serif: 'Playfair Display', Georgia, serif;
+  --cinema-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --cinema-sans: 'Lato', -apple-system, sans-serif;
+}
+
+/* --- Base Overrides --- */
+body.cinematic {
+  background: var(--cinema-bg);
+  color: var(--cinema-text);
+  font-family: var(--cinema-sans);
+  overflow-x: hidden;
+}
+
+body.cinematic::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, transparent 0%, var(--cinema-bg) 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* --- Film Grain Overlay --- */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* --- Minimal Nav --- */
+.cinema-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  z-index: 100;
+  background: linear-gradient(to bottom, var(--cinema-bg) 0%, transparent 100%);
+}
+
+.cinema-nav-back {
+  font-family: var(--cinema-mono);
+  font-size: 0.85rem;
+  color: var(--cinema-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  letter-spacing: 0.05em;
+}
+
+.cinema-nav-back:hover {
+  color: var(--cinema-accent);
+}
+
+.arrow-back {
+  margin-right: 0.5rem;
+}
+
+/* --- Hero: Opening Credits --- */
+.cinema-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.cinema-hero-content {
+  max-width: 700px;
+  text-align: center;
+}
+
+.cinema-eyebrow {
+  font-family: var(--cinema-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cinema-muted);
+  margin-bottom: 2rem;
+}
+
+.cinema-title {
+  font-family: var(--cinema-serif);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.title-line {
+  display: block;
+}
+
+.title-line.accent {
+  color: var(--cinema-accent);
+  font-style: italic;
+}
+
+.cinema-subtitle {
+  font-size: 1.25rem;
+  color: var(--cinema-muted);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+
+.cinema-hero-image {
+  display: none; /* Hidden on mobile, shown on desktop */
+}
+
+.hero-portrait {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 2px;
+  filter: grayscale(100%) contrast(1.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 900px) {
+  .cinema-hero {
+    flex-direction: row;
+    gap: 6rem;
+    text-align: left;
+  }
+
+  .cinema-hero-content {
+    text-align: left;
+  }
+
+  .cinema-hero-image {
+    display: block;
+  }
+}
+
+/* --- Buttons --- */
+.btn-cinema {
+  display: inline-block;
+  font-family: var(--cinema-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  background: var(--cinema-accent);
+  color: var(--cinema-bg);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cinema:hover {
+  background: var(--cinema-text);
+  transform: translateY(-2px);
+}
+
+.btn-cinema-outline {
+  display: inline-block;
+  font-family: var(--cinema-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: var(--cinema-accent);
+  text-decoration: none;
+  border: 1px solid var(--cinema-accent);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cinema-outline:hover {
+  background: var(--cinema-accent);
+  color: var(--cinema-bg);
+}
+
+/* --- Sections --- */
+.cinema-section {
+  padding: 8rem 2rem;
+  position: relative;
+}
+
+.cinema-section.alt {
+  background: var(--cinema-surface);
+}
+
+.cinema-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.label-number {
+  font-family: var(--cinema-mono);
+  font-size: 0.75rem;
+  color: var(--cinema-accent);
+  letter-spacing: 0.1em;
+}
+
+.label-text {
+  font-family: var(--cinema-mono);
+  font-size: 0.75rem;
+  color: var(--cinema-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.cinema-heading {
+  font-family: var(--cinema-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.cinema-intro {
+  font-size: 1.1rem;
+  color: var(--cinema-muted);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+/* --- Movie Posters Grid --- */
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.movie-poster {
+  background: var(--cinema-surface);
+  border: 1px solid var(--cinema-border);
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.cinema-section:not(.alt) .movie-poster {
+  background: var(--cinema-bg);
+}
+
+.movie-poster:hover {
+  border-color: var(--cinema-accent);
+  transform: translateY(-4px);
+}
+
+.poster-image {
+  height: 180px;
+  background: linear-gradient(135deg, var(--cinema-border) 0%, var(--cinema-bg) 100%);
+  position: relative;
+}
+
+.poster-image.ethics {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.poster-image.satire {
+  background: linear-gradient(135deg, #2d132c 0%, #1a1a2e 100%);
+}
+
+.poster-image.local {
+  background: linear-gradient(135deg, #1e3a2f 0%, #1a1a2e 100%);
+}
+
+.poster-content {
+  padding: 1.5rem;
+}
+
+.poster-genre {
+  font-family: var(--cinema-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinema-accent);
+}
+
+.poster-title {
+  font-family: var(--cinema-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0.5rem 0;
+}
+
+.poster-tagline {
+  font-size: 0.9rem;
+  color: var(--cinema-muted);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.poster-year {
+  font-family: var(--cinema-mono);
+  font-size: 0.75rem;
+  color: var(--cinema-muted);
+}
+
+.cinema-cta-text {
+  font-family: var(--cinema-mono);
+  font-size: 0.9rem;
+  color: var(--cinema-accent);
+}
+
+.monospace {
+  opacity: 0.5;
+}
+
+/* --- Origin Story --- */
+.origin-story {
+  margin-bottom: 4rem;
+}
+
+.origin-quote {
+  font-family: var(--cinema-serif);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-style: italic;
+  color: var(--cinema-accent);
+  border-left: 3px solid var(--cinema-accent);
+  padding-left: 2rem;
+  margin: 0 0 2rem 0;
+}
+
+.origin-text {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--cinema-text);
+  margin-bottom: 1.5rem;
+  max-width: 700px;
+}
+
+/* --- Tech Stack --- */
+.tech-stack {
+  margin-bottom: 3rem;
+}
+
+.stack-title {
+  font-family: var(--cinema-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cinema-muted);
+  margin-bottom: 1.5rem;
+}
+
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.stack-item {
+  background: var(--cinema-bg);
+  border: 1px solid var(--cinema-border);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.stack-icon {
+  display: block;
+  font-family: var(--cinema-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinema-accent);
+  margin-bottom: 0.5rem;
+}
+
+.stack-tech {
+  font-size: 0.9rem;
+  color: var(--cinema-text);
+}
+
+/* --- Twin Section --- */
+.twin-section {
+  text-align: center;
+  background: linear-gradient(to bottom, var(--cinema-bg) 0%, var(--cinema-surface) 100%);
+}
+
+.twin-interface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.twin-avatar {
+  position: relative;
+}
+
+.avatar-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(100%) contrast(1.1);
+  border: 3px solid var(--cinema-accent);
+}
+
+.avatar-pulse {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  border: 1px solid var(--cinema-accent);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.twin-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--cinema-mono);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1.25rem 3rem;
+  background: var(--cinema-accent);
+  color: var(--cinema-bg);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.twin-button:hover {
+  background: var(--cinema-text);
+  transform: scale(1.02);
+}
+
+.twin-button .pulse-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--cinema-bg);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.twin-hint {
+  font-family: var(--cinema-mono);
+  font-size: 0.75rem;
+  color: var(--cinema-muted);
+  letter-spacing: 0.1em;
+}
+
+/* --- Credentials --- */
+.credentials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .credentials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.credential-block {
+  border-left: 2px solid var(--cinema-border);
+  padding-left: 1.5rem;
+}
+
+.credential-title {
+  font-family: var(--cinema-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cinema-accent);
+  margin-bottom: 1.5rem;
+}
+
+.credential-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.credential-list li {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--cinema-border);
+}
+
+.credential-list li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.credential-role {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cinema-text);
+  margin-bottom: 0.25rem;
+}
+
+.credential-org {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--cinema-muted);
+}
+
+.credential-date {
+  display: block;
+  font-family: var(--cinema-mono);
+  font-size: 0.75rem;
+  color: var(--cinema-accent-dim);
+  margin-top: 0.5rem;
+}
+
+.competency-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-family: var(--cinema-mono);
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: var(--cinema-surface);
+  border: 1px solid var(--cinema-border);
+  color: var(--cinema-muted);
+}
+
+body.cinematic .cinema-section:not(.alt) .tag {
+  background: var(--cinema-bg);
+}
+
+/* --- Credits / Footer --- */
+.credits {
+  text-align: center;
+  background: var(--cinema-bg);
+  border-top: 1px solid var(--cinema-border);
+}
+
+.credits-title {
+  font-family: var(--cinema-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--cinema-muted);
+  margin-bottom: 3rem;
+}
+
+.credits-name {
+  font-family: var(--cinema-serif);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.credits-location {
+  font-family: var(--cinema-mono);
+  font-size: 0.85rem;
+  color: var(--cinema-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+.credits-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.credits-link {
+  font-family: var(--cinema-mono);
+  font-size: 0.85rem;
+  color: var(--cinema-accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.credits-link:hover {
+  color: var(--cinema-text);
+}
+
+.credits-footer {
+  font-size: 0.85rem;
+  color: var(--cinema-muted);
+}
+
+.credits-footer a {
+  color: var(--cinema-accent);
+  text-decoration: none;
+}
+
+.credits-footer a:hover {
+  text-decoration: underline;
+}
