@@ -10,13 +10,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <title>Portfolio — Springs AI Solutions</title>
   <meta name="description"
-    content="See live examples of Springs AI Solutions voice agents in action. Personal Brand Agents, Business Greeters, and more.">
+    content="See our AI Voice Agents in action. Live examples of Personal Brand Agents, Talking Resumes, and Business Greeters.">
   <!-- Open Graph / Social Preview -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://springsaisolutions.com/portfolio.html">
   <meta property="og:title" content="Portfolio — Springs AI Solutions">
   <meta property="og:description"
-    content="See live examples of Springs AI Solutions voice agents in action.">
+    content="See our AI Voice Agents in action. Live examples of Personal Brand Agents, Talking Resumes, and Business Greeters.">
   <meta property="og:image" content="https://springsaisolutions.com/images/og-preview.png">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -52,56 +52,52 @@
   <section class="page-hero">
     <div class="container">
       <h4>Live Examples</h4>
-      <h1>Portfolio</h1>
-      <p>See our AI Voice Agents in action. Each project is a demonstration of what we build.</p>
+      <h1>See It In Action.</h1>
+      <p>Real AI Voice Agents built for real clients. Click to explore each site and talk to their digital twin.</p>
     </div>
   </section>
 
   <!-- PORTFOLIO GRID -->
   <section>
     <div class="container">
-      <div class="section-header reveal">
-        <h4>Featured Work</h4>
-        <h2>Client Showcases</h2>
-      </div>
+      <div class="portfolio-grid">
 
-      <div class="portfolio-grid reveal">
-
-        <!-- Example 1: Personal Brand Agent -->
-        <a href="paotie.html" class="portfolio-card featured">
+        <!-- Paotie Dawson -->
+        <a href="clients/paotie-dawson/" class="portfolio-card reveal">
           <div class="portfolio-image">
-            <img src="images/paotie-headshot.jpg" alt="Paotie Dawson - Personal Brand Agent">
-            <span class="portfolio-badge">Personal Brand Agent</span>
+            <div class="portfolio-badge">Personal Brand Agent</div>
           </div>
           <div class="portfolio-content">
             <h3>Paotie Dawson</h3>
-            <p class="portfolio-type">The Writer. The Engineer. The Rogue.</p>
-            <p class="portfolio-desc">A cinematic personal brand site with an AI twin that discusses politics, satire, and the code that runs the site.</p>
-            <span class="portfolio-link">View Project &rarr;</span>
+            <p class="portfolio-tagline">The Writer. The Engineer. The Rogue.</p>
+            <p class="portfolio-desc">A cinematic digital estate showcasing journalism, AI engineering, and a voice-enabled digital twin.</p>
+            <span class="portfolio-link">Visit Site <span class="arrow">&rarr;</span></span>
           </div>
         </a>
 
         <!-- Placeholder: Coming Soon -->
-        <div class="portfolio-card coming-soon">
-          <div class="portfolio-image placeholder">
-            <span class="coming-soon-label">Coming Soon</span>
+        <div class="portfolio-card portfolio-coming-soon reveal">
+          <div class="portfolio-image">
+            <div class="portfolio-badge">Talking Resume</div>
           </div>
           <div class="portfolio-content">
-            <h3>Business Greeter Demo</h3>
-            <p class="portfolio-type">Local Service Business</p>
-            <p class="portfolio-desc">A 24/7 AI receptionist that captures leads, answers FAQs, and books appointments.</p>
+            <h3>Your Name Here</h3>
+            <p class="portfolio-tagline">Your tagline goes here.</p>
+            <p class="portfolio-desc">Want to be featured? Get started with a Talking Resume or Personal Brand Agent.</p>
+            <span class="portfolio-link">Coming Soon</span>
           </div>
         </div>
 
         <!-- Placeholder: Coming Soon -->
-        <div class="portfolio-card coming-soon">
-          <div class="portfolio-image placeholder">
-            <span class="coming-soon-label">Coming Soon</span>
+        <div class="portfolio-card portfolio-coming-soon reveal">
+          <div class="portfolio-image">
+            <div class="portfolio-badge">Business Greeter</div>
           </div>
           <div class="portfolio-content">
-            <h3>Talking Resume Demo</h3>
-            <p class="portfolio-type">Job Seeker Portfolio</p>
-            <p class="portfolio-desc">An interactive resume that answers recruiter questions about experience and skills.</p>
+            <h3>Your Business Here</h3>
+            <p class="portfolio-tagline">24/7 AI receptionist.</p>
+            <p class="portfolio-desc">A smart greeter that answers FAQs and captures leads while you sleep.</p>
+            <span class="portfolio-link">Coming Soon</span>
           </div>
         </div>
 
@@ -109,14 +105,16 @@
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="proof-section">
-    <div class="container reveal">
-      <h4>Ready to Join Them?</h4>
-      <h2>Let's build your <em>AI Agent.</em></h2>
-      <p>Your project could be the next showcase. Let's talk about what we can build together.</p>
-      <div style="margin-top: 2rem;">
-        <a href="contact.html" class="btn btn-primary">Start Your Project</a>
+  <!-- CTA SECTION -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Want to be featured?</h2>
+        <p>Get your own AI Voice Agent and join our portfolio of live examples.</p>
+        <div class="cta-buttons">
+          <a href="services.html" class="btn btn-primary">View Services</a>
+          <a href="contact.html" class="btn btn-outline">Contact Us</a>
+        </div>
       </div>
     </div>
   </section>
@@ -156,7 +154,16 @@
     </div>
   </footer>
 
+  <!-- SCRIPTS -->
+  <script>
+    // Vapi Configuration
+    window.vapiConfig = {
+      publicKey: "e69d2468-67f6-4f38-ae1f-c0b43d436cd6",
+      assistantId: "ce3d0466-1272-4cd8-ae99-d997b5fb90ee"
+    };
+  </script>
   <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/visualVoice.js"></script>
 </body>
 
 </html>

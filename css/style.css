@@ -1480,3 +1480,47 @@ body>* {
   font-weight: 600;
 }
 
+.portfolio-tagline {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-coming-soon {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.portfolio-coming-soon .portfolio-image {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-primary) 100%);
+}
+
+/* CTA Box */
+.cta-box {
+  text-align: center;
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+}
+
+.cta-box h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.cta-box p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+

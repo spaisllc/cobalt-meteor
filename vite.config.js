@@ -14,7 +14,7 @@ export default defineConfig({
                 about: resolve(__dirname, 'about.html'),
                 services: resolve(__dirname, 'services.html'),
                 contact: resolve(__dirname, 'contact.html'),
-                portfolios: resolve(__dirname, 'portfolios.html'),
+                portfolio: resolve(__dirname, 'portfolio.html'),
                 // Client sites
                 'clients/paotie-dawson/index': resolve(__dirname, 'clients/paotie-dawson/index.html')
             }
