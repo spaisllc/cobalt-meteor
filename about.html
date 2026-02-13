@@ -128,7 +128,7 @@
         <p style="margin-bottom: var(--space-md);">
           <span data-email="SpringsAISolutions" data-domain="gmail.com" onclick="window.location='mail'+'to:'+'SpringsAISolutions'+'@'+'gmail.com';" style="cursor: pointer; color: var(--gold);">SpringsAISolutions&#64;gmail.com</span>
         </p>
-        <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
+        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/springsaisolutions'});return false;" class="btn btn-primary">Book a Consultation</a>
       </div>
     </div>
   </section>
@@ -165,6 +165,10 @@
       </div>
     </div>
   </footer>
+
+  <!-- CALENDLY -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
   <script type="module" src="js/main.js"></script>
 </body>
