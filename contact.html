@@ -101,6 +101,48 @@
     </div>
   </section>
 
+  <!-- CONTACT FORM -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="contact-form-wrapper reveal" style="max-width: 700px; margin: 0 auto;">
+        <h2 style="text-align: center; margin-bottom: var(--space-sm);">Send Us a Message</h2>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-md);">Not ready to book a call? Tell us about your project and we'll get back to you within 24 hours.</p>
+
+        <form action="https://formspree.io/f/SpringsAISolutions@gmail.com" method="POST" class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="your@email.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="interest">I'm interested in...</label>
+            <select id="interest" name="interest" required>
+              <option value="">Select an option</option>
+              <option value="talking-resume">Talking Resume ($19/mo)</option>
+              <option value="personal-brand">Personal Brand Agent ($49/mo)</option>
+              <option value="business-greeter">Business Greeter ($79/mo)</option>
+              <option value="enterprise">Enterprise / Custom Solution</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Tell us about your project</label>
+            <textarea id="message" name="message" rows="5" required placeholder="What are you looking to build? What problem are you trying to solve?"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
