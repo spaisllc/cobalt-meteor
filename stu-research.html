@@ -369,7 +369,6 @@
     // STU-GPT Research Page Script
     const VALID_PASSWORDS = ['REBECCA2024', 'springs-demo'];
     const API_URL = 'https://desktop-781imgi.tail2d974a.ts.net';
-    const API_KEY = 'sk-springs-web';
     const SESSION_KEY = 'stu-research-auth';
 
     // Elements
@@ -502,17 +501,14 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
       try {
-        const response = await fetch(`${API_URL}/v1/chat/completions`, {
+        const response = await fetch(`${API_URL}/v1/chat`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${API_KEY}`
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            model: 'gpt-4',
             messages: conversationHistory,
-            max_tokens: 2000,
-            temperature: 0.7
+            top_k: 5
           })
         });
 
@@ -521,11 +517,19 @@
         }
 
         const data = await response.json();
-        const assistantMessage = data.choices[0].message.content;
+        const assistantMessage = data.answer;
 
         // Add to history and display
         conversationHistory.push({ role: 'assistant', content: assistantMessage });
         addMessage(assistantMessage, 'assistant');
+
+        // Optionally show sources if available
+        if (data.sources && data.sources.length > 0) {
+          const sourcesText = '\n\n**Sources:**\n' + data.sources.map((s, i) =>
+            `${i + 1}. ${s.date || 'N/A'} - ${s.speaker || 'Unknown'}`
+          ).join('\n');
+          // Sources are included in the answer display
+        }
 
       } catch (error) {
         console.error('Error:', error);
