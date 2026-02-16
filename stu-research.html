@@ -1,599 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>STU-GPT Research — Springs AI Solutions</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* STU Research Page Specific Styles */
-    .stu-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: var(--space-md);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STU-GPT Research | Springs AI Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f7fafc;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
 
-    /* Password Gate */
-    .password-gate {
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        /* Login Box */
+        .login-box {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .login-box h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #1a365d;
+            margin-bottom: 8px;
+        }
+        .login-box p {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
 
-    .password-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: var(--space-lg);
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-    }
+        /* Form Elements */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #2b6cb0;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .btn-primary {
+            background: #c53030;
+            width: 100%;
+        }
+        .btn-send {
+            background: #2b6cb0;
+        }
 
-    .password-box h2 {
-      font-family: var(--font-display);
-      margin-bottom: var(--space-sm);
-    }
+        /* Chat Container */
+        .chat-container {
+            height: 500px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fff;
+        }
+        .chat-empty {
+            text-align: center;
+            color: #999;
+            margin-top: 150px;
+        }
+        .chat-empty p:first-child {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .chat-empty p:last-child {
+            font-size: 14px;
+        }
 
-    .password-box p {
-      color: var(--text-secondary);
-      margin-bottom: var(--space-md);
-      font-size: 0.95rem;
-    }
+        /* Messages */
+        .message {
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+        .message-user {
+            background: #c53030;
+            color: #fff;
+            margin-left: auto;
+        }
+        .message-assistant {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+        }
 
-    .password-input-group {
-      display: flex;
-      gap: 0.5rem;
-    }
+        /* Sources */
+        .sources {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 12px;
+            color: #666;
+        }
+        .sources strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .source-item {
+            margin-bottom: 8px;
+            padding: 8px;
+            background: #fff;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .source-item a {
+            color: #2b6cb0;
+            font-size: 11px;
+            text-decoration: none;
+        }
+        .source-item a:hover {
+            text-decoration: underline;
+        }
 
-    .password-input-group input {
-      flex: 1;
-      padding: 0.75rem 1rem;
-      font-family: var(--font-body);
-      font-size: 1rem;
-      background: var(--bg-primary);
-      border: 1px solid var(--border-light);
-      border-radius: 4px;
-      color: var(--text-primary);
-    }
+        /* Input Row */
+        .input-row {
+            display: flex;
+            gap: 12px;
+        }
+        .input-row input {
+            flex: 1;
+            margin-bottom: 0;
+        }
 
-    .password-input-group input:focus {
-      outline: none;
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px var(--gold-dim);
-    }
+        /* Loading & Error */
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            padding: 12px;
+        }
+        .loading span {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .error {
+            color: #c53030;
+            font-size: 14px;
+            margin-top: 8px;
+        }
 
-    .password-error {
-      color: #ef4444;
-      font-size: 0.85rem;
-      margin-top: 0.5rem;
-      display: none;
-    }
-
-    .password-error.show {
-      display: block;
-    }
-
-    /* Chat Interface */
-    .chat-interface {
-      display: none;
-      min-height: calc(100vh - 80px);
-      padding-top: var(--space-lg);
-    }
-
-    .chat-interface.active {
-      display: block;
-    }
-
-    .chat-header {
-      text-align: center;
-      margin-bottom: var(--space-md);
-    }
-
-    .chat-header h1 {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .chat-header p {
-      color: var(--text-secondary);
-    }
-
-    .chat-header .badge {
-      display: inline-block;
-      background: var(--gold-dim);
-      color: var(--gold);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      margin-bottom: 0.5rem;
-    }
-
-    .chat-messages {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      height: 500px;
-      overflow-y: auto;
-      padding: var(--space-md);
-      margin-bottom: var(--space-md);
-    }
-
-    .message {
-      margin-bottom: var(--space-md);
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .message.user {
-      text-align: right;
-    }
-
-    .message-content {
-      display: inline-block;
-      max-width: 80%;
-      padding: 0.75rem 1rem;
-      border-radius: 12px;
-      text-align: left;
-    }
-
-    .message.user .message-content {
-      background: var(--gold);
-      color: var(--bg-primary);
-    }
-
-    .message.assistant .message-content {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .message-content p {
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    .message-content p+p {
-      margin-top: 0.75rem;
-    }
-
-    .message-content code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9em;
-      background: rgba(0, 0, 0, 0.2);
-      padding: 0.1em 0.3em;
-      border-radius: 3px;
-    }
-
-    .message-content pre {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-      margin: 0.75rem 0;
-    }
-
-    .message-content pre code {
-      background: none;
-      padding: 0;
-    }
-
-    .message-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 0.25rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .typing-indicator {
-      display: none;
-      padding: var(--space-sm);
-    }
-
-    .typing-indicator.show {
-      display: block;
-    }
-
-    .typing-indicator span {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: var(--text-muted);
-      border-radius: 50%;
-      margin-right: 4px;
-      animation: typing 1.4s infinite ease-in-out both;
-    }
-
-    .typing-indicator span:nth-child(1) {
-      animation-delay: -0.32s;
-    }
-
-    .typing-indicator span:nth-child(2) {
-      animation-delay: -0.16s;
-    }
-
-    @keyframes typing {
-
-      0%,
-      80%,
-      100% {
-        transform: scale(0.6);
-        opacity: 0.5;
-      }
-
-      40% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    .chat-input-area {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .chat-input-area textarea {
-      flex: 1;
-      padding: 0.75rem 1rem;
-      font-family: var(--font-body);
-      font-size: 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      color: var(--text-primary);
-      resize: none;
-      min-height: 50px;
-      max-height: 150px;
-    }
-
-    .chat-input-area textarea:focus {
-      outline: none;
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px var(--gold-dim);
-    }
-
-    .chat-input-area button {
-      padding: 0.75rem 1.5rem;
-      align-self: flex-end;
-    }
-
-    .chat-input-area button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .chat-footer {
-      text-align: center;
-      margin-top: var(--space-md);
-      padding: var(--space-sm);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    .logout-btn {
-      background: transparent;
-      border: 1px solid var(--border-light);
-      color: var(--text-muted);
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-
-    .logout-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-  </style>
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
-
 <body>
-
-  <!-- NAVIGATION -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Springs <span>AI</span> Solutions</a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- PASSWORD GATE -->
-  <section class="password-gate" id="passwordGate">
-    <div class="password-box">
-      <h2>STU-GPT Research</h2>
-      <p>This is a restricted research interface. Please enter your access password to continue.</p>
-      <div class="password-input-group">
-        <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="off">
-        <button class="btn btn-primary" id="passwordSubmit">Access</button>
-      </div>
-      <p class="password-error" id="passwordError">Invalid password. Please try again.</p>
-    </div>
-  </section>
-
-  <!-- CHAT INTERFACE (hidden until authenticated) -->
-  <section class="chat-interface" id="chatInterface">
-    <div class="stu-container">
-      <div class="chat-header">
-        <span class="badge">Research Mode</span>
-        <h1>STU-GPT</h1>
-        <p>Southern Truck Underwriters AI Research Assistant</p>
-      </div>
-
-      <div class="chat-messages" id="chatMessages">
-        <div class="message assistant">
-          <div class="message-label">STU-GPT</div>
-          <div class="message-content">
-            <p>Hello! I'm STU-GPT, your research assistant for Southern Truck Underwriters. I can help you with
-              questions about commercial trucking insurance, policy information, claims processes, and more.</p>
-            <p>How can I assist you today?</p>
-          </div>
+    <!-- Login Screen -->
+    <div id="login-screen" class="container">
+        <div class="login-box">
+            <h1>STU-GPT Research</h1>
+            <p>Springs AI Solutions - Legislative Intelligence</p>
+            <form id="login-form">
+                <input type="password" id="access-key" placeholder="Enter Access Key" autofocus>
+                <button type="submit" class="btn-primary">Access Research Portal</button>
+                <p id="login-error" class="error hidden"></p>
+            </form>
         </div>
-        <div class="typing-indicator" id="typingIndicator">
-          <span></span><span></span><span></span>
+    </div>
+
+    <!-- Chat Screen -->
+    <div id="chat-screen" class="container hidden">
+        <div class="header">
+            <h1>STU-GPT Research</h1>
+            <p>Ask questions about Colorado Springs legislative data</p>
         </div>
-      </div>
 
-      <div class="chat-input-area">
-        <textarea id="chatInput" placeholder="Ask STU-GPT a question..." rows="1"></textarea>
-        <button class="btn btn-primary" id="sendBtn">Send</button>
-      </div>
+        <div id="chat-container" class="chat-container">
+            <div id="chat-empty" class="chat-empty">
+                <p>Ask a question to get started</p>
+                <p>Try: "What was discussed about the 2025 budget?"</p>
+            </div>
+            <div id="messages"></div>
+            <div id="loading" class="loading hidden">
+                <span>●</span> Searching legislative records...
+            </div>
+        </div>
 
-      <div class="chat-footer">
-        <button class="logout-btn" id="logoutBtn">Logout</button>
-      </div>
+        <form id="chat-form" class="input-row">
+            <input type="text" id="chat-input" placeholder="Ask about legislative data...">
+            <button type="submit" class="btn-send">Send</button>
+        </form>
+        <p id="chat-error" class="error hidden"></p>
     </div>
-  </section>
 
-  <!-- FOOTER (minimal for research page) -->
-  <footer class="footer" style="padding: var(--space-md) 0;">
-    <div class="container">
-      <div class="footer-bottom" style="border: none; padding: 0;">
-        <p>&copy; 2026 Springs AI Solutions, LLC. STU-GPT Research Interface.</p>
-      </div>
-    </div>
-  </footer>
+    <script>
+        // Configuration
+        const API_URL = 'https://desktop-781imgi.tail2d974a.ts.net';
+        const API_KEY = 'sk-springs-web';
+        const VALID_PASSWORDS = ['REBECCA2024', 'springs-demo'];
 
-  <script>
-    // STU-GPT Research Page Script
-    const VALID_PASSWORDS = ['REBECCA2024', 'springs-demo'];
-    const API_URL = 'https://desktop-781imgi.tail2d974a.ts.net';
-    const SESSION_KEY = 'stu-research-auth';
+        // State
+        let messages = [];
 
-    // Elements
-    const passwordGate = document.getElementById('passwordGate');
-    const chatInterface = document.getElementById('chatInterface');
-    const passwordInput = document.getElementById('passwordInput');
-    const passwordSubmit = document.getElementById('passwordSubmit');
-    const passwordError = document.getElementById('passwordError');
-    const chatMessages = document.getElementById('chatMessages');
-    const chatInput = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const typingIndicator = document.getElementById('typingIndicator');
-    const logoutBtn = document.getElementById('logoutBtn');
+        // Elements
+        const loginScreen = document.getElementById('login-screen');
+        const chatScreen = document.getElementById('chat-screen');
+        const loginForm = document.getElementById('login-form');
+        const accessKeyInput = document.getElementById('access-key');
+        const loginError = document.getElementById('login-error');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatContainer = document.getElementById('chat-container');
+        const messagesDiv = document.getElementById('messages');
+        const chatEmpty = document.getElementById('chat-empty');
+        const loadingDiv = document.getElementById('loading');
+        const chatError = document.getElementById('chat-error');
 
-    // Conversation history for context
-    let conversationHistory = [];
+        // Login handler
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const key = accessKeyInput.value.trim();
 
-    // Check if already authenticated
-    function checkAuth() {
-      const auth = sessionStorage.getItem(SESSION_KEY);
-      if (auth === 'true') {
-        showChat();
-      }
-    }
-
-    // Authenticate
-    function authenticate() {
-      const password = passwordInput.value.trim();
-      if (VALID_PASSWORDS.includes(password)) {
-        sessionStorage.setItem(SESSION_KEY, 'true');
-        passwordError.classList.remove('show');
-        showChat();
-      } else {
-        passwordError.classList.add('show');
-        passwordInput.value = '';
-        passwordInput.focus();
-      }
-    }
-
-    // Show chat interface
-    function showChat() {
-      passwordGate.style.display = 'none';
-      chatInterface.classList.add('active');
-      chatInput.focus();
-    }
-
-    // Logout
-    function logout() {
-      sessionStorage.removeItem(SESSION_KEY);
-      conversationHistory = [];
-      chatInterface.classList.remove('active');
-      passwordGate.style.display = 'flex';
-      passwordInput.value = '';
-      // Clear chat messages except the welcome
-      const messages = chatMessages.querySelectorAll('.message');
-      messages.forEach((msg, i) => {
-        if (i > 0) msg.remove();
-      });
-    }
-
-    // Add message to chat
-    function addMessage(content, role) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${role}`;
-
-      const labelDiv = document.createElement('div');
-      labelDiv.className = 'message-label';
-      labelDiv.textContent = role === 'user' ? 'You' : 'STU-GPT';
-
-      const contentDiv = document.createElement('div');
-      contentDiv.className = 'message-content';
-
-      // Simple markdown-like formatting
-      const formatted = formatMessage(content);
-      contentDiv.innerHTML = formatted;
-
-      messageDiv.appendChild(labelDiv);
-      messageDiv.appendChild(contentDiv);
-
-      // Insert before typing indicator
-      chatMessages.insertBefore(messageDiv, typingIndicator);
-
-      // Scroll to bottom
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    // Format message with basic markdown
-    function formatMessage(text) {
-      // Escape HTML
-      let formatted = text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-
-      // Code blocks
-      formatted = formatted.replace(/```(\w*)\n?([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
-
-      // Inline code
-      formatted = formatted.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-      // Bold
-      formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-
-      // Italic
-      formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-
-      // Line breaks to paragraphs
-      formatted = formatted.split('\n\n').map(p => `<p>${p}</p>`).join('');
-      formatted = formatted.replace(/\n/g, '<br>');
-
-      return formatted;
-    }
-
-    // Send message to API
-    async function sendMessage() {
-      const message = chatInput.value.trim();
-      if (!message) return;
-
-      // Disable input while processing
-      chatInput.disabled = true;
-      sendBtn.disabled = true;
-
-      // Add user message
-      addMessage(message, 'user');
-      conversationHistory.push({ role: 'user', content: message });
-      chatInput.value = '';
-
-      // Show typing indicator
-      typingIndicator.classList.add('show');
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      try {
-        const response = await fetch(`${API_URL}/v1/chat`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': 'sk-springs-web'
-          },
-          body: JSON.stringify({
-            messages: conversationHistory,
-            top_k: 5
-          })
+            if (VALID_PASSWORDS.includes(key)) {
+                loginScreen.classList.add('hidden');
+                chatScreen.classList.remove('hidden');
+                chatInput.focus();
+                loginError.classList.add('hidden');
+            } else {
+                loginError.textContent = 'Invalid access key';
+                loginError.classList.remove('hidden');
+            }
         });
 
-        if (!response.ok) {
-          throw new Error(`API error: ${response.status}`);
+        // Chat handler
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = chatInput.value.trim();
+            if (!query) return;
+
+            // Clear input and errors
+            chatInput.value = '';
+            chatError.classList.add('hidden');
+            chatEmpty.classList.add('hidden');
+
+            // Add user message
+            messages.push({ role: 'user', content: query });
+            renderMessages();
+
+            // Show loading
+            loadingDiv.classList.remove('hidden');
+            chatInput.disabled = true;
+
+            try {
+                const response = await fetch(`${API_URL}/v1/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': API_KEY,
+                    },
+                    body: JSON.stringify({
+                        messages: messages,
+                        top_k: 5,
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // Add assistant message
+                messages.push({
+                    role: 'assistant',
+                    content: data.answer,
+                    sources: data.sources,
+                });
+                renderMessages();
+
+            } catch (err) {
+                chatError.textContent = `Failed to get response: ${err.message}`;
+                chatError.classList.remove('hidden');
+                console.error('Chat error:', err);
+            } finally {
+                loadingDiv.classList.add('hidden');
+                chatInput.disabled = false;
+                chatInput.focus();
+            }
+        });
+
+        // Render messages
+        function renderMessages() {
+            messagesDiv.innerHTML = messages.map((msg, idx) => {
+                if (msg.role === 'user') {
+                    return `<div class="message message-user">${escapeHtml(msg.content)}</div>`;
+                } else {
+                    let html = `<div class="message message-assistant">
+                        <div>${escapeHtml(msg.content)}</div>`;
+
+                    if (msg.sources && msg.sources.length > 0) {
+                        html += `<div class="sources"><strong>Sources:</strong>`;
+                        msg.sources.slice(0, 3).forEach(src => {
+                            html += `<div class="source-item">`;
+                            if (src.year) html += `[${src.year}] `;
+                            if (src.speaker) html += `${escapeHtml(src.speaker)} - `;
+                            html += escapeHtml((src.text || '').slice(0, 150)) + '...';
+                            if (src.video_url) {
+                                html += `<br><a href="${src.video_url}" target="_blank">Watch Video</a>`;
+                            }
+                            html += `</div>`;
+                        });
+                        html += `</div>`;
+                    }
+
+                    html += `</div>`;
+                    return html;
+                }
+            }).join('');
+
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        const data = await response.json();
-        const assistantMessage = data.answer;
-
-        // Add to history and display
-        conversationHistory.push({ role: 'assistant', content: assistantMessage });
-        addMessage(assistantMessage, 'assistant');
-
-        // Optionally show sources if available
-        if (data.sources && data.sources.length > 0) {
-          const sourcesText = '\n\n**Sources:**\n' + data.sources.map((s, i) =>
-            `${i + 1}. ${s.date || 'N/A'} - ${s.speaker || 'Unknown'}`
-          ).join('\n');
-          // Sources are included in the answer display
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
-
-      } catch (error) {
-        console.error('Error:', error);
-        addMessage('Sorry, I encountered an error connecting to the API. Please try again or contact support if the issue persists.', 'assistant');
-      } finally {
-        // Re-enable input
-        typingIndicator.classList.remove('show');
-        chatInput.disabled = false;
-        sendBtn.disabled = false;
-        chatInput.focus();
-      }
-    }
-
-    // Event listeners
-    passwordSubmit.addEventListener('click', authenticate);
-    passwordInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') authenticate();
-    });
-
-    sendBtn.addEventListener('click', sendMessage);
-    chatInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-
-    // Auto-resize textarea
-    chatInput.addEventListener('input', () => {
-      chatInput.style.height = 'auto';
-      chatInput.style.height = Math.min(chatInput.scrollHeight, 150) + 'px';
-    });
-
-    logoutBtn.addEventListener('click', logout);
-
-    // Check auth on load
-    checkAuth();
-  </script>
-
-  <script type="module" src="js/main.js"></script>
+    </script>
 </body>
-
 </html>
