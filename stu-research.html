@@ -391,7 +391,7 @@
   <script>
     // STU-GPT Research Page Script
     const VALID_PASSWORDS = ['REBECCA2024', 'springs-demo'];
-    const API_URL = 'https://bigger-big-objects-leg.trycloudflare.com';
+    const API_URL = 'https://desktop-781imgi.tail2d974a.ts.net';
     const API_KEY = 'sk-springs-web';
     const SESSION_KEY = 'stu-research-auth';
 
@@ -525,17 +525,15 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
       try {
-        const response = await fetch(`${API_URL}/v1/chat/completions`, {
+        const response = await fetch(`${API_URL}/v1/chat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${API_KEY}`
+            'x-api-key': API_KEY
           },
           body: JSON.stringify({
-            model: 'gpt-4',
             messages: conversationHistory,
-            max_tokens: 2000,
-            temperature: 0.7
+            top_k: 5
           })
         });
 
@@ -544,7 +542,7 @@
         }
 
         const data = await response.json();
-        const assistantMessage = data.choices[0].message.content;
+        const assistantMessage = data.answer;
 
         // Add to history and display
         conversationHistory.push({ role: 'assistant', content: assistantMessage });
