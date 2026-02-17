@@ -311,6 +311,50 @@
       border-color: var(--gold);
       color: var(--gold);
     }
+
+    .suggested-questions { margin-bottom: var(--space-md); }
+    .suggested-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .suggested-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.85rem;
+      font-size: 0.8rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--font-body);
+    }
+    .chip:hover { border-color: var(--gold); color: var(--gold); }
+
+    .message-sources {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .sources-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .source-chip {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(0,0,0,0.15);
+      border-radius: 4px;
+      padding: 0.35rem 0.6rem;
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
   </style>
 </head>
 
@@ -351,16 +395,27 @@
       <div class="chat-header">
         <span class="badge">Research Mode</span>
         <h1>STU-GPT</h1>
-        <p>Southern Truck Underwriters AI Research Assistant</p>
+        <p>Colorado Springs Government Data Research Assistant</p>
+      </div>
+
+      <div class="suggested-questions">
+        <p class="suggested-label">Try asking:</p>
+        <div class="suggested-chips">
+          <button class="chip" onclick="fillQuestion(this)">What was the total City budget in 2024?</button>
+          <button class="chip" onclick="fillQuestion(this)">How did CSU's budget change from 2022 to 2024?</button>
+          <button class="chip" onclick="fillQuestion(this)">What did the council discuss about police funding?</button>
+          <button class="chip" onclick="fillQuestion(this)">Compare City and CSU spending in 2023</button>
+        </div>
       </div>
 
       <div class="chat-messages" id="chatMessages">
         <div class="message assistant">
           <div class="message-label">STU-GPT</div>
           <div class="message-content">
-            <p>Hello! I'm STU-GPT, your research assistant for Southern Truck Underwriters. I can help you with
-              questions about commercial trucking insurance, policy information, claims processes, and more.</p>
-            <p>How can I assist you today?</p>
+            <p>Hello! I'm STU-GPT, a research assistant trained on Colorado Springs government data — city budgets,
+              Colorado Springs Utilities (CSU) budgets, city council meeting transcripts, and legislative records
+              going back to 2015.</p>
+            <p>Try asking about budget figures, year-over-year comparisons, or specific council discussions.</p>
           </div>
         </div>
         <div class="typing-indicator" id="typingIndicator">
@@ -391,7 +446,7 @@
   <script>
     // STU-GPT Research Page Script
     const VALID_PASSWORDS = ['REBECCA2024', 'springs-demo'];
-    const API_URL = 'https://desktop-781imgi.tail2d974a.ts.net';
+    const API_URL = 'https://stu-api.springsaisolutions.com';
     const API_KEY = 'sk-springs-web';
     const SESSION_KEY = 'stu-research-auth';
 
@@ -453,8 +508,17 @@
       });
     }
 
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function fillQuestion(btn) {
+      chatInput.value = btn.textContent;
+      chatInput.focus();
+    }
+
     // Add message to chat
-    function addMessage(content, role) {
+    function addMessage(content, role, sources = []) {
       const messageDiv = document.createElement('div');
       messageDiv.className = `message ${role}`;
 
@@ -468,6 +532,22 @@
       // Simple markdown-like formatting
       const formatted = formatMessage(content);
       contentDiv.innerHTML = formatted;
+
+      if (role === 'assistant' && sources.length > 0) {
+        const validSources = sources.filter(s => s.year || s.date || s.speaker).slice(0, 3);
+        if (validSources.length > 0) {
+          const sourcesDiv = document.createElement('div');
+          sourcesDiv.className = 'message-sources';
+          sourcesDiv.innerHTML = '<div class="sources-label">Sources</div>' +
+            validSources.map(s => {
+              const year = s.year ? `[${s.year}] ` : '';
+              const who = s.speaker ? escapeHtml(s.speaker) + ' — ' : '';
+              const snippet = escapeHtml((s.text || '').slice(0, 120)) + '…';
+              return `<div class="source-chip">${year}${who}${snippet}</div>`;
+            }).join('');
+          contentDiv.appendChild(sourcesDiv);
+        }
+      }
 
       messageDiv.appendChild(labelDiv);
       messageDiv.appendChild(contentDiv);
@@ -543,10 +623,11 @@
 
         const data = await response.json();
         const assistantMessage = data.answer;
+        const sources = data.sources || [];
 
         // Add to history and display
         conversationHistory.push({ role: 'assistant', content: assistantMessage });
-        addMessage(assistantMessage, 'assistant');
+        addMessage(assistantMessage, 'assistant', sources);
 
       } catch (error) {
         console.error('Error:', error);
