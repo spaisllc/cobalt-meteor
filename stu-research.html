@@ -608,6 +608,13 @@
             body.classList.toggle('open');
           });
 
+          // Auto-expand when any source has a video URL (instant fact-check)
+          const hasVideo = validSources.some(s => s.video_url);
+          if (hasVideo) {
+            toggle.classList.add('open');
+            body.classList.add('open');
+          }
+
           sourcesDiv.appendChild(toggle);
           sourcesDiv.appendChild(body);
           contentDiv.appendChild(sourcesDiv);
