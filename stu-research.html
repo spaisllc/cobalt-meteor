@@ -335,37 +335,47 @@
     .chip:hover { border-color: var(--gold); color: var(--gold); }
 
     .message-sources {
-      margin-top: 0.75rem;
-      padding-top: 0.75rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
     .sources-label {
       font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--text-muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
     }
     .source-chip {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      background: rgba(0,0,0,0.15);
-      border-radius: 4px;
-      padding: 0.35rem 0.6rem;
-      margin-bottom: 0.3rem;
-      line-height: 1.4;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      margin-bottom: 0.45rem;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .source-chip-text {
+      flex: 1;
     }
     .source-watch-btn {
-      display: inline-block;
-      margin-left: 0.5rem;
-      padding: 0.1rem 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 0.2rem 0.65rem;
       background: var(--gold);
       color: #000;
-      border-radius: 3px;
-      font-size: 0.7rem;
-      font-weight: 600;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
       text-decoration: none;
       white-space: nowrap;
+      margin-top: 0.1rem;
     }
     .source-watch-btn:hover {
       background: #fff;
@@ -561,9 +571,9 @@
               const who = s.speaker ? escapeHtml(s.speaker) + ' — ' : '';
               const snippet = escapeHtml((s.text || '').slice(0, 100)) + '…';
               const watchBtn = s.video_url
-                ? ` <a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">▶ Watch</a>`
+                ? `<a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">▶ Watch</a>`
                 : '';
-              return `<div class="source-chip">${year}${date}${who}${snippet}${watchBtn}</div>`;
+              return `<div class="source-chip"><span class="source-chip-text">${year}${date}${who}${snippet}</span>${watchBtn}</div>`;
             }).join('');
           contentDiv.appendChild(sourcesDiv);
         }
