@@ -339,6 +339,27 @@
       padding-top: 0.85rem;
       border-top: 1px solid rgba(255,255,255,0.1);
     }
+    .sources-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0;
+      font-family: var(--font-body);
+    }
+    .sources-toggle:hover { color: var(--gold); }
+    .sources-toggle .toggle-arrow { font-size: 0.65rem; transition: transform 0.2s; }
+    .sources-toggle.open .toggle-arrow { transform: rotate(90deg); }
+    .sources-body { display: none; margin-top: 0.6rem; }
+    .sources-body.open { display: block; }
     .sources-label {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -564,17 +585,31 @@
         if (validSources.length > 0) {
           const sourcesDiv = document.createElement('div');
           sourcesDiv.className = 'message-sources';
-          sourcesDiv.innerHTML = '<div class="sources-label">Sources</div>' +
-            validSources.map(s => {
-              const year = s.year ? `[${s.year}] ` : '';
-              const date = s.date ? escapeHtml(s.date) + ' ' : '';
-              const who = s.speaker ? escapeHtml(s.speaker) + ' — ' : '';
-              const snippet = escapeHtml((s.text || '').slice(0, 100)) + '…';
-              const watchBtn = s.video_url
-                ? `<a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">▶ Watch</a>`
-                : '';
-              return `<div class="source-chip"><span class="source-chip-text">${year}${date}${who}${snippet}</span>${watchBtn}</div>`;
-            }).join('');
+
+          const toggle = document.createElement('button');
+          toggle.className = 'sources-toggle';
+          toggle.innerHTML = `<span class="toggle-arrow">▶</span> Sources (${validSources.length})`;
+
+          const body = document.createElement('div');
+          body.className = 'sources-body';
+          body.innerHTML = validSources.map(s => {
+            const year = s.year ? `[${s.year}] ` : '';
+            const date = s.date ? escapeHtml(s.date) + ' ' : '';
+            const who = s.speaker ? escapeHtml(s.speaker) + ' — ' : '';
+            const snippet = escapeHtml((s.text || '').slice(0, 100)) + '…';
+            const watchBtn = s.video_url
+              ? `<a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">▶ Watch</a>`
+              : '';
+            return `<div class="source-chip"><span class="source-chip-text">${year}${date}${who}${snippet}</span>${watchBtn}</div>`;
+          }).join('');
+
+          toggle.addEventListener('click', () => {
+            toggle.classList.toggle('open');
+            body.classList.toggle('open');
+          });
+
+          sourcesDiv.appendChild(toggle);
+          sourcesDiv.appendChild(body);
           contentDiv.appendChild(sourcesDiv);
         }
       }
