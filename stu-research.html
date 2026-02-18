@@ -127,7 +127,8 @@
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 8px;
-      height: 500px;
+      height: calc(100vh - 370px);
+      min-height: 320px;
       overflow-y: auto;
       padding: var(--space-md);
       margin-bottom: var(--space-md);
@@ -163,8 +164,8 @@
     }
 
     .message.user .message-content {
-      background: var(--gold);
-      color: var(--bg-primary);
+      background: #3B82F6;
+      color: #ffffff;
     }
 
     .message.assistant .message-content {
@@ -332,7 +333,7 @@
       transition: all var(--transition);
       font-family: var(--font-body);
     }
-    .chip:hover { border-color: var(--gold); color: var(--gold); }
+    .chip:hover { border-color: #3B82F6; color: #3B82F6; }
 
     .message-sources {
       margin-top: 1rem;
@@ -355,7 +356,7 @@
       margin-bottom: 0;
       font-family: var(--font-body);
     }
-    .sources-toggle:hover { color: var(--gold); }
+    .sources-toggle:hover { color: #3B82F6; }
     .sources-toggle .toggle-arrow { font-size: 0.65rem; transition: transform 0.2s; }
     .sources-toggle.open .toggle-arrow { transform: rotate(90deg); }
     .sources-body { display: none; margin-top: 0.6rem; }
@@ -368,39 +369,34 @@
       margin-bottom: 0.6rem;
       font-weight: 600;
     }
-    .source-chip {
+    .sources-list {
+      list-style: disc;
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+    .source-item {
       font-size: 0.82rem;
       color: var(--text-secondary);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 6px;
-      padding: 0.55rem 0.75rem;
-      margin-bottom: 0.45rem;
-      line-height: 1.5;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-    .source-chip-text {
-      flex: 1;
+      margin-bottom: 0.5rem;
+      line-height: 1.55;
     }
     .source-watch-btn {
       display: inline-flex;
       align-items: center;
-      flex-shrink: 0;
-      padding: 0.2rem 0.65rem;
-      background: var(--gold);
-      color: #000;
+      margin-left: 0.5rem;
+      padding: 0.15rem 0.55rem;
+      background: #3B82F6;
+      color: #ffffff;
       border-radius: 4px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-decoration: none;
       white-space: nowrap;
-      margin-top: 0.1rem;
+      vertical-align: middle;
     }
     .source-watch-btn:hover {
-      background: #fff;
-      color: #000;
+      background: #2563EB;
+      color: #ffffff;
     }
   </style>
 </head>
@@ -592,16 +588,16 @@
 
           const body = document.createElement('div');
           body.className = 'sources-body';
-          body.innerHTML = validSources.map(s => {
+          body.innerHTML = '<ul class="sources-list">' + validSources.map(s => {
             const year = s.year ? `[${s.year}] ` : '';
-            const date = s.date ? escapeHtml(s.date) + ' ' : '';
+            const date = s.date ? escapeHtml(s.date) + ' · ' : '';
             const who = s.speaker ? escapeHtml(s.speaker) + ' — ' : '';
             const snippet = escapeHtml((s.text || '').slice(0, 100)) + '…';
             const watchBtn = s.video_url
               ? `<a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">▶ Watch</a>`
               : '';
-            return `<div class="source-chip"><span class="source-chip-text">${year}${date}${who}${snippet}</span>${watchBtn}</div>`;
-          }).join('');
+            return `<li class="source-item">${year}${date}${who}${snippet}${watchBtn}</li>`;
+          }).join('') + '</ul>';
 
           toggle.addEventListener('click', () => {
             toggle.classList.toggle('open');
@@ -627,8 +623,10 @@
       // Insert before typing indicator
       chatMessages.insertBefore(messageDiv, typingIndicator);
 
-      // Scroll to bottom
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+      // Scroll so the top of the new message is visible (answer reads before sources)
+      requestAnimationFrame(() => {
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     }
 
     // Format message with basic markdown
