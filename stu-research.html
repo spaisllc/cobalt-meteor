@@ -355,6 +355,22 @@
       margin-bottom: 0.3rem;
       line-height: 1.4;
     }
+    .source-watch-btn {
+      display: inline-block;
+      margin-left: 0.5rem;
+      padding: 0.1rem 0.5rem;
+      background: var(--gold);
+      color: #000;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .source-watch-btn:hover {
+      background: #fff;
+      color: #000;
+    }
   </style>
 </head>
 
@@ -534,16 +550,20 @@
       contentDiv.innerHTML = formatted;
 
       if (role === 'assistant' && sources.length > 0) {
-        const validSources = sources.filter(s => s.year || s.date || s.speaker).slice(0, 3);
+        const validSources = sources.filter(s => s.year || s.date || s.speaker || s.video_url).slice(0, 4);
         if (validSources.length > 0) {
           const sourcesDiv = document.createElement('div');
           sourcesDiv.className = 'message-sources';
           sourcesDiv.innerHTML = '<div class="sources-label">Sources</div>' +
             validSources.map(s => {
               const year = s.year ? `[${s.year}] ` : '';
+              const date = s.date ? escapeHtml(s.date) + ' ' : '';
               const who = s.speaker ? escapeHtml(s.speaker) + ' — ' : '';
-              const snippet = escapeHtml((s.text || '').slice(0, 120)) + '…';
-              return `<div class="source-chip">${year}${who}${snippet}</div>`;
+              const snippet = escapeHtml((s.text || '').slice(0, 100)) + '…';
+              const watchBtn = s.video_url
+                ? ` <a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">▶ Watch</a>`
+                : '';
+              return `<div class="source-chip">${year}${date}${who}${snippet}${watchBtn}</div>`;
             }).join('');
           contentDiv.appendChild(sourcesDiv);
         }
