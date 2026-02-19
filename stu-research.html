@@ -20,6 +20,11 @@
       max-width: 900px;
       margin: 0 auto;
       padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      width: 100%;
     }
 
     /* Password Gate */
@@ -87,17 +92,19 @@
     /* Chat Interface */
     .chat-interface {
       display: none;
-      padding-top: var(--space-lg);
-      padding-bottom: var(--space-lg);
     }
 
     .chat-interface.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      /* height set dynamically by JS to fill viewport below nav */
     }
 
     .chat-header {
       text-align: center;
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-sm);
+      flex-shrink: 0;
     }
 
     .chat-header h1 {
@@ -127,12 +134,11 @@
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 8px;
-      height: 360px;
-      max-height: calc(100vh - 440px);
-      min-height: 240px;
+      flex: 1;
+      min-height: 0;
       overflow-y: auto;
       padding: var(--space-md);
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-sm);
       font-size: 14px;
     }
 
@@ -295,10 +301,11 @@
 
     .chat-footer {
       text-align: center;
-      margin-top: var(--space-md);
-      padding: var(--space-sm);
+      margin-top: 0.25rem;
+      padding: 0.25rem;
       color: var(--text-muted);
       font-size: 0.85rem;
+      flex-shrink: 0;
     }
 
     .logout-btn {
@@ -317,7 +324,7 @@
       color: var(--gold);
     }
 
-    .suggested-questions { margin-bottom: var(--space-md); }
+    .suggested-questions { margin-bottom: var(--space-sm); flex-shrink: 0; }
     .suggested-label {
       color: var(--text-muted);
       font-size: 0.8rem;
@@ -538,6 +545,14 @@
     function showChat() {
       passwordGate.style.display = 'none';
       chatInterface.classList.add('active');
+      // Fill viewport below nav
+      const nav = document.querySelector('.nav');
+      const navHeight = nav ? nav.offsetHeight : 65;
+      chatInterface.style.height = `calc(100vh - ${navHeight}px)`;
+      // Lock page scroll and hide site footer
+      document.body.style.overflow = 'hidden';
+      const siteFooter = document.querySelector('footer.footer');
+      if (siteFooter) siteFooter.style.display = 'none';
       chatInput.focus();
     }
 
@@ -546,6 +561,11 @@
       sessionStorage.removeItem(SESSION_KEY);
       conversationHistory = [];
       chatInterface.classList.remove('active');
+      chatInterface.style.height = '';
+      // Restore page scroll and footer
+      document.body.style.overflow = '';
+      const siteFooter = document.querySelector('footer.footer');
+      if (siteFooter) siteFooter.style.display = '';
       passwordGate.style.display = 'flex';
       passwordInput.value = '';
       // Clear chat messages except the welcome
