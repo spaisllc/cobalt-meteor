@@ -20,11 +20,6 @@
       max-width: 900px;
       margin: 0 auto;
       padding: var(--space-md);
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      min-height: 0;
-      width: 100%;
     }
 
     /* Password Gate */
@@ -95,16 +90,14 @@
     }
 
     .chat-interface.active {
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      /* height set dynamically by JS to fill viewport below nav */
+      display: block;
+      padding-top: var(--space-md);
+      padding-bottom: 6rem; /* room for sticky input */
     }
 
     .chat-header {
       text-align: center;
-      margin-bottom: var(--space-sm);
-      flex-shrink: 0;
+      margin-bottom: var(--space-md);
     }
 
     .chat-header h1 {
@@ -131,15 +124,9 @@
     }
 
     .chat-messages {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      padding: var(--space-md);
-      margin-bottom: var(--space-sm);
+      /* No fixed height — messages grow naturally, page scrolls */
       font-size: 14px;
+      margin-bottom: var(--space-sm);
     }
 
     .message {
@@ -267,6 +254,12 @@
     .chat-input-area {
       display: flex;
       gap: 0.5rem;
+      position: sticky;
+      bottom: 0;
+      background: var(--bg-primary);
+      padding: 0.75rem 0 1rem;
+      border-top: 1px solid var(--border-subtle);
+      z-index: 10;
     }
 
     .chat-input-area textarea {
@@ -301,11 +294,10 @@
 
     .chat-footer {
       text-align: center;
-      margin-top: 0.25rem;
-      padding: 0.25rem;
+      margin-top: 0.5rem;
+      padding: var(--space-sm);
       color: var(--text-muted);
       font-size: 0.85rem;
-      flex-shrink: 0;
     }
 
     .logout-btn {
@@ -324,7 +316,7 @@
       color: var(--gold);
     }
 
-    .suggested-questions { margin-bottom: var(--space-sm); flex-shrink: 0; }
+    .suggested-questions { margin-bottom: var(--space-md); }
     .suggested-label {
       color: var(--text-muted);
       font-size: 0.8rem;
@@ -545,14 +537,6 @@
     function showChat() {
       passwordGate.style.display = 'none';
       chatInterface.classList.add('active');
-      // Fill viewport below nav
-      const nav = document.querySelector('.nav');
-      const navHeight = nav ? nav.offsetHeight : 65;
-      chatInterface.style.height = `calc(100vh - ${navHeight}px)`;
-      // Lock page scroll and hide site footer
-      document.body.style.overflow = 'hidden';
-      const siteFooter = document.querySelector('footer.footer');
-      if (siteFooter) siteFooter.style.display = 'none';
       chatInput.focus();
     }
 
@@ -561,13 +545,9 @@
       sessionStorage.removeItem(SESSION_KEY);
       conversationHistory = [];
       chatInterface.classList.remove('active');
-      chatInterface.style.height = '';
-      // Restore page scroll and footer
-      document.body.style.overflow = '';
-      const siteFooter = document.querySelector('footer.footer');
-      if (siteFooter) siteFooter.style.display = '';
       passwordGate.style.display = 'flex';
       passwordInput.value = '';
+      window.scrollTo(0, 0);
       // Clear chat messages except the welcome
       const messages = chatMessages.querySelectorAll('.message');
       messages.forEach((msg, i) => {
@@ -640,9 +620,9 @@
       // Insert before typing indicator
       chatMessages.insertBefore(messageDiv, typingIndicator);
 
-      // Scroll within the chat box so the top of the new message is visible
+      // Scroll page so top of new message is visible
       requestAnimationFrame(() => {
-        chatMessages.scrollTop = messageDiv.offsetTop - chatMessages.offsetTop;
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
 
