@@ -87,8 +87,8 @@
     /* Chat Interface */
     .chat-interface {
       display: none;
-      min-height: calc(100vh - 80px);
       padding-top: var(--space-lg);
+      padding-bottom: var(--space-lg);
     }
 
     .chat-interface.active {
@@ -127,11 +127,13 @@
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 8px;
-      height: calc(100vh - 370px);
-      min-height: 320px;
+      height: 480px;
+      max-height: calc(100vh - 420px);
+      min-height: 280px;
       overflow-y: auto;
       padding: var(--space-md);
       margin-bottom: var(--space-md);
+      font-size: 0.95rem;
     }
 
     .message {
@@ -623,9 +625,9 @@
       // Insert before typing indicator
       chatMessages.insertBefore(messageDiv, typingIndicator);
 
-      // Scroll so the top of the new message is visible (answer reads before sources)
+      // Scroll within the chat box so the top of the new message is visible
       requestAnimationFrame(() => {
-        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        chatMessages.scrollTop = messageDiv.offsetTop - chatMessages.offsetTop;
       });
     }
 
