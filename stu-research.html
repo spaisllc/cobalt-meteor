@@ -597,9 +597,8 @@
             const date = s.date ? escapeHtml(s.date) + ' · ' : '';
             const who = s.speaker ? escapeHtml(s.speaker) + ' — ' : '';
             const snippet = escapeHtml((s.text || '').slice(0, 100)) + '…';
-            const isBlog = s.source_type === 'blog' || (s.video_url && s.video_url.includes('springstaxpayersunited.com'));
             const watchBtn = s.video_url
-              ? `<a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">${isBlog ? '📄 Read' : '▶ Watch'}</a>`
+              ? `<a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">View</a>`
               : '';
             return `<li class="source-item">${year}${date}${who}${snippet}${watchBtn}</li>`;
           }).join('') + '</ul>';
