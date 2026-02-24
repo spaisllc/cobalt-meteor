@@ -92,7 +92,8 @@
     .chat-interface.active {
       display: block;
       padding-top: var(--space-md);
-      padding-bottom: 6rem; /* room for sticky input */
+      padding-bottom: 6rem;
+      /* room for sticky input */
     }
 
     .chat-header {
@@ -316,7 +317,10 @@
       color: var(--gold);
     }
 
-    .suggested-questions { margin-bottom: var(--space-md); }
+    .suggested-questions {
+      margin-bottom: var(--space-md);
+    }
+
     .suggested-label {
       color: var(--text-muted);
       font-size: 0.8rem;
@@ -324,7 +328,13 @@
       letter-spacing: 0.05em;
       margin-bottom: 0.5rem;
     }
-    .suggested-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .suggested-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
     .chip {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -336,13 +346,18 @@
       transition: all var(--transition);
       font-family: var(--font-body);
     }
-    .chip:hover { border-color: #3B82F6; color: #3B82F6; }
+
+    .chip:hover {
+      border-color: #3B82F6;
+      color: #3B82F6;
+    }
 
     .message-sources {
       margin-top: 1rem;
       padding-top: 0.85rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
+
     .sources-toggle {
       background: none;
       border: none;
@@ -359,11 +374,29 @@
       margin-bottom: 0;
       font-family: var(--font-body);
     }
-    .sources-toggle:hover { color: #3B82F6; }
-    .sources-toggle .toggle-arrow { font-size: 0.65rem; transition: transform 0.2s; }
-    .sources-toggle.open .toggle-arrow { transform: rotate(90deg); }
-    .sources-body { display: none; margin-top: 0.6rem; }
-    .sources-body.open { display: block; }
+
+    .sources-toggle:hover {
+      color: #3B82F6;
+    }
+
+    .sources-toggle .toggle-arrow {
+      font-size: 0.65rem;
+      transition: transform 0.2s;
+    }
+
+    .sources-toggle.open .toggle-arrow {
+      transform: rotate(90deg);
+    }
+
+    .sources-body {
+      display: none;
+      margin-top: 0.6rem;
+    }
+
+    .sources-body.open {
+      display: block;
+    }
+
     .sources-label {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -372,17 +405,20 @@
       margin-bottom: 0.6rem;
       font-weight: 600;
     }
+
     .sources-list {
       list-style: disc;
       padding-left: 1.2rem;
       margin: 0;
     }
+
     .source-item {
       font-size: 0.82rem;
       color: var(--text-secondary);
       margin-bottom: 0.5rem;
       line-height: 1.55;
     }
+
     .source-watch-btn {
       display: inline-flex;
       align-items: center;
@@ -397,6 +433,7 @@
       white-space: nowrap;
       vertical-align: middle;
     }
+
     .source-watch-btn:hover {
       background: #2563EB;
       color: #ffffff;
@@ -490,11 +527,9 @@
   </footer>
 
   <script>
-    // STU-GPT Research Page Script
-    const VALID_PASSWORDS = ['REBECCA2024', 'springs-demo'];
     const API_URL = 'https://stu-gpt-api-production.up.railway.app';
-    const API_KEY = 'sk-springs-web';
     const SESSION_KEY = 'stu-research-auth';
+    const TOKEN_KEY = 'stu-research-token';
 
     // Elements
     const passwordGate = document.getElementById('passwordGate');
@@ -514,22 +549,43 @@
     // Check if already authenticated
     function checkAuth() {
       const auth = sessionStorage.getItem(SESSION_KEY);
-      if (auth === 'true') {
+      if (auth === 'true' && sessionStorage.getItem(TOKEN_KEY)) {
         showChat();
       }
     }
 
-    // Authenticate
-    function authenticate() {
+    // Authenticate via server
+    async function authenticate() {
       const password = passwordInput.value.trim();
-      if (VALID_PASSWORDS.includes(password)) {
-        sessionStorage.setItem(SESSION_KEY, 'true');
-        passwordError.classList.remove('show');
-        showChat();
-      } else {
+      if (!password) return;
+
+      passwordSubmit.disabled = true;
+      passwordSubmit.textContent = '...';
+
+      try {
+        const res = await fetch(`${API_URL}/v1/auth`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          sessionStorage.setItem(SESSION_KEY, 'true');
+          sessionStorage.setItem(TOKEN_KEY, data.token);
+          passwordError.classList.remove('show');
+          showChat();
+        } else {
+          passwordError.classList.add('show');
+          passwordInput.value = '';
+          passwordInput.focus();
+        }
+      } catch (err) {
+        passwordError.textContent = 'Connection error. Please try again.';
         passwordError.classList.add('show');
-        passwordInput.value = '';
-        passwordInput.focus();
+      } finally {
+        passwordSubmit.disabled = false;
+        passwordSubmit.textContent = 'Access';
       }
     }
 
@@ -672,11 +728,12 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
       try {
+        const apiKey = sessionStorage.getItem(TOKEN_KEY) || '';
         const response = await fetch(`${API_URL}/v1/chat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': API_KEY
+            'x-api-key': apiKey
           },
           body: JSON.stringify({
             messages: conversationHistory,
