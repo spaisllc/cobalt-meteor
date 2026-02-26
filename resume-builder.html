@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <title>AI Resume Builder — Springs AI Solutions</title>
+    <meta name="description"
+        content="Let AI build your world-class, ATS-optimized resume in minutes. Tailored to any job. Powered by Springs AI Solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://springsaisolutions.com/resume-builder.html">
+    <meta property="og:title" content="AI Resume Builder — Springs AI Solutions">
+    <meta property="og:description"
+        content="Let AI build your world-class, ATS-optimized resume tailored to the exact job you want.">
+    <meta property="og:image" content="https://springsaisolutions.com/images/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ---- Resume Builder Page — Scoped Styles ---- */
+
+        .builder-hero {
+            padding: calc(var(--space-2xl) + 80px) 0 var(--space-xl);
+            text-align: center;
+        }
+
+        .builder-hero h1 em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .builder-hero p {
+            margin: 0 auto;
+        }
+
+        /* Step sections */
+        .builder-steps {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 var(--space-md) var(--space-2xl);
+        }
+
+        .step-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+            position: relative;
+            transition: border-color var(--transition);
+        }
+
+        .step-block:hover {
+            border-color: var(--border-light);
+        }
+
+        .step-number {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: var(--gold-dim);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 0.25rem 0.75rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .step-block h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .step-block>p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: var(--space-md);
+            max-width: none;
+        }
+
+        .form-group {
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group label span {
+            color: var(--gold);
+            font-weight: 400;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .form-group textarea,
+        .form-group input[type="text"],
+        .form-group input[type="url"] {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            padding: 0.85rem 1rem;
+            resize: vertical;
+            transition: border-color var(--transition);
+            outline: none;
+        }
+
+        .form-group textarea:focus,
+        .form-group input:focus {
+            border-color: var(--gold);
+        }
+
+        .form-group textarea::placeholder,
+        .form-group input::placeholder {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .interview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+        }
+
+        .interview-grid .form-group:last-child {
+            grid-column: 1 / -1;
+        }
+
+        /* Generate button */
+        .generate-wrapper {
+            text-align: center;
+            padding: var(--space-md) 0 var(--space-lg);
+        }
+
+        .generate-wrapper p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: var(--space-sm) auto 0;
+            max-width: 40ch;
+        }
+
+        #generate-btn {
+            font-size: 1rem;
+            padding: 1.1rem 3rem;
+            letter-spacing: 0.15em;
+        }
+
+        #generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Spinner */
+        .spinner-overlay {
+            display: none;
+            text-align: center;
+            padding: var(--space-xl) 0;
+        }
+
+        .spinner-overlay.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border-light);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin: 0 auto var(--space-md);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner-overlay p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0 auto;
+        }
+
+        /* ---- Results Section ---- */
+        #results-section {
+            display: none;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 var(--space-md) var(--space-2xl);
+        }
+
+        #results-section.visible {
+            display: block;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .results-header h2 em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        /* Editable preview (unlocked top part) */
+        .resume-preview-unlocked {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .resume-preview-unlocked h3 {
+            font-size: 1rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            margin-bottom: var(--space-sm);
+        }
+
+        #resume-name {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        #resume-title {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            letter-spacing: 0.06em;
+        }
+
+        #summary-edit {
+            width: 100%;
+            min-height: 100px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding: 0.85rem 1rem;
+            resize: vertical;
+            outline: none;
+            transition: border-color var(--transition);
+        }
+
+        #summary-edit:focus {
+            border-color: var(--gold);
+        }
+
+        .skills-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: var(--space-md);
+        }
+
+        .skill-tag {
+            background: var(--gold-dim);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.9rem;
+        }
+
+        /* Locked / Blurred section */
+        .resume-preview-locked {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+            overflow: hidden;
+        }
+
+        .locked-blur {
+            filter: blur(6px);
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .locked-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(2px);
+            text-align: center;
+            padding: var(--space-md);
+        }
+
+        .locked-overlay .lock-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .locked-overlay h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .locked-overlay p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: var(--space-md);
+            max-width: 38ch;
+        }
+
+        /* Fake blurred experience items */
+        .fake-job {
+            margin-bottom: var(--space-md);
+        }
+
+        .fake-job-title {
+            height: 18px;
+            background: var(--text-muted);
+            border-radius: 2px;
+            width: 55%;
+            margin-bottom: 0.5rem;
+        }
+
+        .fake-job-company {
+            height: 12px;
+            background: var(--border-light);
+            border-radius: 2px;
+            width: 35%;
+            margin-bottom: 0.75rem;
+        }
+
+        .fake-job-line {
+            height: 10px;
+            background: var(--border-subtle);
+            border-radius: 2px;
+            margin-bottom: 0.4rem;
+        }
+
+        .fake-job-line:nth-child(4) {
+            width: 92%;
+        }
+
+        .fake-job-line:nth-child(5) {
+            width: 78%;
+        }
+
+        .fake-job-line:nth-child(6) {
+            width: 85%;
+        }
+
+        /* Paywall CTA */
+        .paywall-cta {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: var(--space-xl);
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .paywall-cta h3 {
+            margin-bottom: var(--space-xs);
+        }
+
+        .paywall-cta p {
+            margin: 0 auto var(--space-lg);
+            color: var(--text-secondary);
+        }
+
+        .paywall-price {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.4rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .paywall-price .price-amount {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .paywall-price .price-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .paywall-features {
+            list-style: none;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .paywall-features li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .paywall-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .restart-link {
+            display: block;
+            text-align: center;
+            margin-top: var(--space-md);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .restart-link:hover {
+            color: var(--gold);
+        }
+
+        /* Error banner */
+        .error-banner {
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 1rem 1.5rem;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .error-banner.visible {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .interview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .interview-grid .form-group:last-child {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Springs <span>AI</span> Solutions</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <section class="builder-hero">
+        <div class="container">
+            <h4>Powered by AI</h4>
+            <h1>Build Your <em>World-Class</em> Resume</h1>
+            <p>No resume? No problem. Tell us your story and paste any job description — our AI will build you a
+                tailored,
+                ATS-optimized resume in minutes. The first step toward your Talking Resume website.</p>
+        </div>
+    </section>
+
+    <!-- BUILDER FORM -->
+    <div class="builder-steps">
+
+        <!-- Error Banner -->
+        <div id="error-banner" class="error-banner" role="alert"></div>
+
+        <!-- Step 1: Background -->
+        <div class="step-block reveal">
+            <span class="step-number">Step 1 of 3</span>
+            <h3>Your Background</h3>
+            <p>Share as much or as little as you have. You can paste LinkedIn text, an old resume, or just freeform
+                notes — we'll sort it out.</p>
+
+            <div class="form-group">
+                <label for="linkedin">LinkedIn Profile <span>(paste profile text or URL)</span></label>
+                <textarea id="linkedin" rows="4"
+                    placeholder="e.g. Paste your LinkedIn 'About' section and work history, or type: linkedin.com/in/yourname"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="indeed">Indeed / Other Profile <span>(optional)</span></label>
+                <textarea id="indeed" rows="3"
+                    placeholder="Any additional profile text from Indeed or other job sites..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="old-resume">Old Resume <span>(paste as text if you have one)</span></label>
+                <textarea id="old-resume" rows="5"
+                    placeholder="Paste your existing resume text here. Don't worry about formatting — we'll clean it up."></textarea>
+            </div>
+        </div>
+
+        <!-- Step 2: Interview -->
+        <div class="step-block reveal">
+            <span class="step-number">Step 2 of 3</span>
+            <h3>Quick Interview</h3>
+            <p>Answer these 3 questions in your own words. This is where the magic comes from — your own voice unlocks
+                things a resume alone can't capture.</p>
+
+            <div class="interview-grid">
+                <div class="form-group">
+                    <label for="q1">Biggest Career Win <span>(be specific!)</span></label>
+                    <textarea id="q1" rows="4"
+                        placeholder="e.g. I led a team of 5 to launch a new product that increased quarterly revenue by 40%..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="q2">What Kind of Work Do You Love?</label>
+                    <textarea id="q2" rows="4"
+                        placeholder="e.g. I love problem-solving, working with data, and mentoring junior staff..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="q3">Your Top 3–5 Skills</label>
+                    <textarea id="q3" rows="3"
+                        placeholder="e.g. Project Management, Python, Customer Relations, OSHA Compliance, Team Leadership..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Target Job -->
+        <div class="step-block reveal">
+            <span class="step-number">Step 3 of 3</span>
+            <h3>Target Job Description</h3>
+            <p>Paste the exact job description you're applying for. Our AI will read every keyword and tailor your
+                resume to match it perfectly — just like a human career coach would.</p>
+
+            <div class="form-group">
+                <label for="job-description">Paste Job Description <span>(the more detail, the better)</span></label>
+                <textarea id="job-description" rows="10"
+                    placeholder="Paste the full job description here, including requirements, responsibilities, and any keywords you see..."></textarea>
+            </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="generate-wrapper">
+            <button id="generate-btn" class="btn btn-primary" onclick="generateResume()">
+                ✨ Generate My AI Resume
+            </button>
+            <p>This usually takes 15–30 seconds. We'll show you a preview instantly.</p>
+        </div>
+
+        <!-- Spinner -->
+        <div id="spinner" class="spinner-overlay">
+            <div class="spinner"></div>
+            <p>Our AI is reading your background, cross-referencing the job description, and crafting your resume…</p>
+        </div>
+
+    </div>
+
+    <!-- RESULTS SECTION (hidden until generated) -->
+    <section id="results-section">
+        <div class="container">
+
+            <div class="results-header reveal">
+                <h4>Your AI Resume</h4>
+                <h2>Here's What We <em>Built For You</em></h2>
+                <p style="margin: 0 auto;">Your professional summary and skills are fully unlocked below. Review and
+                    edit them freely. To receive the complete resume and your Talking Resume website, continue to
+                    checkout.</p>
+            </div>
+
+            <!-- UNLOCKED: Summary + Skills -->
+            <div class="resume-preview-unlocked reveal">
+                <h3>✅ Unlocked Preview</h3>
+
+                <div id="resume-name">Your Name</div>
+                <div id="resume-title">Professional Title</div>
+
+                <div class="form-group" style="margin-bottom: var(--space-md);">
+                    <label for="summary-edit">Professional Summary <span>(feel free to edit)</span></label>
+                    <textarea id="summary-edit" rows="5"></textarea>
+                </div>
+
+                <div>
+                    <label
+                        style="display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.5rem;">Core
+                        Skills</label>
+                    <div id="skills-preview" class="skills-preview"></div>
+                </div>
+            </div>
+
+            <!-- LOCKED: Work Experience -->
+            <div class="resume-preview-locked reveal">
+                <div class="locked-blur">
+                    <div class="fake-job">
+                        <div class="fake-job-title"></div>
+                        <div class="fake-job-company"></div>
+                        <div class="fake-job-line"></div>
+                        <div class="fake-job-line"></div>
+                        <div class="fake-job-line"></div>
+                    </div>
+                    <div class="fake-job">
+                        <div class="fake-job-title"></div>
+                        <div class="fake-job-company"></div>
+                        <div class="fake-job-line"></div>
+                        <div class="fake-job-line"></div>
+                        <div class="fake-job-line"></div>
+                    </div>
+                </div>
+                <div class="locked-overlay">
+                    <div class="lock-icon">🔒</div>
+                    <h3>Unlock Full Work History</h3>
+                    <p>Your complete, ATS-optimized work experience is ready — purchase your Talking Resume to receive
+                        the full version.</p>
+                    <a href=""
+                        onclick="Calendly.initPopupWidget({url: 'https://calendly.com/springsaisolutions'});return false;"
+                        class="btn btn-primary" style="font-size: 0.85rem;">Book Your Consultation →</a>
+                </div>
+            </div>
+
+            <!-- PAYWALL CTA -->
+            <div class="paywall-cta reveal">
+                <h4>Ready to Go Live?</h4>
+                <h3>Publish Your Talking Resume Website</h3>
+                <p>Your AI-generated resume becomes the brain of a stunning, interactive website where recruiters can
+                    actually <em>talk</em> to your avatar.</p>
+
+                <div class="paywall-price">
+                    <span class="price-amount">$149</span>
+                    <span class="price-desc">one-time setup + $19 / month hosting</span>
+                </div>
+
+                <ul class="paywall-features">
+                    <li>Complete, AI-crafted ATS-optimized resume</li>
+                    <li>Personal website with your own shareable link</li>
+                    <li>Talking AI avatar powered by your resume</li>
+                    <li>30 voice minutes / month included</li>
+                    <li>Unlimited text chat for recruiters</li>
+                </ul>
+
+                <a href=""
+                    onclick="Calendly.initPopupWidget({url: 'https://calendly.com/springsaisolutions'});return false;"
+                    class="btn btn-primary" id="publish-btn" style="font-size: 1rem; padding: 1.1rem 3rem;">
+                    🚀 Publish My Talking Resume
+                </a>
+            </div>
+
+            <p class="restart-link" onclick="restartBuilder()">← Start over with different information</p>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <div class="nav-logo">Springs <span>AI</span> Solutions</div>
+                    <p>AI Voice Agents for individuals and businesses.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="resume-builder.html">AI Resume Builder</a></li>
+                        <li><a href="services.html#individuals">Talking Resume</a></li>
+                        <li><a href="services.html#individuals">Personal Brand Agent</a></li>
+                        <li><a href="services.html#business">Business Greeter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Springs AI Solutions, LLC. All rights reserved.</p>
+                <p>Colorado Springs, CO</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CALENDLY -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+    <script type="module" src="js/main.js"></script>
+
+    <script>
+        // ============================================================
+        // Resume Builder — Client Logic
+        // Calls our secure Railway backend proxy at /v1/resume/generate
+        // The proxy holds the Leapter API key — it never touches the browser.
+        // ============================================================
+
+        const API_BASE = "https://stu-gpt-api-production.up.railway.app";
+        const INTERNAL_KEY = "sk-springs-web";
+
+        async function generateResume() {
+            const btn = document.getElementById("generate-btn");
+            const spinner = document.getElementById("spinner");
+            const errorBanner = document.getElementById("error-banner");
+
+            // Collect form data
+            const payload = {
+                linkedin_data: document.getElementById("linkedin").value.trim(),
+                indeed_data: document.getElementById("indeed").value.trim(),
+                old_resume_text: document.getElementById("old-resume").value.trim(),
+                interview_transcript: [
+                    document.getElementById("q1").value.trim(),
+                    document.getElementById("q2").value.trim(),
+                    document.getElementById("q3").value.trim()
+                ].filter(Boolean).join("\n\n"),
+                target_job_description: document.getElementById("job-description").value.trim()
+            };
+
+            // Basic validation
+            if (!payload.target_job_description) {
+                showError("Please paste a job description in Step 3 before generating.");
+                return;
+            }
+            if (!payload.linkedin_data && !payload.old_resume_text && !payload.interview_transcript) {
+                showError("Please fill in at least your background (Step 1) or interview answers (Step 2) to get started.");
+                return;
+            }
+
+            // UI: loading state
+            hideError();
+            btn.disabled = true;
+            spinner.classList.add("active");
+            window.scrollTo({ top: spinner.offsetTop - 100, behavior: "smooth" });
+
+            try {
+                const response = await fetch(`${API_BASE}/v1/resume/generate`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-api-key": INTERNAL_KEY
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.detail || `Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                renderResults(data);
+
+            } catch (err) {
+                showError(`Something went wrong: ${err.message}. Please try again in a moment.`);
+            } finally {
+                btn.disabled = false;
+                spinner.classList.remove("active");
+            }
+        }
+
+        function renderResults(data) {
+            // Leapter may wrap the result — handle both direct and nested responses
+            const resume = data.result ?? data.output ?? data;
+
+            const basics = resume.basics ?? {};
+            const skills = resume.core_skills ?? resume.skills ?? [];
+            const summary = basics.professional_summary ?? basics.summary ?? "";
+
+            // Populate unlocked preview
+            document.getElementById("resume-name").textContent = basics.name ?? "Your Name";
+            document.getElementById("resume-title").textContent = basics.title ?? basics.label ?? "Professional";
+            document.getElementById("summary-edit").value = summary;
+
+            // Render skill tags
+            const skillsContainer = document.getElementById("skills-preview");
+            skillsContainer.innerHTML = "";
+            (Array.isArray(skills) ? skills : []).slice(0, 12).forEach(skill => {
+                const tag = document.createElement("span");
+                tag.className = "skill-tag";
+                tag.textContent = skill;
+                skillsContainer.appendChild(tag);
+            });
+
+            // Show results, hide form area slightly
+            document.getElementById("results-section").classList.add("visible");
+            document.getElementById("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function showError(msg) {
+            const banner = document.getElementById("error-banner");
+            banner.textContent = msg;
+            banner.classList.add("visible");
+            banner.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+
+        function hideError() {
+            document.getElementById("error-banner").classList.remove("visible");
+        }
+
+        function restartBuilder() {
+            document.getElementById("results-section").classList.remove("visible");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+
+</body>
+
+</html>
