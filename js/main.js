@@ -97,6 +97,14 @@ const SPARouter = {
       const newModal = currentBody.querySelector('#welcome-modal');
       if (newModal) newModal.remove();
 
+      // Re-execute inline scripts from the new page (innerHTML doesn't run them)
+      currentBody.querySelectorAll('script:not([type="module"])').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+        newScript.textContent = oldScript.textContent;
+        oldScript.replaceWith(newScript);
+      });
+
       // Re-initialize page features
       this.reinitPage();
 
