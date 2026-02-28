@@ -5,8 +5,8 @@
 
 export class OpenAIService {
     constructor() {
-        // Use relative path for serverless function
-        this.apiEndpoint = '/.netlify/functions/chat';
+        // Cloudflare Pages Function
+        this.apiEndpoint = '/api/chat';
         this.fallbackEndpoint = '/api/chat';
     }
 
