@@ -15,7 +15,8 @@ export default defineConfig({
                 services: resolve(__dirname, 'services.html'),
                 contact: resolve(__dirname, 'contact.html'),
                 'stu-research': resolve(__dirname, 'stu-research.html'),
-                'resume-builder': resolve(__dirname, 'resume-builder.html')
+                'resume-builder': resolve(__dirname, 'resume-builder.html'),
+                'inventoryspais': resolve(__dirname, 'inventoryspais.html')
             }
         }
     },
