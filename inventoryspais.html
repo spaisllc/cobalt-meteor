@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InventorySPAIS — AI Inventory for Restaurants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a0f1e;
+      --dark: #111827;
+      --blue: #1a56db;
+      --blue-bright: #3b82f6;
+      --blue-glow: rgba(59,130,246,0.15);
+      --accent: #60a5fa;
+      --gold: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(96,165,250,0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(26,86,219,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 90% 80%, rgba(96,165,250,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(10,15,30,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(96,165,250,0.1);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(96,165,250,0.4);
+    }
+
+    .nav-brand span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-cta {
+      background: var(--blue);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      border: 1px solid rgba(96,165,250,0.3);
+    }
+
+    .nav-cta:hover {
+      background: var(--blue-bright);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(26,86,219,0.15);
+      border: 1px solid rgba(96,165,250,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid rgba(96,165,250,0.5);
+      box-shadow: 0 0 40px rgba(96,165,250,0.3), 0 0 80px rgba(26,86,219,0.2);
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #60a5fa, #1a56db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #94a3b8;
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1a56db, #1e3a8a);
+      color: white;
+      padding: 16px 36px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 24px rgba(26,86,219,0.4);
+      border: 1px solid rgba(96,165,250,0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(26,86,219,0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      padding: 16px 36px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid rgba(96,165,250,0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(96,165,250,0.08);
+      border-color: var(--accent);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      color: #64748b;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 560px;
+      font-weight: 300;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .step {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px 28px;
+      position: relative;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .step:hover {
+      border-color: rgba(96,165,250,0.35);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(96,165,250,0.12);
+      line-height: 1;
+      margin-bottom: 20px;
+      letter-spacing: -0.04em;
+    }
+
+    .step-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .step p {
+      color: #64748b;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 60px;
+    }
+
+    .feature {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: all 0.3s;
+    }
+
+    .feature:hover {
+      border-color: rgba(96,165,250,0.3);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .feature-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26,86,219,0.15);
+      border-radius: 12px;
+      border: 1px solid rgba(96,165,250,0.2);
+    }
+
+    .feature h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .feature p {
+      color: #64748b;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(96,165,250,0.2), transparent);
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    /* ── PRICING ── */
+    .pricing-card {
+      max-width: 480px;
+      margin: 60px auto 0;
+      background: rgba(26,86,219,0.08);
+      border: 1px solid rgba(96,165,250,0.25);
+      border-radius: 24px;
+      padding: 48px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #1a56db, #60a5fa, #1a56db);
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: var(--gold);
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .pricing-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card .price {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin: 20px 0 8px;
+    }
+
+    .pricing-card .price-sub {
+      color: #64748b;
+      font-size: 0.875rem;
+      margin-bottom: 32px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 36px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(96,165,250,0.08);
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      text-align: center;
+      padding: 100px 24px;
+    }
+
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(26,86,219,0.08);
+      border: 1px solid rgba(96,165,250,0.2);
+      border-radius: 28px;
+      padding: 64px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(96,165,250,0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-box p {
+      color: #64748b;
+      font-size: 1rem;
+      margin-bottom: 36px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(96,165,250,0.08);
+      color: #374151;
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    footer .footer-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(96,165,250,0.3);
+    }
+
+    footer .footer-logo span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      color: #4b5563;
+      font-size: 0.9rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      .pricing-card { padding: 36px 24px; }
+      .cta-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <img src="https://inventoryspais.springsaisolutions.com/static/SPAIS.jpg" alt="InventorySPAIS Wolf Logo">
+    <span>InventorySPAIS</span>
+  </a>
+  <a href="mailto:SpringsAISolutions@gmail.com" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✦ Powered by Springs AI Solutions</div>
+  <img src="https://inventoryspais.springsaisolutions.com/static/SPAIS.jpg" alt="InventorySPAIS" class="hero-logo">
+  <h1>Inventory Counting,<br><span>Reinvented.</span></h1>
+  <p>InventorySPAIS uses AI to scan your shelves and count inventory in seconds — no manual counting, no clipboards, no errors.</p>
+  <div class="hero-actions">
+    <a href="mailto:SpringsAISolutions@gmail.com" class="btn-primary">Get Started</a>
+    <a href="https://inventoryspais.springsaisolutions.com" class="btn-secondary" target="_blank">Try the App →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Three steps.<br>That's it.</h2>
+    <p class="section-sub">No training required. Any staff member can run a full inventory scan in under 2 minutes.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">📸</div>
+        <h3>Take a Photo</h3>
+        <p>Open the app on any phone — no download needed. Photograph your shelves, up to 3 sections at once.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">🤖</div>
+        <h3>AI Counts Everything</h3>
+        <p>Our AI vision engine instantly identifies and counts bottles, cans, and dry goods — reading brands, sizes, and quantities.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">📊</div>
+        <h3>Review & Export</h3>
+        <p>Verify counts with one tap, then download a time-stamped CSV report ready for your ordering system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section>
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything your team needs.</h2>
+    <p class="section-sub">Built specifically for restaurants and food service operations.</p>
+
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">⏱️</div>
+        <div>
+          <h3>Save Time on Manual Counting</h3>
+          <p>Cut inventory time from hours to minutes. No more clipboards, tally marks, or spreadsheet entry.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <div>
+          <h3>AI-Powered Accuracy</h3>
+          <p>Gemini AI vision reads labels, counts items, and identifies brands — with a human verification step built in.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <div>
+          <h3>Works on Any Phone</h3>
+          <p>No app download. No special hardware. Just open a browser on any smartphone and start scanning.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✅</div>
+        <div>
+          <h3>Reduce Inventory Errors</h3>
+          <p>Human verification screen lets staff confirm AI counts before finalizing — catching mistakes before they cost you.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📥</div>
+        <div>
+          <h3>CSV Reports</h3>
+          <p>Every scan exports a clean, time-stamped CSV file. Easy to share, archive, or import into your ordering system.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚀</div>
+        <div>
+          <h3>No App Download Needed</h3>
+          <p>Works instantly in any mobile browser. Share a link with your team and they're ready to scan in seconds.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section>
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Simple, transparent pricing.</h2>
+    <p class="section-sub" style="margin: 0 auto;">One flat monthly rate per location. No setup fees, no contracts, no surprises.</p>
+
+    <div class="pricing-card">
+      <div class="pricing-badge">⭐ Per Location</div>
+      <h3>InventorySPAIS</h3>
+      <div class="price">Contact Us</div>
+      <div class="price-sub">Custom pricing for your operation</div>
+      <ul class="pricing-features">
+        <li>Unlimited inventory scans</li>
+        <li>AI-powered item counting</li>
+        <li>Human verification step</li>
+        <li>Time-stamped CSV exports</li>
+        <li>Works on any smartphone</li>
+        <li>No app download required</li>
+        <li>Multi-location discounts available</li>
+      </ul>
+      <a href="mailto:SpringsAISolutions@gmail.com" class="btn-primary" style="display:block; text-align:center;">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>Ready to stop counting by hand?</h2>
+    <p>Join restaurants already saving hours every week with InventorySPAIS. Reach out for a live demo at your location.</p>
+    <a href="mailto:SpringsAISolutions@gmail.com" class="btn-primary">Get Started Today</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://inventoryspais.springsaisolutions.com/static/SPAIS.jpg" alt="Logo">
+    <span>Springs AI Solutions</span>
+  </div>
+  <p>InventorySPAIS © 2025 <a href="#">Springs AI Solutions</a> · <a href="mailto:SpringsAISolutions@gmail.com">SpringsAISolutions@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
