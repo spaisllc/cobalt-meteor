@@ -1,421 +1,378 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2113.65">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    span.s1 {font: 12.0px 'Apple Color Emoji'}
-    span.s2 {font: 12.0px 'PingFang SC'}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InventorySPAIS</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #222639 0%, #1a1f3a 50%, #0d1b2a 100%); min-height: 100vh; color: #e2e8f0; }
+        header { background: linear-gradient(135deg, #1a56db 0%, #1e3a8a 100%); color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 20px rgba(26,86,219,0.4); border-bottom: 1px solid rgba(96,165,250,0.3); }
+        header h1 { font-size: 2rem; letter-spacing: 0.05em; }
+        header p { font-size: 1rem; opacity: 0.85; margin-top: 4px; }
+        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        .card { background: rgba(255,255,255,0.07); backdrop-filter: blur(10px); border: 1px solid rgba(96,165,250,0.2); border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .card h2 { font-size: 1rem; color: #60a5fa; margin-bottom: 14px; border-bottom: 1px solid rgba(96,165,250,0.2); padding-bottom: 8px; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #93c5fd; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+        .checkbox-group label { display: flex; align-items: center; gap: 6px; font-weight: normal; background: rgba(255,255,255,0.07); border: 1px solid rgba(96,165,250,0.25); border-radius: 8px; padding: 8px 12px; cursor: pointer; color: #e2e8f0; transition: all 0.2s; }
+        .checkbox-group label:hover { border-color: #60a5fa; background: rgba(96,165,250,0.1); }
+        input[type="range"] { width: 100%; margin-bottom: 8px; }
+        .confidence-display { text-align: center; font-weight: 700; color: #60a5fa; font-size: 2.2rem; margin-bottom: 14px; }
+        .scan-all-box { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; background: rgba(26,86,219,0.2); padding: 10px; border-radius: 8px; border: 1px solid rgba(96,165,250,0.3); cursor: pointer; }
+        .scan-all-box span { font-weight: 700; color: #60a5fa; font-size: 0.9rem; }
+        .shelf-card { border: 1px solid rgba(96,165,250,0.2); border-radius: 12px; padding: 14px; margin-bottom: 12px; background: rgba(255,255,255,0.04); }
+        .shelf-card.has-photo { border-color: #48bb78; background: rgba(72,187,120,0.06); }
+        .shelf-title { font-weight: 700; font-size: 0.95rem; color: #e2e8f0; margin-bottom: 10px; }
+        .shelf-buttons { display: flex; gap: 8px; margin-bottom: 10px; }
+        .btn-shelf-cam { flex: 1; background: rgba(26,86,219,0.3); color: #93c5fd; border: 1px solid rgba(96,165,250,0.4); border-radius: 8px; padding: 10px 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .btn-shelf-cam:hover { background: rgba(26,86,219,0.5); }
+        .btn-shelf-lib { flex: 1; background: rgba(124,58,237,0.3); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.4); border-radius: 8px; padding: 10px 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .btn-shelf-lib:hover { background: rgba(124,58,237,0.5); }
+        .shelf-status { font-size: 0.8rem; color: #94a3b8; }
+        .shelf-card.has-photo .shelf-status { color: #48bb78; font-weight: 600; }
+        .shelf-preview { width: 100%; border-radius: 8px; margin-top: 10px; max-height: 120px; object-fit: cover; display: none; }
+        .photo-count { font-size: 0.85rem; color: #94a3b8; margin-top: 4px; }
+        .btn-primary { width: 100%; background: linear-gradient(135deg, #1a56db, #1e3a8a); color: white; border: none; border-radius: 10px; padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(26,86,219,0.4); }
+        .btn-primary:hover { transform: translateY(-1px); }
+        .btn-primary:disabled { background: #374151; box-shadow: none; cursor: not-allowed; transform: none; }
+        .btn-secondary { width: 100%; background: transparent; color: #60a5fa; border: 2px solid #60a5fa; border-radius: 10px; padding: 14px; font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 10px; }
+        .btn-csv { width: 100%; background: linear-gradient(135deg, #059669, #047857); color: white; border: none; border-radius: 10px; padding: 14px; font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 15px rgba(5,150,105,0.3); }
+        #results-card { display: none; }
+        .inventory-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .inventory-table th { background: rgba(26,86,219,0.6); color: #e2e8f0; padding: 12px 8px; text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .inventory-table td { padding: 12px 8px; border-bottom: 1px solid rgba(96,165,250,0.1); vertical-align: middle; color: #e2e8f0; }
+        .inventory-table tr:last-child td { border-bottom: none; }
+        .inventory-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+        .item-type-badge { background: rgba(26,86,219,0.3); color: #93c5fd; border-radius: 20px; padding: 3px 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(96,165,250,0.3); }
+        .count-badge { background: linear-gradient(135deg, #1a56db, #1e3a8a); color: white; border-radius: 20px; padding: 4px 12px; font-weight: 700; font-size: 1rem; display: inline-block; }
+        .fill-bar-container { width: 60px; background: rgba(255,255,255,0.1); border-radius: 10px; height: 8px; display: inline-block; vertical-align: middle; margin-right: 6px; }
+        .fill-bar { height: 8px; border-radius: 10px; background: linear-gradient(90deg, #1a56db, #60a5fa); }
+        .summary-header { background: rgba(26,86,219,0.15); border: 1px solid rgba(96,165,250,0.2); border-radius: 10px; padding: 14px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .summary-header .total { font-size: 1.5rem; font-weight: 800; color: #60a5fa; }
+        .summary-header .label { font-size: 0.8rem; color: #94a3b8; }
+        #loading { display: none; text-align: center; padding: 20px; }
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(96,165,250,0.2); border-top-color: #60a5fa; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .error-box { background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.3); border-radius: 8px; padding: 12px 16px; color: #fca5a5; font-size: 0.9rem; }
+        footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #4b5563; }
+        .conf-table { width: 100%; font-size: 0.78rem; border-collapse: collapse; border-radius: 8px; overflow: hidden; }
+        .conf-table th { padding: 8px 10px; background: rgba(26,86,219,0.5); color: #93c5fd; text-align: left; }
+        .conf-table th:last-child { text-align: center; }
+        .conf-table td { padding: 8px 10px; border-bottom: 1px solid rgba(96,165,250,0.1); }
+        .conf-table td:first-child { color: #e2e8f0; }
+        .conf-table td:last-child { text-align: center; font-weight: 700; }
+        .conf-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;InventorySPAIS&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>* { box-sizing: border-box; margin: 0; padding: 0; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #f0f4f8;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a202c;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>header {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 16px 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>header h1 { font-size: 1.4rem; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>header p<span class="Apple-converted-space">  </span>{ font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.container { padding: 20px; max-width: 600px; margin: 0 auto; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 1px 4px rgba(0,0,0,0.08);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card h2 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #e2e8f0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>label {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.85rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #4a5568;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.checkbox-group {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.checkbox-group label {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: normal;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #f7fafc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #e2e8f0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.checkbox-group input[type="checkbox"]:checked + span {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>select, input[type="range"] {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #e2e8f0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #f7fafc;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.confidence-display {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Camera area */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.camera-area {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 2px dashed #cbd5e0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 30px 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: border-color 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.camera-area:hover { border-color: #1a56db; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.camera-area .icon { font-size: 2.5rem; margin-bottom: 8px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.camera-area p { font-size: 0.9rem; color: #718096; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>#fileInput { display: none; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>#preview-area {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>#preview-area img {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 80px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 80px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>object-fit: cover;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #e2e8f0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.photo-count {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.85rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #718096;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Buttons */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: background 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary:hover <span class="Apple-converted-space">  </span>{ background: #1e429f; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary:disabled {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #a0aec0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: not-allowed;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-secondary {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Results */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#results-card { display: none; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.inventory-table {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-collapse: collapse;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.inventory-table th {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: left;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.inventory-table td {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #e2e8f0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.inventory-table tr:last-child td { border-bottom: none; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.inventory-table tr:nth-child(even) td { background: #f7fafc; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Loading */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#loading { display: none; text-align: center; padding: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.spinner {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 40px; height: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 4px solid #e2e8f0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-top-color: #1a56db;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>animation: spin 0.8s linear infinite;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto 12px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin { to { transform: rotate(360deg); } }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Error */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.error-box {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #fff5f5;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #fc8181;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 16px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #c53030;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>footer {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #a0aec0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;<span class="s1">📦</span> InventorySPAIS&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;by Springs AI Solutions&lt;/p&gt;</p>
-<p class="p1">&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- STEP 1: What to scan --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;<span class="s2">①</span> What to Scan&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;Dry Goods&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="checkbox-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;&lt;input type="checkbox" value="can" class="dry-good"&gt;&lt;span&gt;Cans&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;&lt;input type="checkbox" value="cup" class="dry-good"&gt;&lt;span&gt;Cups&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;Beverage Bottles&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="checkbox-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;&lt;input type="checkbox" value="water bottle" class="beverage"&gt;&lt;span&gt;Water Bottles&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;&lt;input type="checkbox" value="soda bottle" class="beverage"&gt;&lt;span&gt;Soda Bottles&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;&lt;input type="checkbox" value="juice bottle" class="beverage"&gt;&lt;span&gt;Juice Bottles&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;&lt;input type="checkbox" value="wine bottle" class="beverage"&gt;&lt;span&gt;Wine Bottles&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;&lt;input type="checkbox" value="beer bottle" class="beverage"&gt;&lt;span&gt;Beer Bottles&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;Confidence Level&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="range" id="confidence" min="0.5" max="1.0" step="0.05" value="0.8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="confidence-display"&gt;&lt;span id="confidenceValue"&gt;80&lt;/span&gt;% confident&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;Export Format&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;select id="exportFormat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="TABLE"&gt;View on Screen (Table)&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="CSV"&gt;Download as CSV&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- STEP 2: Take photos --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;<span class="s2">②</span> Take Photos&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="camera-area" onclick="document.getElementById('fileInput').click()"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s1">📷</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Tap to take photos or choose from your library&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="margin-top:6px; font-size:0.8rem;"&gt;You can select multiple photos&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="file" id="fileInput" accept="image/*" multiple capture="environment"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="preview-area"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="photo-count" id="photoCount"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- STEP 3: Scan --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;<span class="s2">③</span> Run Scan&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn-primary" id="scanBtn" onclick="runScan()" disabled&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span><span class="s1">🔍</span> Scan Inventory</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Loading --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="loading"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="spinner"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Analyzing your inventory with AI...&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:0.8rem; color:#a0aec0; margin-top:6px;"&gt;This may take a few seconds&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Results --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card" id="results-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;<span class="s1">✅</span> Scan Results&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="results-content"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn-secondary" onclick="resetScan()"&gt;<span class="s1">🔄</span> Scan Again&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;footer&gt;InventorySPAIS &amp;copy; 2025 Springs AI Solutions&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let capturedImages = [];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Update confidence display</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("confidence").addEventListener("input", function() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("confidenceValue").textContent = Math.round(this.value * 100);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Handle photo selection</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("fileInput").addEventListener("change", function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const files = Array.from(e.target.files);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const previewArea = document.getElementById("preview-area");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>previewArea.innerHTML = "";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>capturedImages = [];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>files.forEach(file =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const reader = new FileReader();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>reader.onload = function(ev) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Store base64 (strip the data:image/jpeg;base64, prefix)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const base64 = ev.target.result.split(",")[1];</p>
-<p class="p1"><span class="Apple-converted-space">                </span>capturedImages.push(base64);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Show preview thumbnail</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const img = document.createElement("img");</p>
-<p class="p1"><span class="Apple-converted-space">                </span>img.src = ev.target.result;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>previewArea.appendChild(img);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Update count and enable button</p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById("photoCount").textContent =</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>`${capturedImages.length} photo(s) ready to scan`;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById("scanBtn").disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p1"><span class="Apple-converted-space">            </span>reader.readAsDataURL(file);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>async function runScan() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Gather selections</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const dryGoods = Array.from(document.querySelectorAll(".dry-good:checked")).map(cb =&gt; cb.value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const beverages = Array.from(document.querySelectorAll(".beverage:checked")).map(cb =&gt; cb.value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const confidence = parseFloat(document.getElementById("confidence").value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const exportFormat = document.getElementById("exportFormat").value;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Show loading</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("loading").style.display = "block";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("results-card").style.display = "none";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("scanBtn").disabled = true;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const response = await fetch("/scan", {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>method: "POST",</p>
-<p class="p1"><span class="Apple-converted-space">                </span>headers: { "Content-Type": "application/json" },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>body: JSON.stringify({</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>mediaData: capturedImages,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>itemTypesToCount: dryGoods,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>beverageBottleTypes: beverages,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>minConfidenceScore: confidence,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>exportFormat: exportFormat</p>
-<p class="p1"><span class="Apple-converted-space">                </span>})</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("loading").style.display = "none";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (exportFormat === "CSV") {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Trigger CSV download</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const blob = await response.blob();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const url = URL.createObjectURL(blob);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const a = document.createElement("a");</p>
-<p class="p1"><span class="Apple-converted-space">                </span>a.href = url;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>a.download = "inventory_report.csv";</p>
-<p class="p1"><span class="Apple-converted-space">                </span>a.click();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById("results-content").innerHTML =</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>"&lt;p style='color:green; font-weight:600;'&gt;<span class="s1">✅</span> CSV downloaded successfully!&lt;/p&gt;";</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const data = await response.json();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (data.error) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>document.getElementById("results-content").innerHTML =</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>`&lt;div class='error-box'&gt;<span class="s1">⚠️</span> ${data.error}&lt;/div&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>document.getElementById("results-content").innerHTML = data.tableHTML;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("results-card").style.display = "block";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>} catch (err) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("loading").style.display = "none";</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("results-content").innerHTML =</p>
-<p class="p1"><span class="Apple-converted-space">                </span>`&lt;div class='error-box'&gt;<span class="s1">⚠️</span> Could not connect to server. Please try again.&lt;/div&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("results-card").style.display = "block";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("scanBtn").disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function resetScan() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>capturedImages = [];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("preview-area").innerHTML = "";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("photoCount").textContent = "";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("fileInput").value = "";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("results-card").style.display = "none";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("scanBtn").disabled = true;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<header>
+    <img src="/static/SPAIS.jpg" style="width:120px; height:120px; border-radius:50%; border:3px solid rgba(96,165,250,0.6); margin-bottom:10px; box-shadow: 0 0 20px rgba(96,165,250,0.4);">
+    <h1>InventorySPAIS</h1>
+    <p>by Springs AI Solutions</p>
+</header>
+<div class="container">
+
+    <!-- CARD 1: What to Scan -->
+    <div class="card">
+        <h2>① What to Scan</h2>
+        <p style="font-size:0.8rem;color:#94a3b8;margin-bottom:14px;">Tap to select what to count. Tap again to deselect.</p>
+        <div style="display:flex;gap:10px;justify-content:center;">
+            <div id="btn-bottles" onclick="toggleCategory('bottles')" style="flex:1;text-align:center;padding:16px 8px;border-radius:12px;border:2px solid rgba(96,165,250,0.3);background:rgba(255,255,255,0.05);cursor:pointer;transition:all 0.2s;">
+                <div style="font-size:1.8rem;">🍷</div>
+                <div style="font-size:0.85rem;font-weight:700;color:#93c5fd;margin-top:6px;">Bottles</div>
+            </div>
+            <div id="btn-cans" onclick="toggleCategory('cans')" style="flex:1;text-align:center;padding:16px 8px;border-radius:12px;border:2px solid rgba(96,165,250,0.3);background:rgba(255,255,255,0.05);cursor:pointer;transition:all 0.2s;">
+                <div style="font-size:1.8rem;">🥫</div>
+                <div style="font-size:0.85rem;font-weight:700;color:#93c5fd;margin-top:6px;">Cans</div>
+            </div>
+            <div id="btn-drygoods" onclick="toggleCategory('drygoods')" style="flex:1;text-align:center;padding:16px 8px;border-radius:12px;border:2px solid rgba(96,165,250,0.3);background:rgba(255,255,255,0.05);cursor:pointer;transition:all 0.2s;">
+                <div style="font-size:1.8rem;">📦</div>
+                <div style="font-size:0.85rem;font-weight:700;color:#93c5fd;margin-top:6px;">Dry Goods</div>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:12px;">
+            <span id="scan-all-hint" style="font-size:0.78rem;color:#4b5563;">Tap items above or <span onclick="selectAll()" style="color:#60a5fa;cursor:pointer;font-weight:700;">Select All</span></span>
+        </div>
+    </div>
+
+    <!-- CARD 2: Specification Confidence -->
+    <div class="card">
+        <h2>⚙️ Scan Sensitivity</h2>
+        <p style="font-size:0.8rem;color:#94a3b8;margin-bottom:14px;">How strict should the AI be? Higher = only counts items it's sure about.</p>
+        <input type="range" id="confidence" min="0.5" max="1.0" step="0.15" value="0.8">
+        <div style="display:flex;justify-content:space-between;margin-top:8px;">
+            <span style="font-size:0.78rem;color:#f87171;">🔍 Catch All</span>
+            <span style="font-size:0.78rem;color:#48bb78;">✅ Balanced</span>
+            <span style="font-size:0.78rem;color:#60a5fa;">🎯 Sure Only</span>
+        </div>
+        <div class="confidence-display" style="margin-top:10px;"><span id="confidenceValue">80</span>%</div>
+    </div>
+
+    <!-- CARD 3: Take Photos -->
+    <div class="card">
+        <h2>② Take or Choose Photos</h2>
+        <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:14px;">📷 = Take new photo &nbsp;|&nbsp; 🖼️ = Choose from library</p>
+
+        <div class="shelf-card" id="shelfCard0">
+            <div class="shelf-title">Shelf 1</div>
+            <div class="shelf-buttons">
+                <div class="btn-shelf-cam" onclick="triggerCamera(0)">📷 Camera</div>
+                <div class="btn-shelf-lib" onclick="triggerLibrary(0)">🖼️ Library</div>
+            </div>
+            <div class="shelf-status" id="status0">No photo yet</div>
+            <img id="preview0" class="shelf-preview">
+        </div>
+        <input type="file" id="camInput0" accept="image/*" capture="environment" style="display:none">
+        <input type="file" id="libInput0" accept="image/*" style="display:none">
+
+        <div class="shelf-card" id="shelfCard1">
+            <div class="shelf-title">Shelf 2</div>
+            <div class="shelf-buttons">
+                <div class="btn-shelf-cam" onclick="triggerCamera(1)">📷 Camera</div>
+                <div class="btn-shelf-lib" onclick="triggerLibrary(1)">🖼️ Library</div>
+            </div>
+            <div class="shelf-status" id="status1">No photo yet</div>
+            <img id="preview1" class="shelf-preview">
+        </div>
+        <input type="file" id="camInput1" accept="image/*" capture="environment" style="display:none">
+        <input type="file" id="libInput1" accept="image/*" style="display:none">
+
+        <div class="shelf-card" id="shelfCard2">
+            <div class="shelf-title">Shelf 3</div>
+            <div class="shelf-buttons">
+                <div class="btn-shelf-cam" onclick="triggerCamera(2)">📷 Camera</div>
+                <div class="btn-shelf-lib" onclick="triggerLibrary(2)">🖼️ Library</div>
+            </div>
+            <div class="shelf-status" id="status2">No photo yet</div>
+            <img id="preview2" class="shelf-preview">
+        </div>
+        <input type="file" id="camInput2" accept="image/*" capture="environment" style="display:none">
+        <input type="file" id="libInput2" accept="image/*" style="display:none">
+
+        <div class="photo-count" id="photoCount" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- CARD 4: Run Scan -->
+    <div class="card">
+        <h2>③ Run Scan</h2>
+        <button class="btn-primary" id="scanBtn" onclick="runScan()" disabled>
+            🔍 Scan Inventory
+        </button>
+    </div>
+
+    <div id="loading">
+        <div class="spinner"></div>
+        <p style="color:#94a3b8;">Analyzing your inventory with AI...</p>
+        <p style="font-size:0.8rem; color:#4b5563; margin-top:6px;">This may take a few seconds per shelf</p>
+    </div>
+
+    <!-- CARD 5: Verification -->
+    <div class="card" id="verify-card" style="display:none;">
+        <h2>🔍 Verify Count</h2>
+        <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:14px;">AI scan complete! Please check each count and adjust if needed.</p>
+        <div id="verify-content"></div>
+        <button class="btn-primary" onclick="confirmScan()" style="margin-top:14px;">✅ Confirm & Save Report</button>
+        <button class="btn-secondary" onclick="resetScan()">🔄 Scan Again</button>
+    </div>
+
+    <!-- CARD 6: Results -->
+    <div class="card" id="results-card" style="display:none;">
+        <h2>✅ Final Report</h2>
+        <div id="results-content"></div>
+        <button class="btn-csv" id="csvBtn" onclick="downloadCSV()" style="display:none;">
+            ⬇️ Download CSV Report
+        </button>
+        <button class="btn-secondary" onclick="resetScan()">🔄 Scan Again</button>
+    </div>
+
+</div>
+<footer>InventorySPAIS © 2025 Springs AI Solutions</footer>
+
+<script>
+    var capturedImages = [null, null, null];
+    var selectedCategories = {bottles: false, cans: false, drygoods: false};
+
+    function toggleCategory(cat) {
+        selectedCategories[cat] = !selectedCategories[cat];
+        var btn = document.getElementById('btn-' + cat);
+        if (selectedCategories[cat]) {
+            btn.style.border = '2px solid #60a5fa';
+            btn.style.background = 'rgba(96,165,250,0.15)';
+        } else {
+            btn.style.border = '2px solid rgba(96,165,250,0.3)';
+            btn.style.background = 'rgba(255,255,255,0.05)';
+        }
+    }
+
+    function selectAll() {
+        ['bottles','cans','drygoods'].forEach(function(cat) {
+            selectedCategories[cat] = true;
+            var btn = document.getElementById('btn-' + cat);
+            btn.style.border = '2px solid #60a5fa';
+            btn.style.background = 'rgba(96,165,250,0.15)';
+        });
+    }
+
+    function getSelectedTypes() {
+        var itemTypes = [];
+        var beverages = [];
+        if (selectedCategories.bottles) beverages = ['water bottle','soda bottle','juice bottle','wine bottle','beer bottle'];
+        if (selectedCategories.cans) itemTypes.push('can');
+        if (selectedCategories.drygoods) itemTypes = itemTypes.concat(['box','bag','jar']);
+        return {itemTypes: itemTypes, beverages: beverages};
+    }
+    var lastSummaryData = null;
+    var verifyData = [];
+
+    function buildVerifyScreen(summary) {
+        verifyData = JSON.parse(JSON.stringify(summary));
+        var html = '';
+        verifyData.forEach(function(item, index) {
+            var emoji = item.itemType === 'bottle' ? '🍷' : '🥫';
+            html += '<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(96,165,250,0.2);border-radius:12px;padding:14px;margin-bottom:10px;">';
+            html += '<div style="font-size:0.85rem;color:#93c5fd;font-weight:700;margin-bottom:8px;">' + emoji + ' ' + item.itemType.toUpperCase() + ' | ' + item.brand + ' | ' + item.product + ' | ' + item.size + '</div>';
+            html += '<div style="display:flex;align-items:center;gap:12px;">';
+            html += '<span style="color:#94a3b8;font-size:0.8rem;">Count:</span>';
+            html += '<button onclick="adjustCount(' + index + ',-1)" style="background:rgba(220,38,38,0.3);color:#fca5a5;border:1px solid rgba(220,38,38,0.4);border-radius:8px;width:36px;height:36px;font-size:1.2rem;cursor:pointer;">−</button>';
+            html += '<span id="count-' + index + '" style="font-size:1.5rem;font-weight:800;color:#60a5fa;min-width:30px;text-align:center;">' + item.count + '</span>';
+            html += '<button onclick="adjustCount(' + index + ',1)" style="background:rgba(26,86,219,0.3);color:#93c5fd;border:1px solid rgba(96,165,250,0.4);border-radius:8px;width:36px;height:36px;font-size:1.2rem;cursor:pointer;">+</button>';
+            html += '</div>';
+            html += '</div>';
+        });
+        document.getElementById('verify-content').innerHTML = html;
+        document.getElementById('verify-card').style.display = 'block';
+    }
+
+    function adjustCount(index, delta) {
+        verifyData[index].count = Math.max(0, verifyData[index].count + delta);
+        document.getElementById('count-' + index).textContent = verifyData[index].count;
+    }
+
+    function confirmScan() {
+        lastSummaryData = verifyData;
+        document.getElementById('verify-card').style.display = 'none';
+        document.getElementById('results-content').innerHTML = buildFinalTable(verifyData);
+        document.getElementById('csvBtn').style.display = 'block';
+        document.getElementById('results-card').style.display = 'block';
+    }
+
+    function buildFinalTable(data) {
+        var html = '<div class="summary-header"><div><div class="total">' + data.reduce(function(a,b){return a+b.count;},0) + '</div><div class="label">Total Items</div></div></div>';
+        html += '<table class="inventory-table"><thead><tr><th>Type</th><th>Brand</th><th>Product</th><th>Size</th><th>Count</th></tr></thead><tbody>';
+        data.forEach(function(item) {
+            html += '<tr><td><span class="item-type-badge">' + item.itemType + '</span></td><td>' + item.brand + '</td><td>' + item.product + '</td><td>' + item.size + '</td><td><span class="count-badge">' + item.count + '</span></td></tr>';
+        });
+        html += '</tbody></table>';
+        return html;
+    }
+
+    document.getElementById("confidence").addEventListener("input", function() {
+        document.getElementById("confidenceValue").textContent = Math.round(this.value * 100);
+    });
+
+    function toggleScanAll(checkbox) {
+        var all = document.querySelectorAll(".dry-good, .beverage");
+        all.forEach(function(cb) { cb.disabled = checkbox.checked; cb.checked = false; });
+    }
+
+    function triggerCamera(i) { document.getElementById("camInput" + i).click(); }
+    function triggerLibrary(i) { document.getElementById("libInput" + i).click(); }
+
+    function handlePhoto(index, input) {
+        if (!input.files || input.files.length === 0) return;
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+            capturedImages[index] = ev.target.result.split(",")[1];
+            var preview = document.getElementById("preview" + index);
+            preview.src = ev.target.result;
+            preview.style.display = "block";
+            document.getElementById("status" + index).textContent = "✅ Photo ready";
+            document.getElementById("shelfCard" + index).classList.add("has-photo");
+            var count = capturedImages.filter(function(x) { return x !== null; }).length;
+            document.getElementById("photoCount").textContent = count + " shelf photo(s) ready to scan";
+            document.getElementById("scanBtn").disabled = false;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    for (var i = 0; i < 3; i++) {
+        (function(idx) {
+            document.getElementById("camInput" + idx).addEventListener("change", function() { handlePhoto(idx, this); });
+            document.getElementById("libInput" + idx).addEventListener("change", function() { handlePhoto(idx, this); });
+        })(i);
+    }
+
+    async function runScan() {
+        var selected = getSelectedTypes();
+        var dryGoods = selected.itemTypes;
+        var beverages = selected.beverages;
+        var confidence = parseFloat(document.getElementById("confidence").value);
+        var photos = capturedImages.filter(function(x) { return x !== null; });
+
+        if (dryGoods.length === 0 && beverages.length === 0) {
+            var selected2 = {itemTypes: ['can','box','bag','jar'], beverages: ['water bottle','soda bottle','juice bottle','wine bottle','beer bottle']};
+            dryGoods = selected2.itemTypes;
+            beverages = selected2.beverages;
+        }
+
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("results-card").style.display = "none";
+        document.getElementById("scanBtn").disabled = true;
+        document.getElementById("csvBtn").style.display = "none";
+        lastSummaryData = null;
+
+        try {
+            var response = await fetch("/scan", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mediaData: photos, itemTypesToCount: dryGoods, beverageBottleTypes: beverages, minConfidenceScore: confidence })
+            });
+            document.getElementById("loading").style.display = "none";
+            var data = await response.json();
+            if (data.error) {
+                document.getElementById("results-content").innerHTML = "<div class='error-box'>⚠️ " + data.error + "</div>";
+                document.getElementById("results-card").style.display = "block";
+            } else {
+                buildVerifyScreen(data.summary);
+            }
+        } catch(err) {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("results-content").innerHTML = "<div class='error-box'>⚠️ Could not connect to server. Please try again.</div>";
+            document.getElementById("results-card").style.display = "block";
+        }
+        document.getElementById("scanBtn").disabled = false;
+    }
+
+    function downloadCSV() {
+        if (!lastSummaryData) return;
+        var rows = [["Item Type","Brand","Product","Size","Count","Fill Percentage"]];
+        lastSummaryData.forEach(function(item) {
+            rows.push([item.itemType, item.brand||"Unknown", item.product||"Unknown", item.size||"Unknown", item.count, item.fillPercentage !== null ? item.fillPercentage+"%" : ""]);
+        });
+        var csv = rows.map(function(r) { return r.join(","); }).join("\n");
+        var blob = new Blob([csv], { type: "text/csv" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url; var now = new Date(); var stamp = now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0") + "-" + String(now.getDate()).padStart(2,"0") + "_" + String(now.getHours()).padStart(2,"0") + "-" + String(now.getMinutes()).padStart(2,"0"); a.download = "inventory_report_" + stamp + ".csv"; a.click();
+    }
+
+    function resetScan() {
+        capturedImages = [null, null, null];
+        lastSummaryData = null;
+        for (var i = 0; i < 3; i++) {
+            document.getElementById("preview" + i).style.display = "none";
+            document.getElementById("preview" + i).src = "";
+            document.getElementById("status" + i).textContent = "No photo yet";
+            document.getElementById("camInput" + i).value = "";
+            document.getElementById("libInput" + i).value = "";
+            document.getElementById("shelfCard" + i).classList.remove("has-photo");
+        }
+        document.getElementById("photoCount").textContent = "";
+        document.getElementById("results-card").style.display = "none";
+        document.getElementById("csvBtn").style.display = "none";
+        document.getElementById("scanBtn").disabled = true;
+    }
+</script>
 </body>
 </html>
