@@ -1,8 +1,3 @@
-# Serve client sites as static files (not SPA)
 /clients/*  /clients/:splat  200
-
-# Specific pages
-/inventoryspais.html  /inventoryspais.html  200
-
-# SPA fallback for main site routes
+/inventoryspais  /inventoryspais.html  200
 /*  /index.html  200
