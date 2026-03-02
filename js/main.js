@@ -18,7 +18,8 @@ const SPARouter = {
           href.startsWith('http') ||
           href.startsWith('mailto:') ||
           href.startsWith('tel:') ||
-          link.target === '_blank') {
+          link.target === '_blank' ||
+          href.includes('products.html')) {
         return;
       }
 
