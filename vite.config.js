@@ -18,7 +18,8 @@ export default defineConfig({
                 'resume-builder': resolve(__dirname, 'resume-builder.html'),
                 'inventoryspais': resolve(__dirname, 'inventoryspais.html'),
                 'products': resolve(__dirname, 'products.html'),
-                'products': resolve(__dirname, 'products.html')
+                'cos-gpt': resolve(__dirname, 'cos-gpt.html'),
+                'cos-gpt-app': resolve(__dirname, 'cos-gpt-app.html')
             }
         }
     },

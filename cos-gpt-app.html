@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>COS-GPT — Colorado Springs Government Data Assistant</title>
+  <meta name="description" content="Ask questions about Colorado Springs city budgets, council meetings, and public records.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .stu-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-md);
+    }
+
+    .chat-interface {
+      display: block;
+      padding-top: var(--space-md);
+      padding-bottom: 6rem;
+    }
+
+    .chat-header {
+      text-align: center;
+      margin-bottom: var(--space-md);
+    }
+
+    .chat-header h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .chat-header p { color: var(--text-secondary); }
+
+    .chat-header .badge {
+      display: inline-block;
+      background: var(--gold-dim);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 0.5rem;
+    }
+
+    .questions-remaining {
+      display: inline-block;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.25);
+      color: #60a5fa;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-left: 0.5rem;
+    }
+
+    .chat-messages {
+      font-size: 14px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .message {
+      margin-bottom: var(--space-md);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.user { text-align: right; }
+
+    .message-content {
+      display: inline-block;
+      max-width: 80%;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .message.user .message-content {
+      background: #3B82F6;
+      color: #ffffff;
+    }
+
+    .message.assistant .message-content {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .message-content p { margin: 0; line-height: 1.6; }
+    .message-content p+p { margin-top: 0.75rem; }
+
+    .message-content code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      background: rgba(0,0,0,0.2);
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+
+    .message-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .typing-indicator { display: none; padding: var(--space-sm); }
+    .typing-indicator.show { display: block; }
+
+    .typing-indicator span {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      margin-right: 4px;
+      animation: typing 1.4s infinite ease-in-out both;
+    }
+
+    .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes typing {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    .chat-input-area {
+      display: flex;
+      gap: 0.5rem;
+      position: sticky;
+      bottom: 0;
+      background: var(--bg-primary);
+      padding: 0.75rem 0 1rem;
+      border-top: 1px solid var(--border-subtle);
+      z-index: 10;
+    }
+
+    .chat-input-area textarea {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      color: var(--text-primary);
+      resize: none;
+      min-height: 50px;
+      max-height: 150px;
+    }
+
+    .chat-input-area textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-dim);
+    }
+
+    .chat-input-area textarea:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .chat-input-area button { padding: 0.75rem 1.5rem; align-self: flex-end; }
+    .chat-input-area button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .suggested-questions { margin-bottom: var(--space-md); }
+
+    .suggested-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .suggested-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.85rem;
+      font-size: 0.8rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--font-body);
+    }
+
+    .chip:hover { border-color: #3B82F6; color: #3B82F6; }
+
+    /* WAITLIST WALL */
+    .waitlist-wall {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: var(--space-md);
+    }
+
+    .waitlist-wall.show { display: block; }
+
+    .waitlist-wall h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .waitlist-wall p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .waitlist-wall .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .message-sources {
+      margin-top: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .sources-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-body);
+    }
+
+    .sources-toggle:hover { color: #3B82F6; }
+    .sources-toggle .toggle-arrow { font-size: 0.65rem; transition: transform 0.2s; }
+    .sources-toggle.open .toggle-arrow { transform: rotate(90deg); }
+
+    .sources-body { display: none; margin-top: 0.6rem; }
+    .sources-body.open { display: block; }
+
+    .sources-list { list-style: disc; padding-left: 1.2rem; margin: 0; }
+
+    .source-item {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      line-height: 1.55;
+    }
+
+    .source-watch-btn {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 0.5rem;
+      padding: 0.15rem 0.55rem;
+      background: #3B82F6;
+      color: #ffffff;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    .source-watch-btn:hover { background: #2563EB; }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Springs <span>AI</span> Solutions</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="products.html">Products</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- CHAT INTERFACE -->
+  <section class="chat-interface" id="chatInterface">
+    <div class="stu-container">
+
+      <div class="chat-header">
+        <span class="badge">Free Preview</span>
+        <span class="questions-remaining" id="questionsRemaining">5 questions remaining</span>
+        <h1>COS-GPT</h1>
+        <p>Colorado Springs Government Data Assistant · <a href="cos-gpt.html" style="color: var(--gold);">Learn more →</a></p>
+      </div>
+
+      <div class="suggested-questions" id="suggestedQuestions">
+        <p class="suggested-label">Try asking:</p>
+        <div class="suggested-chips">
+          <button class="chip" onclick="fillQuestion(this)">What was the total City budget in 2024?</button>
+          <button class="chip" onclick="fillQuestion(this)">How did CSU's budget change from 2022 to 2024?</button>
+          <button class="chip" onclick="fillQuestion(this)">What did the council discuss about police funding?</button>
+          <button class="chip" onclick="fillQuestion(this)">Compare City and CSU spending in 2023</button>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="message assistant">
+          <div class="message-label">COS-GPT</div>
+          <div class="message-content">
+            <p>Hello! I'm COS-GPT, a research assistant trained on Colorado Springs government data — city budgets, Colorado Springs Utilities (CSU) financials, city council meeting transcripts, and legislative records going back to 2013.</p>
+            <p>You have <strong>5 free questions</strong> to try. Ask me anything about how your city spends money or what your council has discussed.</p>
+          </div>
+        </div>
+        <div class="typing-indicator" id="typingIndicator">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- WAITLIST WALL - shown after 5 questions -->
+      <div class="waitlist-wall" id="waitlistWall">
+        <h3>You've used your 5 free questions 🎉</h3>
+        <p>Want unlimited access to COS-GPT? Join the waitlist and be first to know when full access launches.</p>
+        <div class="btn-group">
+          <a href="mailto:SpringsAISolutions@gmail.com?subject=COS-GPT Waitlist&body=Please add me to the COS-GPT waitlist for full access." class="btn btn-primary">Join the Waitlist</a>
+          <a href="cos-gpt.html" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+
+      <div class="chat-input-area" id="chatInputArea">
+        <textarea id="chatInput" placeholder="Ask COS-GPT about Colorado Springs government data..." rows="1"></textarea>
+        <button class="btn btn-primary" id="sendBtn">Send</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="padding: var(--space-md) 0;">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 Springs AI Solutions, LLC. · <a href="cos-gpt.html">About COS-GPT</a> · <a href="mailto:SpringsAISolutions@gmail.com?subject=COS-GPT Waitlist&body=Please add me to the COS-GPT waitlist for full access.">Join Waitlist</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_URL = 'https://stu-gpt-api-production.up.railway.app';
+    const FREE_LIMIT = 5;
+    const COUNT_KEY = 'cos-gpt-question-count';
+
+    // Elements
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const waitlistWall = document.getElementById('waitlistWall');
+    const chatInputArea = document.getElementById('chatInputArea');
+    const questionsRemaining = document.getElementById('questionsRemaining');
+    const suggestedQuestions = document.getElementById('suggestedQuestions');
+
+    let conversationHistory = [];
+    let questionCount = parseInt(sessionStorage.getItem(COUNT_KEY) || '0');
+
+    // Update the counter display
+    function updateCounter() {
+      const remaining = Math.max(0, FREE_LIMIT - questionCount);
+      questionsRemaining.textContent = `${remaining} question${remaining !== 1 ? 's' : ''} remaining`;
+      if (remaining <= 1) {
+        questionsRemaining.style.background = 'rgba(239,68,68,0.1)';
+        questionsRemaining.style.borderColor = 'rgba(239,68,68,0.25)';
+        questionsRemaining.style.color = '#f87171';
+      }
+    }
+
+    // Show the waitlist wall and disable input
+    function showWaitlistWall() {
+      waitlistWall.classList.add('show');
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+      chatInput.placeholder = 'Join the waitlist for unlimited access';
+      suggestedQuestions.style.display = 'none';
+      questionsRemaining.textContent = '0 questions remaining';
+      questionsRemaining.style.background = 'rgba(239,68,68,0.1)';
+      questionsRemaining.style.borderColor = 'rgba(239,68,68,0.25)';
+      questionsRemaining.style.color = '#f87171';
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function fillQuestion(btn) {
+      if (questionCount >= FREE_LIMIT) return;
+      chatInput.value = btn.textContent;
+      chatInput.focus();
+      suggestedQuestions.style.display = 'none';
+    }
+
+    function addMessage(content, role, sources = []) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${role}`;
+
+      const labelDiv = document.createElement('div');
+      labelDiv.className = 'message-label';
+      labelDiv.textContent = role === 'user' ? 'You' : 'COS-GPT';
+
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = formatMessage(content);
+
+      if (role === 'assistant' && sources.length > 0) {
+        const validSources = sources.filter(s => s.year || s.date || s.speaker || s.video_url).slice(0, 4);
+        if (validSources.length > 0) {
+          const sourcesDiv = document.createElement('div');
+          sourcesDiv.className = 'message-sources';
+
+          const toggle = document.createElement('button');
+          toggle.className = 'sources-toggle';
+          toggle.innerHTML = `<span class="toggle-arrow">▶</span> Sources (${validSources.length})`;
+
+          const body = document.createElement('div');
+          body.className = 'sources-body';
+          body.innerHTML = '<ul class="sources-list">' + validSources.map(s => {
+            const year = s.year ? `[${s.year}] ` : '';
+            const date = s.date ? escapeHtml(s.date) + ' · ' : '';
+            const who = s.speaker ? escapeHtml(s.speaker) + ' — ' : '';
+            const snippet = escapeHtml((s.text || '').slice(0, 100)) + '…';
+            const watchBtn = s.video_url
+              ? `<a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" class="source-watch-btn">View</a>`
+              : '';
+            return `<li class="source-item">${year}${date}${who}${snippet}${watchBtn}</li>`;
+          }).join('') + '</ul>';
+
+          toggle.addEventListener('click', () => {
+            toggle.classList.toggle('open');
+            body.classList.toggle('open');
+          });
+
+          sourcesDiv.appendChild(toggle);
+          sourcesDiv.appendChild(body);
+          contentDiv.appendChild(sourcesDiv);
+        }
+      }
+
+      messageDiv.appendChild(labelDiv);
+      messageDiv.appendChild(contentDiv);
+      chatMessages.insertBefore(messageDiv, typingIndicator);
+
+      requestAnimationFrame(() => {
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    function formatMessage(text) {
+      let formatted = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      formatted = formatted.replace(/```(\w*)\n?([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+      formatted = formatted.replace(/`([^`]+)`/g, '<code>$1</code>');
+      formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      formatted = formatted.split('\n\n').map(p => `<p>${p}</p>`).join('');
+      formatted = formatted.replace(/\n/g, '<br>');
+      return formatted;
+    }
+
+    async function sendMessage() {
+      if (questionCount >= FREE_LIMIT) {
+        showWaitlistWall();
+        return;
+      }
+
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+
+      addMessage(message, 'user');
+      conversationHistory.push({ role: 'user', content: message });
+      chatInput.value = '';
+
+      // Increment count
+      questionCount++;
+      sessionStorage.setItem(COUNT_KEY, questionCount.toString());
+      updateCounter();
+
+      typingIndicator.classList.add('show');
+
+      try {
+        const response = await fetch(`${API_URL}/v1/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: conversationHistory,
+            top_k: 5
+          })
+        });
+
+        if (!response.ok) throw new Error(`API error: ${response.status}`);
+
+        const data = await response.json();
+        const assistantMessage = data.answer;
+        const sources = data.sources || [];
+
+        conversationHistory.push({ role: 'assistant', content: assistantMessage });
+        addMessage(assistantMessage, 'assistant', sources);
+
+      } catch (error) {
+        console.error('Error:', error);
+        addMessage('Sorry, I encountered an error connecting to the API. Please try again.', 'assistant');
+        // Don't count failed requests against the limit
+        questionCount--;
+        sessionStorage.setItem(COUNT_KEY, questionCount.toString());
+        updateCounter();
+      } finally {
+        typingIndicator.classList.remove('show');
+        if (questionCount >= FREE_LIMIT) {
+          showWaitlistWall();
+        } else {
+          chatInput.disabled = false;
+          sendBtn.disabled = false;
+          chatInput.focus();
+        }
+      }
+    }
+
+    // Event listeners
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    chatInput.addEventListener('input', () => {
+      chatInput.style.height = 'auto';
+      chatInput.style.height = Math.min(chatInput.scrollHeight, 150) + 'px';
+    });
+
+    // Initialize
+    updateCounter();
+    if (questionCount >= FREE_LIMIT) {
+      showWaitlistWall();
+    }
+  </script>
+
+</body>
+</html>
