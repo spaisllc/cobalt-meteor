@@ -1597,3 +1597,11 @@ body>* {
   min-height: 120px;
 }
 
+
+/* Products Dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown .dropdown-menu { display: none; position: absolute; top: 100%; right: 0; background: #0a0f1e; border: 1px solid rgba(96,165,250,0.2); border-radius: 10px; padding: 8px; min-width: 200px; z-index: 999; }
+.nav-dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu li { list-style: none; }
+.dropdown-menu li a { display: block; padding: 10px 14px; color: #e2e8f0; text-decoration: none; border-radius: 6px; font-size: 0.9rem; white-space: nowrap; }
+.dropdown-menu li a:hover { background: rgba(96,165,250,0.1); color: #60a5fa; }
