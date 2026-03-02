@@ -19,7 +19,9 @@ const SPARouter = {
           href.startsWith('mailto:') ||
           href.startsWith('tel:') ||
           link.target === '_blank' ||
-          href.includes('products.html')) {
+          href.includes('products.html') ||
+          href.includes('cos-gpt.html') ||
+          href.includes('cos-gpt-app.html')) {
         return;
       }
 
