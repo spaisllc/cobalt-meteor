@@ -306,6 +306,17 @@
   </script>
   <script type="module" src="js/main.js"></script>
   <script type="module" src="js/visualVoice.js"></script>
+<script>
+document.querySelector(".nav-dropdown > a").addEventListener("click", function(e) {
+  e.preventDefault();
+  this.parentElement.classList.toggle("open");
+});
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".nav-dropdown")) {
+    document.querySelectorAll(".nav-dropdown").forEach(function(d) { d.classList.remove("open"); });
+  }
+});
+</script>
 </body>
 
 </html>
