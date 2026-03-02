@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products — Springs AI Solutions</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .products-hero {
+      padding: 140px 24px 60px;
+      text-align: center;
+    }
+    .products-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+    .products-hero p {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      max-width: 900px;
+      margin: 60px auto 100px;
+      padding: 0 24px;
+    }
+    .product-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(96,165,250,0.2);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .product-card:hover {
+      border-color: rgba(96,165,250,0.5);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .product-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .product-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid rgba(96,165,250,0.4);
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(96,165,250,0.3);
+    }
+    .product-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #e2e8f0;
+    }
+    .product-card p {
+      color: #64748b;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .product-badge {
+      display: inline-block;
+      background: rgba(26,86,219,0.2);
+      border: 1px solid rgba(96,165,250,0.3);
+      color: #60a5fa;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .product-badge.coming-soon {
+      background: rgba(245,158,11,0.1);
+      border-color: rgba(245,158,11,0.3);
+      color: #f59e0b;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Springs <span>AI</span> Solutions</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="products.html" style="color:#60a5fa;">Products</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="products-hero">
+    <h1>Our Products</h1>
+    <p>AI-powered tools built for real-world problems. No fluff, just solutions that work.</p>
+  </div>
+
+  <div class="products-grid">
+    <a href="/inventoryspais.html" target="_blank" class="product-card">
+      <img src="https://inventoryspais.springsaisolutions.com/static/SPAIS.jpg" alt="InventorySPAIS">
+      <h2>InventorySPAIS</h2>
+      <p>AI inventory scanner for restaurants. Scan shelves, count bottles, cans, and dry goods in seconds. Export time-stamped CSV reports.</p>
+      <span class="product-badge">🐺 Live Now</span>
+    </a>
+
+    <div class="product-card" style="cursor:default;">
+      <div class="product-icon">🏛️</div>
+      <h2>COS-GPT</h2>
+      <p>AI-powered access to Colorado Springs city records, meeting minutes, budgets, and public data. Government transparency for everyone.</p>
+      <span class="product-badge coming-soon">⏳ Coming Soon</span>
+    </div>
+  </div>
+
+  <footer style="text-align:center; padding:40px 24px; border-top:1px solid rgba(96,165,250,0.08); color:#4b5563; font-size:0.8rem;">
+    Springs AI Solutions © 2025 · <a href="mailto:SpringsAISolutions@gmail.com" style="color:#60a5fa;">SpringsAISolutions@gmail.com</a>
+  </footer>
+
+</body>
+</html>
