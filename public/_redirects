@@ -1,3 +1,2 @@
 /clients/*  /clients/:splat  200
 /inventoryspais  /inventoryspais.html  200
-/*  /index.html  200
