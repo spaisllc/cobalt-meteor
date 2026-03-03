@@ -496,7 +496,7 @@
         xBody.style.cssText = 'font-size:0.82rem; line-height:1.6; color:#cbd5e1;';
 
         // Convert markdown-style links to real links
-        let postText = (xPost.text || '').replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,
+        let postText = (xPost.text || '').replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g,
           '<a href="$2" target="_blank" rel="noopener" style="color:#3B82F6;">$1</a>');
         // Bold
         postText = postText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
