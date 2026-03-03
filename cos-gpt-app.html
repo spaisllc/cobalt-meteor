@@ -434,7 +434,7 @@
       suggestedQuestions.style.display = 'none';
     }
 
-    function addMessage(content, role, sources = []) {
+    function addMessage(content, role, sources = [], xPosts = []) {
       const messageDiv = document.createElement('div');
       messageDiv.className = `message ${role}`;
 
@@ -478,6 +478,42 @@
           sourcesDiv.appendChild(body);
           contentDiv.appendChild(sourcesDiv);
         }
+      }
+
+      // X Posts section
+      if (role === 'assistant' && xPosts.length > 0) {
+        const xPost = xPosts[0];
+        const xDiv = document.createElement('div');
+        xDiv.className = 'message-sources';
+        xDiv.style.marginTop = '0.75rem';
+
+        const xToggle = document.createElement('button');
+        xToggle.className = 'sources-toggle';
+        xToggle.innerHTML = '<span class="toggle-arrow">▶</span> 𝕏 Recent Posts';
+
+        const xBody = document.createElement('div');
+        xBody.className = 'sources-body';
+        xBody.style.cssText = 'font-size:0.82rem; line-height:1.6; color:#cbd5e1;';
+
+        // Convert markdown-style links to real links
+        let postText = (xPost.text || '').replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,
+          '<a href="$2" target="_blank" rel="noopener" style="color:#3B82F6;">$1</a>');
+        // Bold
+        postText = postText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        // Line breaks
+        postText = postText.replace(/
+/g, '<br>');
+
+        xBody.innerHTML = postText;
+
+        xToggle.addEventListener('click', () => {
+          xToggle.classList.toggle('open');
+          xBody.classList.toggle('open');
+        });
+
+        xDiv.appendChild(xToggle);
+        xDiv.appendChild(xBody);
+        contentDiv.appendChild(xDiv);
       }
 
       messageDiv.appendChild(labelDiv);
@@ -541,9 +577,10 @@
         const data = await response.json();
         const assistantMessage = data.answer;
         const sources = data.sources || [];
+        const xPosts = data.x_posts || [];
 
         conversationHistory.push({ role: 'assistant', content: assistantMessage });
-        addMessage(assistantMessage, 'assistant', sources);
+        addMessage(assistantMessage, 'assistant', sources, xPosts);
 
       } catch (error) {
         console.error('Error:', error);
