@@ -501,8 +501,7 @@
         // Bold
         postText = postText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
         // Line breaks
-        postText = postText.replace(/
-/g, '<br>');
+        postText = postText.split('\n').join('<br>');
 
         xBody.innerHTML = postText;
 
