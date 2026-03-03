@@ -811,7 +811,7 @@
 
         function renderResults(data) {
             // Leapter may wrap the result — handle both direct and nested responses
-            const resume = data.result ?? data.output ?? data;
+            const resume = data.outputData?.resume_json_payload ?? data.result ?? data.output ?? data;
 
             const basics = resume.basics ?? {};
             const skills = resume.core_skills ?? resume.skills ?? [];
