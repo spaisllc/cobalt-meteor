@@ -495,11 +495,21 @@
         xBody.className = 'sources-body';
         xBody.style.cssText = 'font-size:0.82rem; line-height:1.6; color:#cbd5e1;';
 
+        // Skip if Grok couldn't find anything relevant
+        const noResults = /no recent.*found|no posts.*found|did not find|could not find|unable to find/i.test(xPost.text || '');
+        if (noResults) continue;
+
         // Convert markdown-style links to real links
         let postText = (xPost.text || '')
           .replace(/\[\[(\d+)\]\]/g, '')  // remove [[1]] citation numbers
           .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g,
-          '<a href="$2" target="_blank" rel="noopener" style="color:#3B82F6;">$1</a>');
+          '<a href="$2" target="_blank" rel="noopener" style="color:#3B82F6; text-decoration:underline;">$1</a>')
+          // Convert bare URLs in parentheses: (https://...)
+          .replace(/\((https?:\/\/[^\s)]+)\)/g,
+          ' <a href="$1" target="_blank" rel="noopener" style="color:#3B82F6; text-decoration:underline;">🔗</a>')
+          // Convert any remaining bare URLs
+          .replace(/(^|\s)(https?:\/\/[^\s<]+)/g,
+          '$1<a href="$2" target="_blank" rel="noopener" style="color:#3B82F6; text-decoration:underline;">$2</a>');
         // Bold
         postText = postText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
         // Line breaks
