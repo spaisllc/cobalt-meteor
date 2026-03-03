@@ -497,7 +497,7 @@
 
         // Skip if Grok couldn't find anything relevant
         const noResults = /no recent.*found|no posts.*found|did not find|could not find|unable to find/i.test(xPost.text || '');
-        if (noResults) continue;
+        if (noResults) return;
 
         // Convert markdown-style links to real links
         let postText = (xPost.text || '')
