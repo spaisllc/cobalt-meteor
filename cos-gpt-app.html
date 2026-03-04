@@ -482,66 +482,34 @@
 
       // X Posts section — parse Grok text into individual post cards
       if (role === 'assistant' && xPosts.length > 0) {
-        // Try to parse structured JSON cards from Grok
-        let parsedPosts = [];
-        try {
-          const rawText = xPosts[0].text || '';
-          const noResults = /no recent.*found|no posts.*found|did not find|could not find|unable to find/i.test(rawText);
-          if (!noResults) {
-            const jsonMatch = rawText.match(/\[\s*\{[\s\S]*\}\s*\]/);
-            if (jsonMatch) {
-              parsedPosts = JSON.parse(jsonMatch[0]);
-            }
-          }
-        } catch(e) { parsedPosts = []; }
+        const rawText = xPosts[0].text || '';
+        const noResults = /no recent.*found|no posts.*found|did not find|could not find|unable to find/i.test(rawText);
 
-        if (parsedPosts.length > 0) {
+        if (!noResults) {
+          let formattedText = rawText;
+          // Convert markdown links [text](url) to clickable links
+          formattedText = formattedText.replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:#1d9bf0;text-decoration:none;">$1</a>');
+          // Convert bare https:// links to clickable links
+          formattedText = formattedText.replace(/(?<!href=")(https?:\/\/[^\s<"]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:#1d9bf0;text-decoration:none;">$1</a>');
+          // Bold
+          formattedText = formattedText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+          // Strip [[n]] citation numbers
+          formattedText = formattedText.replace(/\[\[\d+\]\]/g, '');
+          // Convert newlines to <br>
+          formattedText = formattedText.replace(/\n/g, '<br>');
+
           const xDiv = document.createElement('div');
           xDiv.className = 'message-sources';
           xDiv.style.marginTop = '0.75rem';
 
           const xToggle = document.createElement('button');
           xToggle.className = 'sources-toggle';
-          xToggle.innerHTML = '<span class="toggle-arrow">▶</span> 𝕏 Recent Posts (' + parsedPosts.length + ')';
+          xToggle.innerHTML = '<span class="toggle-arrow">▶</span> 𝕏 Recent Posts';
 
           const xBody = document.createElement('div');
           xBody.className = 'sources-body';
-          xBody.style.cssText = 'margin-top:0.5rem;display:flex;flex-direction:column;gap:10px;';
-
-          parsedPosts.forEach(post => {
-            const card = document.createElement('div');
-            card.style.cssText = 'background:#0f1923;border:1px solid #2f3336;border-radius:12px;padding:12px 16px;font-size:0.82rem;line-height:1.6;color:#e7e9ea;';
-
-            const header = document.createElement('div');
-            header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;';
-
-            const handle = document.createElement('span');
-            handle.style.cssText = 'color:#1d9bf0;font-weight:600;font-size:0.83rem;';
-            handle.textContent = post.handle || '';
-
-            const date = document.createElement('span');
-            date.style.cssText = 'color:#6e767d;font-size:0.75rem;';
-            date.textContent = post.date || '';
-
-            header.appendChild(handle);
-            header.appendChild(date);
-
-            const body = document.createElement('p');
-            body.style.cssText = 'margin:0 0 8px 0;color:#e7e9ea;';
-            body.textContent = post.text || '';
-
-            const link = document.createElement('a');
-            link.href = post.url || '#';
-            link.target = '_blank';
-            link.rel = 'noopener';
-            link.style.cssText = 'color:#1d9bf0;font-size:0.78rem;text-decoration:none;';
-            link.textContent = 'View on 𝕏 →';
-
-            card.appendChild(header);
-            card.appendChild(body);
-            card.appendChild(link);
-            xBody.appendChild(card);
-          });
+          xBody.style.cssText = 'margin-top:0.5rem;padding:12px 16px;background:#0f1923;border:1px solid #2f3336;border-radius:12px;font-size:0.82rem;line-height:1.8;color:#e7e9ea;';
+          xBody.innerHTML = formattedText;
 
           xToggle.addEventListener('click', () => {
             xToggle.classList.toggle('open');
@@ -551,7 +519,7 @@
           xDiv.appendChild(xToggle);
           xDiv.appendChild(xBody);
           contentDiv.appendChild(xDiv);
-        } // end if parsedPosts.length > 0
+        }
       }
 
       messageDiv.appendChild(labelDiv);
