@@ -20,7 +20,6 @@ export default defineConfig({
                 'products': resolve(__dirname, 'products.html'),
                 'cos-gpt': resolve(__dirname, 'cos-gpt.html'),
                 'cos-gpt-app': resolve(__dirname, 'cos-gpt-app.html'),
-                'resume-generator': resolve(__dirname, 'resume-generator.html')
             }
         }
     },

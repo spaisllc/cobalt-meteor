@@ -756,24 +756,34 @@
             const errorBanner = document.getElementById("error-banner");
 
             // Collect form data
-            const payload = {
-                linkedin_data: document.getElementById("linkedin").value.trim(),
-                indeed_data: document.getElementById("indeed").value.trim(),
-                old_resume_text: document.getElementById("old-resume").value.trim(),
-                interview_transcript: [
-                    document.getElementById("q1").value.trim(),
-                    document.getElementById("q2").value.trim(),
-                    document.getElementById("q3").value.trim()
-                ].filter(Boolean).join("\n\n"),
-                target_job_description: document.getElementById("job-description").value.trim()
-            };
+            // Combine all resume inputs into one rich resume string
+            const linkedinText = document.getElementById("linkedin").value.trim();
+            const indeedText = document.getElementById("indeed").value.trim();
+            const oldResumeText = document.getElementById("old-resume").value.trim();
+            const q1 = document.getElementById("q1").value.trim();
+            const q2 = document.getElementById("q2").value.trim();
+            const q3 = document.getElementById("q3").value.trim();
+            const jobPosting = document.getElementById("job-description").value.trim();
+
+            // Build combined resume text from all inputs
+            const resumeParts = [];
+            if (oldResumeText) resumeParts.push("=== EXISTING RESUME ===\n" + oldResumeText);
+            if (linkedinText) resumeParts.push("=== LINKEDIN / PROFILE ===\n" + linkedinText);
+            if (indeedText) resumeParts.push("=== ADDITIONAL PROFILE ===\n" + indeedText);
+            if (q1) resumeParts.push("=== BIGGEST CAREER WIN ===\n" + q1);
+            if (q2) resumeParts.push("=== WORK I LOVE ===\n" + q2);
+            if (q3) resumeParts.push("=== TOP SKILLS ===\n" + q3);
+
+            const resume = resumeParts.join("\n\n");
+
+            const payload = { resume, jobPosting };
 
             // Basic validation
-            if (!payload.target_job_description) {
+            if (!jobPosting) {
                 showError("Please paste a job description in Step 3 before generating.");
                 return;
             }
-            if (!payload.linkedin_data && !payload.old_resume_text && !payload.interview_transcript) {
+            if (!resume) {
                 showError("Please fill in at least your background (Step 1) or interview answers (Step 2) to get started.");
                 return;
             }
@@ -785,21 +795,18 @@
             window.scrollTo({ top: spinner.offsetTop - 100, behavior: "smooth" });
 
             try {
-                const response = await fetch(`${API_BASE}/v1/resume/generate`, {
+                const response = await fetch(WORKER_URL, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-api-key": INTERNAL_KEY
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 });
 
+                const data = await response.json();
+
                 if (!response.ok) {
-                    const err = await response.json().catch(() => ({}));
-                    throw new Error(err.detail || `Server error: ${response.status}`);
+                    throw new Error(data.error || `Server error: ${response.status}`);
                 }
 
-                const data = await response.json();
                 renderResults(data);
 
             } catch (err) {
@@ -811,29 +818,71 @@
         }
 
         function renderResults(data) {
-            // Leapter may wrap the result — handle both direct and nested responses
-            const resume = data.outputData?.resume_json_payload ?? data.result ?? data.output ?? data;
+            // Mercury 2 returns data.resume as plain text
+            const rawResume = data.resume || "";
 
-            const basics = resume.basics ?? {};
-            const skills = resume.core_skills ?? resume.skills ?? [];
-            const summary = basics.professional_summary ?? basics.summary ?? "";
+            // Split into lines for parsing
+            const lines = rawResume.split("\n");
+            let nameGuess = "";
+            let titleGuess = "";
+            let summaryLines = [];
+            let skillLines = [];
+            let inSummary = false;
+            let inSkills = false;
 
-            // Populate unlocked preview
-            document.getElementById("resume-name").textContent = basics.name ?? "Your Name";
-            document.getElementById("resume-title").textContent = basics.title ?? basics.label ?? "Professional";
-            document.getElementById("summary-edit").value = summary;
+            lines.forEach((line, i) => {
+                const trimmed = line.trim();
+                if (!trimmed) { inSummary = false; inSkills = false; return; }
 
-            // Render skill tags
+                // Grab name from first non-empty, non-header line
+                if (!nameGuess && i < 5 && !trimmed.startsWith("#") && trimmed.length < 60) {
+                    nameGuess = trimmed.replace(/[*_#]/g, "").trim();
+                    return;
+                }
+
+                // Detect section headers
+                const lc = trimmed.toLowerCase().replace(/[*#_]/g, "").trim();
+                const isHeader = trimmed.startsWith("#") || /^[A-Z][A-Z\s&]{4,}$/.test(trimmed) || (trimmed.startsWith("**") && trimmed.endsWith("**"));
+
+                if (isHeader) {
+                    inSummary = lc.includes("summary") || lc.includes("profile") || lc.includes("objective");
+                    inSkills = lc.includes("skill") || lc.includes("competenc") || lc.includes("expertise") || lc.includes("proficien");
+                    if (!titleGuess && i > 0 && i < 6) titleGuess = trimmed.replace(/[*#_]/g, "").trim();
+                    return;
+                }
+
+                if (inSummary) summaryLines.push(trimmed);
+                if (inSkills) skillLines.push(trimmed);
+            });
+
+            // Populate name + title
+            document.getElementById("resume-name").textContent = nameGuess || "Your Name";
+            document.getElementById("resume-title").textContent = titleGuess || "Professional";
+
+            // Summary — fallback to first 400 chars if none found
+            document.getElementById("summary-edit").value = summaryLines.join(" ") || rawResume.slice(0, 400);
+
+            // Skills — split by commas, bullets, pipes, dashes
             const skillsContainer = document.getElementById("skills-preview");
             skillsContainer.innerHTML = "";
-            (Array.isArray(skills) ? skills : []).slice(0, 12).forEach(skill => {
+            const skillText = skillLines.join(" ");
+            const parsedSkills = skillText
+                .split(/[,|•\-]/)
+                .map(s => s.replace(/[*#_]/g, "").trim())
+                .filter(s => s.length > 2 && s.length < 40)
+                .slice(0, 12);
+
+            parsedSkills.forEach(skill => {
                 const tag = document.createElement("span");
                 tag.className = "skill-tag";
                 tag.textContent = skill;
                 skillsContainer.appendChild(tag);
             });
 
-            // Show results, hide form area slightly
+            // Store full resume for copy button
+            window._fullResumeText = rawResume;
+
+            // Show results
             document.getElementById("results-section").classList.add("visible");
             document.getElementById("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
         }
