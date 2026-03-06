@@ -620,7 +620,7 @@
 
             <!-- UNLOCKED: Summary + Skills -->
             <div class="resume-preview-unlocked reveal">
-                <h3>✅ Your Tailored Resume</h3>
+                <h3>✅ Unlocked Preview</h3>
 
                 <div id="resume-name">Your Name</div>
                 <div id="resume-title">Professional Title</div>
@@ -737,8 +737,6 @@
     <!-- CALENDLY -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    <!-- DOCX for Word export -->
-    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.min.js"></script>
 
     <script type="module" src="js/main.js"></script>
 
@@ -749,7 +747,8 @@
         // The proxy holds the Leapter API key — it never touches the browser.
         // ============================================================
 
-        window.WORKER_URL = "https://springs-resume-generator.springsaisolutions.workers.dev";
+        const API_BASE = "https://stu-gpt-api-production.up.railway.app";
+        const INTERNAL_KEY = "sk-springs-web";
 
         async function generateResume() {
             const btn = document.getElementById("generate-btn");
@@ -796,7 +795,7 @@
             window.scrollTo({ top: spinner.offsetTop - 100, behavior: "smooth" });
 
             try {
-                const response = await fetch(window.WORKER_URL, {
+                const response = await fetch(WORKER_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
@@ -880,12 +879,8 @@
                 skillsContainer.appendChild(tag);
             });
 
-            // Store full resume for copy/download buttons
+            // Store full resume for copy button
             window._fullResumeText = rawResume;
-
-            // Populate full resume display box
-            const fullBox = document.getElementById("full-resume-output");
-            if (fullBox) fullBox.textContent = rawResume;
 
             // Show results
             document.getElementById("results-section").classList.add("visible");
@@ -907,178 +902,80 @@
             document.getElementById("results-section").classList.remove("visible");
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
-
-        function copyFullResume() {
-            const text = window._fullResumeText || document.getElementById("full-resume-output").textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                const orig = btn.textContent;
-                btn.textContent = "✅ Copied!";
-                setTimeout(() => btn.textContent = orig, 2000);
-            });
-        }
-
-        function downloadPDF() {
-            const resumeText = window._fullResumeText || "";
-            const name = document.getElementById("resume-name").textContent || "Resume";
-            
-            // Open a clean print window
-            const win = window.open("", "_blank");
-            win.document.write(`<!DOCTYPE html>
-<html><head>
-<title>${name} — Resume</title>
-<style>
-  body { font-family: Georgia, serif; font-size: 12pt; line-height: 1.6; color: #111; max-width: 750px; margin: 40px auto; padding: 0 20px; }
-  h1 { font-size: 22pt; margin-bottom: 4px; }
-  h2 { font-size: 13pt; border-bottom: 1px solid #ccc; padding-bottom: 4px; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
-  p, li { font-size: 11pt; }
-  @media print { body { margin: 0; } }
-</style>
-</head><body>
-<pre style="white-space: pre-wrap; font-family: Georgia, serif; font-size: 11pt; line-height: 1.7;">${resumeText.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</pre>
-<script>window.onload = function() { window.print(); }<\/script>
-
-<!-- DOWNLOAD BUTTONS - injected separately -->
-<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.min.js"></script>
-<script>
-(function() {
-    // Wait for results section to become visible, then inject buttons
-    const observer = new MutationObserver(function() {
-        const resultsSection = document.getElementById('results-section');
-        if (resultsSection && resultsSection.classList.contains('visible')) {
-            injectDownloadUI();
-        }
-    });
-    observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
-
-    function injectDownloadUI() {
-        if (document.getElementById('download-buttons-injected')) return;
-
-        // Create full resume display box
-        const fullResumeBox = document.createElement('div');
-        fullResumeBox.id = 'download-buttons-injected';
-        fullResumeBox.style.cssText = 'max-width:860px;margin:0 auto 40px;padding:0 24px;';
-        fullResumeBox.innerHTML = `
-            <div style="background:#1e293b;border:1px solid #1e3a5f;border-radius:8px;padding:32px;margin-bottom:20px;">
-                <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#d4af37;margin-bottom:16px;">📄 Your Full Tailored Resume</div>
-                <div id="full-resume-display" style="white-space:pre-wrap;font-family:'Lato',sans-serif;font-size:14px;line-height:1.8;color:#e2e8f0;min-height:100px;">Loading...</div>
-            </div>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-                <button id="btn-copy-full" style="background:transparent;border:1px solid #d4af37;color:#d4af37;padding:12px 28px;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;">📋 Copy</button>
-                <button id="btn-pdf" style="background:linear-gradient(135deg,#d4af37,#e8cc6a);border:none;color:#0f172a;padding:12px 28px;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;">⬇ Download PDF</button>
-                <button id="btn-word" style="background:transparent;border:1px solid #4a90d9;color:#4a90d9;padding:12px 28px;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;">⬇ Download Word</button>
-            </div>
-        `;
-
-        // Insert before footer
-        const footer = document.querySelector('footer');
-        if (footer) footer.parentNode.insertBefore(fullResumeBox, footer);
-
-        // Populate resume text
-        const resumeText = window._fullResumeText || '';
-        document.getElementById('full-resume-display').textContent = resumeText || 'Generate a resume above to see it here.';
-
-        // Wire up buttons
-        document.getElementById('btn-copy-full').onclick = function() {
-            navigator.clipboard.writeText(window._fullResumeText || '').then(() => {
-                this.textContent = '✅ Copied!';
-                setTimeout(() => this.textContent = '📋 Copy', 2000);
-            });
-        };
-
-        document.getElementById('btn-pdf').onclick = function() {
-            const text = window._fullResumeText || '';
-            const name = document.getElementById('resume-name').textContent || 'Resume';
-            const win = window.open('', '_blank');
-            win.document.write(`<!DOCTYPE html><html><head><title>${name}</title>
-            <style>body{font-family:Georgia,serif;font-size:12pt;line-height:1.7;color:#111;max-width:750px;margin:40px auto;padding:0 20px;}
-            @media print{body{margin:0;}}</style></head><body>
-            <pre style="white-space:pre-wrap;font-family:Georgia,serif;font-size:11pt;line-height:1.7;">${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>
-            <script>window.onload=function(){window.print();}<\/script></body></html>`);
-            win.document.close();
-        };
-
-        document.getElementById('btn-word').onclick = function() {
-            if (!window.docx) { alert('Word library still loading, try again in a moment.'); return; }
-            const { Document, Packer, Paragraph, TextRun, HeadingLevel } = window.docx;
-            const text = window._fullResumeText || '';
-            const name = document.getElementById('resume-name').textContent || 'Resume';
-            const lines = text.split('\n');
-            const children = lines.map(line => {
-                const t = line.trim();
-                if (!t) return new Paragraph({text:''});
-                const isHeader = /^#{1,3}\s/.test(t) || /^[A-Z][A-Z\s&]{4,}$/.test(t);
-                const clean = t.replace(/^#+\s*/,'').replace(/\*\*/g,'');
-                if (isHeader) return new Paragraph({text:clean, heading:HeadingLevel.HEADING_2, spacing:{before:200,after:100}});
-                return new Paragraph({children:[new TextRun({text:clean,size:22})],spacing:{after:80}});
-            });
-            const doc = new Document({sections:[{children}]});
-            Packer.toBlob(doc).then(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = name.replace(/\s+/g,'_') + '_Resume.docx';
-                a.click();
-                URL.revokeObjectURL(url);
-            });
-        };
-    }
-})();
-</script>
-</body></html>`);
-            win.document.close();
-        }
-
-        function downloadWord() {
-            const resumeText = window._fullResumeText || "";
-            const name = document.getElementById("resume-name").textContent || "Resume";
-
-            if (!window.docx) {
-                alert("Word export library not loaded yet — please try again in a moment.");
-                return;
-            }
-
-            const { Document, Packer, Paragraph, TextRun, HeadingLevel } = window.docx;
-
-            // Split into paragraphs and build docx content
-            const lines = resumeText.split("\n");
-            const children = lines.map(line => {
-                const trimmed = line.trim();
-                if (!trimmed) return new Paragraph({ text: "" });
-
-                // Detect headers (ALL CAPS or starts with ##)
-                const isHeader = /^#{1,3}\s/.test(trimmed) || /^[A-Z][A-Z\s&]{4,}$/.test(trimmed);
-                const cleanLine = trimmed.replace(/^#+\s*/, "").replace(/\*\*/g, "");
-
-                if (isHeader) {
-                    return new Paragraph({
-                        text: cleanLine,
-                        heading: HeadingLevel.HEADING_2,
-                        spacing: { before: 200, after: 100 }
-                    });
-                }
-
-                return new Paragraph({
-                    children: [new TextRun({ text: cleanLine, size: 22 })],
-                    spacing: { after: 80 }
-                });
-            });
-
-            const doc = new Document({
-                sections: [{ children }]
-            });
-
-            Packer.toBlob(doc).then(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = `${name.replace(/\s+/g, "_")}_Resume.docx`;
-                a.click();
-                URL.revokeObjectURL(url);
-            });
-        }
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.min.js"></script>
+    <script>
+    window.downloadPDF = function() {
+        var text = window._fullResumeText || "";
+        var name = document.getElementById("resume-name").textContent || "Resume";
+        var safe = text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        var win = window.open("", "_blank");
+        var html = "<!DOCTYPE html><html><head><title>" + name + "</title>"
+            + "<style>body{font-family:Georgia,serif;font-size:12pt;line-height:1.7;color:#111;max-width:750px;margin:40px auto;padding:0 20px;}"
+            + "@media print{body{margin:0;}}</style></head><body>"
+            + "<pre style='white-space:pre-wrap;font-family:Georgia,serif;font-size:11pt;line-height:1.7;'>" + safe + "</pre>"
+            + "<scr" + "ipt>window.onload=function(){window.print();}</" + "script></body></html>";
+        win.document.write(html);
+        win.document.close();
+    };
+
+    window.downloadWord = function() {
+        if (!window.docx) { alert("Word library still loading, try again in a second."); return; }
+        var D = window.docx;
+        var text = window._fullResumeText || "";
+        var name = document.getElementById("resume-name").textContent || "Resume";
+        var lines = text.split("\n");
+        var children = lines.map(function(line) {
+            var t = line.trim();
+            if (!t) return new D.Paragraph({ text: "" });
+            var isHeader = /^[A-Z][A-Z\s&]{4,}$/.test(t) || /^#{1,3}\s/.test(t);
+            var clean = t.replace(/^#+\s*/, "").replace(/\*\*/g, "");
+            if (isHeader) return new D.Paragraph({ text: clean, heading: D.HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 } });
+            return new D.Paragraph({ children: [new D.TextRun({ text: clean, size: 22 })], spacing: { after: 80 } });
+        });
+        var doc = new D.Document({ sections: [{ children: children }] });
+        D.Packer.toBlob(doc).then(function(blob) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = name.replace(/\s+/g, "_") + "_Resume.docx";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    };
+
+    window.copyFullResume = function() {
+        navigator.clipboard.writeText(window._fullResumeText || "").then(function() {
+            var btn = document.getElementById("btn-copy-full");
+            if (btn) { btn.textContent = "Copied!"; setTimeout(function(){ btn.textContent = "Copy to Clipboard"; }, 2000); }
+        });
+    };
+
+    var _injected = false;
+    var _observer = new MutationObserver(function() {
+        var s = document.getElementById("results-section");
+        if (s && s.classList.contains("visible") && !_injected) {
+            _injected = true;
+            var box = document.createElement("div");
+            box.style.cssText = "max-width:860px;margin:0 auto 48px;padding:0 24px;";
+            box.innerHTML = "<div style='background:#1e293b;border:1px solid #1e3a5f;border-radius:6px;padding:28px;margin-bottom:20px;'>"
+                + "<div style='font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#d4af37;margin-bottom:14px;'>Your Full Tailored Resume</div>"
+                + "<div id='full-resume-display' style='white-space:pre-wrap;font-family:Lato,sans-serif;font-size:14px;line-height:1.8;color:#e2e8f0;'></div>"
+                + "</div>"
+                + "<div style='display:flex;gap:12px;flex-wrap:wrap;justify-content:center;'>"
+                + "<button id='btn-copy-full' onclick='window.copyFullResume()' style='background:transparent;border:1px solid #d4af37;color:#d4af37;padding:12px 24px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;'>Copy to Clipboard</button>"
+                + "<button onclick='window.downloadPDF()' style='background:linear-gradient(135deg,#d4af37,#e8cc6a);border:none;color:#0f172a;padding:12px 24px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;'>Download PDF</button>"
+                + "<button onclick='window.downloadWord()' style='background:transparent;border:1px solid #4a90d9;color:#4a90d9;padding:12px 24px;font-family:Lato,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;'>Download Word</button>"
+                + "</div>";
+            var footer = document.querySelector("footer.footer");
+            if (footer) { footer.parentNode.insertBefore(box, footer); }
+            var display = document.getElementById("full-resume-display");
+            if (display) { display.textContent = window._fullResumeText || ""; }
+        }
+    });
+    _observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ["class"] });
+    </script>
 </body>
 
 </html>
