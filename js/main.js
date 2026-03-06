@@ -20,6 +20,7 @@ const SPARouter = {
           href.startsWith('tel:') ||
           link.target === '_blank' ||
           href.includes('products.html') ||
+            href.includes('resume-generator.html') ||
           href.includes('cos-gpt.html') ||
           href.includes('cos-gpt-app.html')) {
         return;
