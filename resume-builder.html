@@ -749,8 +749,7 @@
         // The proxy holds the Leapter API key — it never touches the browser.
         // ============================================================
 
-        const API_BASE = "https://stu-gpt-api-production.up.railway.app";
-        const INTERNAL_KEY = "sk-springs-web";
+        const WORKER_URL = "https://springs-resume-generator.springsaisolutions.workers.dev";
 
         async function generateResume() {
             const btn = document.getElementById("generate-btn");
