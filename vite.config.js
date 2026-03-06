@@ -19,7 +19,8 @@ export default defineConfig({
                 'inventoryspais': resolve(__dirname, 'inventoryspais.html'),
                 'products': resolve(__dirname, 'products.html'),
                 'cos-gpt': resolve(__dirname, 'cos-gpt.html'),
-                'cos-gpt-app': resolve(__dirname, 'cos-gpt-app.html')
+                'cos-gpt-app': resolve(__dirname, 'cos-gpt-app.html'),
+                'resume-generator': resolve(__dirname, 'resume-generator.html')
             }
         }
     },
